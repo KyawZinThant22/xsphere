@@ -30,11 +30,12 @@ const SeeQuestionList = () => {
               defaultChecked={data.checked}
               type="radio"
               value={data.text}
-              name="h1"
+              name="data"
+              className="cursor-pointer"
             />
             <label
               htmlFor={data.text}
-              className="ml-2 mr-1 text-[17px] font-semibold"
+              className="ml-2 mr-1 text-[17px] font-semibold "
             >
               {data.text}
             </label>

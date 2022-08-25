@@ -72,7 +72,7 @@ const AddQuestionBox = ({ data, setQuestionBox }) => {
       <div className="flex items-center mt-8 text-center gap-1">
         <button
           aria-label="add question"
-          className="bg-btnColor font-bold   text-white p-2 px-6 rounded"
+          className="bg-btnColor font-bold   text-white p-2 px-6 rounded hover:bg-blue-500"
         >
           Add question
         </button>

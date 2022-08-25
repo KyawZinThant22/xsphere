@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 const Nav = ({ visible }) => {
   return (
     <motion.div
-      className="flex items-center gap-12  z-10"
-      initial={{ opacity: 0, translateY: visible > -60 }}
-      animate={{ opacity: 1, translateY: visible < 120 ? -150 : 0 }}
-      transition={{ duration: 0.5 }}
+      className="flex items-center gap-12 "
+      initial={{ opacity: 0, translateY: -30 }}
+      animate={{ opacity: 1, translateY: visible < 100 ? -150 : 0 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
     >
       <motion.div
         initial={{ opacity: 0 }}

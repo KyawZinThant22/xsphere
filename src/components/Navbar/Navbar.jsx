@@ -24,6 +24,7 @@ const Navbar = () => {
           Back to Dashboard
         </a>
       </div>
+
       <Nav visible={visible} />
       <img src={GetBak} alt="GetBak logo" className="w-40" />
     </nav>

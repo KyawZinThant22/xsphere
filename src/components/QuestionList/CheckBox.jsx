@@ -1,24 +1,22 @@
-import React from "react"; // const handleSelectItem = (item) => {
-//   const itemId = labelList.findIndex((el) => el.id === item.id);
-//   labelList[itemId].isSelected = !labelList[itemId].isSelected;
-//   setLabelList(labelList);
-// };
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 
 const CheckBox = ({ labelList, setLabelList }) => {
   const handleSelectItem = (item) => {
     labelList.map((el) => {
       if (el.id === item.id) {
-        const UpdatedLabel = !item.isSelected;
-        console.log(UpdatedLabel);
-        setLabelList((prev) => [...prev, UpdatedLabel]);
+        setLabelList((prev) =>
+          prev.map((prev) => {
+            if (prev.id === item.id) {
+              return { ...prev, isSelected: !item.isSelected };
+            } else return prev;
+          })
+        );
       }
     });
   };
 
-  console.log(labelList);
-
   return (
+    //also can use checkbox and customize css
     <div className="mt-4">
       <div className="flex items-center gap-2">
         <h3 className="font-bold">Format preview</h3>

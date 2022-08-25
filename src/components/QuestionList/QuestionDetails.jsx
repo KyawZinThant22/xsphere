@@ -12,7 +12,7 @@ const QuestionDetails = ({ data }) => {
   const [questionBox, setQuestionBox] = useState(false);
   console.log(questionBox);
   return (
-    <MotionConfig transition={{ duration: 0.8 }}>
+    <MotionConfig transition={{ duration: 0.6 }}>
       <div className="flex items-center gap-3">
         {!questionBox ? (
           <div>
