@@ -29,7 +29,7 @@ const Navbar = ({ callback, route }) => {
         </a>
       </div>
 
-      <Nav callback={callback} route={route} />
+      {visible && <Nav callback={callback} route={route} />}
       <img src={GetBak} alt="GetBak logo" className="w-28" />
     </nav>
   );
