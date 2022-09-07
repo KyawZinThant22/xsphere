@@ -17,21 +17,6 @@ const questiondata = [
       "Do you find yourself struggling more than usual with the current COVID-19 situation?",
     id: 3,
   },
-  {
-    question:
-      "Do you find yourself struggling more than usual with the current COVID-19 situation?",
-    id: 4,
-  },
-  {
-    question:
-      "Do you find yourself struggling more than usual with the current COVID-19 situation?",
-    id: 5,
-  },
-  {
-    question:
-      "Do you find yourself struggling more than usual with the current COVID-19 situation?",
-    id: 6,
-  },
 ];
 
 const QuestionList = () => {
