@@ -30,7 +30,7 @@ const Questions = () => {
 
   window.addEventListener("scroll", toggleVisible);
   return (
-    <div className="w-[25%] text-gray-600">
+    <div className="col-span-3 text-gray-600">
       <div className="space-y-6 ">
         <AnimatePresence initial={false}>
           {questions.map((question, i) => (

@@ -9,7 +9,7 @@ const RecommentModel = ({ data }) => {
       <img
         src={admin}
         alt="admin"
-        className="w-12 rounded-full  border-solid border-2  border-btnColor absolute right-[192px] -top-[28px]"
+        className="w-12 rounded-full  border-solid border-2  border-btnColor absolute right-[4px] -top-[28px]"
       />
       <div className="bg-yellow p-4 rounded-lg  w-[16rem] text-gray-600 leading-[1.7rem]">
         <p>

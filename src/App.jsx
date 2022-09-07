@@ -9,7 +9,7 @@ const App = () => {
     <div className="container mx-auto mt-12 ">
       <Navbar />
       <Hero />
-      <div className="flex mt-12 gap-12 relatives">
+      <div className="grid mt-12 grid-cols-12 relatives">
         <Questions />
         <QuestionList />
         <SeeQuestionList />

@@ -18,7 +18,7 @@ const data = [
 
 const SeeQuestionList = () => {
   return (
-    <div className="w-[25%] fixed  right-0 ">
+    <div className="col-span-3 fixed right-[80px] ">
       <div className="flex items-center gap-2">
         <h1 className="font-semibold text-[18px]">See question list of:</h1>
         <BsFillQuestionCircleFill className="text-gray-500" />
