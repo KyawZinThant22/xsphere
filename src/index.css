@@ -40,4 +40,7 @@ select {
     -webkit-appearance: none;
     background-position-x: 280px;
 }
+.hideScroll::-webkit-scrollbar{
+  width: 0;
+}
 
