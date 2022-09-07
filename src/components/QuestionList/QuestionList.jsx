@@ -55,7 +55,7 @@ const QuestionList = () => {
     setData(copyListItems);
   };
   return (
-    <div className="col-span-6 space-y-6 mb-12">
+    <div className=" space-y-6  mb-12 col-span-6   ">
       {data.map((data, index) => (
         <div
           draggable
