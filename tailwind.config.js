@@ -9,6 +9,7 @@ module.exports = {
         paleGreen: "rgb(46, 195, 155, 0.1)",
         yellow: "#fef6e8",
         paleBlue: "#f2f7fd",
+        cancelBtn:"rgb(168,184,199,15%)"
       },
     },
   },
