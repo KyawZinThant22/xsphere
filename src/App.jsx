@@ -1,21 +1,28 @@
-import Hero from "./components/Hero";
+import { useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import QuestionList from "./components/QuestionList/QuestionList";
-import Questions from "./components/Questions";
-import SeeQuestionList from "./components/SeeQuestionList";
+import { CampaignSetupPage, QuestionListPage, TimeLinePage } from "./pages";
 
 const App = () => {
-  return (
-    <div className="container mx-auto mt-12 ">
-      <Navbar />
-      <Hero />
-      <div className="grid mt-12 grid-cols-12 relatives">
-        <Questions />
-        <QuestionList />
-        <SeeQuestionList />
-      </div>
-    </div>
-  );
+	const [route, setRoute] = useState("question-list");
+
+	const changeRoute = (route) => {
+		setRoute(route);
+	};
+
+	return (
+		<div className="container mx-auto mt-12 ">
+			<Navbar callback={changeRoute} route={route} />
+			<div className="pt-44">
+				{route === "campaign-setup" ? (
+					<CampaignSetupPage />
+				) : route === "question-list" ? (
+					<QuestionListPage />
+				) : (
+					<TimeLinePage />
+				)}
+			</div>
+		</div>
+	);
 };
 
 export default App;
