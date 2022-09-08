@@ -12,7 +12,7 @@ const QuestionDetails = ({ data }) => {
   const [questionBox, setQuestionBox] = useState(false);
   return (
     <MotionConfig transition={{ duration: 0.6 }}>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 ">
         {!questionBox ? (
           <div>
             <MdOutlineDragIndicator
@@ -34,7 +34,7 @@ const QuestionDetails = ({ data }) => {
         <div
           className={`border-2 border-solid ${
             questionBox ? "border-green" : "border-gray-300"
-          }  rounded-xl px-10 py-10 cursor-pointer`}
+          }  rounded-xl px-10 py-10 cursor-pointer bg-white`}
         >
           <div className="flex items-center gap-2 justify-between">
             <div className="flex items-center gap-2">
