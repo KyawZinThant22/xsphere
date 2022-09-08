@@ -1,47 +1,56 @@
-import React from "react";
 import { useState } from "react";
-import Select from "react-select";
 
-const DraggableSelect = ({ lable, value, onChange }) => {
-	const options = [
-		{ value: "chocolate", label: "Chocolate" },
-		{ value: "strawberry", label: "Strawberry" },
-		{ value: "vanilla", label: "Vanilla" },
-	];
+const DraggableSelect = ({ lable }) => {
+  const optionsList = [
+    {
+      value: "Yangon",
+    },
+    {
+      value: "Mandalay",
+    },
+    {
+      value: "Singapore",
+    },
+  ];
 
-	const [isFocus, setIsFoucs] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState([]);
+  console.log(value);
 
-	const customStyles = {
-		option: (provided, state) => ({
-			...provided,
-			borderBottom: "1px dotted pink",
-			color: state.isSelected ? "red" : "blue",
-			padding: 20,
-		}),
-		control: (provided, state) => ({
-			...provided,
-			border: state.isFocused && state.isHovered ? "2px solid #2cc79d" : "2px solid #2cc79d",
-			outline: "none",
-		}),
-	};
-
-	return (
-		<div
-		// className={`w-full bg-white text-sm font-semibold text-black px-3 py-2 border-2 rounded-md mt-1 placeholder:text-gray-400 ${
-		// 	isFocus ? "border-[#2cc79d]" : ""
-		// }`}
-		>
-			<label className="text-sm font-semibold">{lable}</label>
-			<Select
-				options={options}
-				isMulti
-				styles={customStyles}
-				className={"outline-none"}
-				onFocus={() => setIsFoucs(true)}
-				onBlur={() => setIsFoucs(false)}
-			/>
-		</div>
-	);
+  const handleCatchValue = (data) => {
+    setValue(data);
+    setOpen(false);
+  };
+  return (
+    <div className="relative my-2">
+      <label className="text-sm font-semibold">{lable}</label>
+      <div>
+        <div
+          className="cursor-pointer border rounded-md p-[10px]"
+          onClick={() => setOpen(!open)}
+        >
+          {value.length > 0 ? (
+            <p>{value}</p>
+          ) : (
+            <div className="text-[16px] tracking-wide">None Selected</div>
+          )}
+        </div>
+        {open && (
+          <div className="mt-1 mb-2 flex flex-col gap-2 bg-white border-2 py-2 shadow-md rounded absolute w-full">
+            {optionsList.map((data) => (
+              <p
+                key={data.value}
+                className="cursor-pointer font-medium text-[14px] hover:bg-paleGreen p-2"
+                onClick={() => handleCatchValue(data.value)}
+              >
+                {data.value}
+              </p>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default DraggableSelect;
