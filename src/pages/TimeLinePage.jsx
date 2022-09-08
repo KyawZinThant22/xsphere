@@ -1,19 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaUserCircle } from "react-icons/fa";
-import { AiFillQuestionCircle } from "react-icons/ai";
-import {MdOutlineKeyboardArrowUp,MdOutlineKeyboardArrowDown} from 'react-icons/md'
 import Hero from "../components/Hero";
-import moment from "moment";
+import Date from "../components/Date/Date";
+import DraggableSelect from "../components/Form/DraggableSelect";
 
 const TimeLinePage = () => {
-	const [startDate,setStartDate] = useState()
-	const [endDate,setEndDate] = useState()
-
 	// style for inputBox
 	const inputFocusColor = " focus:border-[#61C09D]";
-	const inputBoxStyle = {
-		padding: '0.55rem 0.75rem'
-	}
 	return (
 		<div className="w-full h-screen overflow-y-scroll">
 			<div className="w-full mt-8">
@@ -47,77 +40,15 @@ const TimeLinePage = () => {
 				
 				{/* Location */}
 				<div className="mb-3">
-					<label
-						htmlFor=""
-						className="text-sm font-semibold flex flex-row space-x-1 items-center"
-					>
-						<span>Location</span>{" "}
-						<AiFillQuestionCircle className="text-[#77808F]" />
-					</label>
-					<input
-						type="text"
-						className={
-							"w-full text-sm font-semibold text-black px-3 py-2 border-2 rounded-md mt-1" +
-							inputFocusColor
-						}
-					/>
+					<DraggableSelect/>
 				</div>
 
 				{/* Date */}
 				<div className="mb-3 grid grid-cols-2 gap-x-2">
 					{/* startDate */}
-					<div>
-						<label htmlFor="startDate" className="text-sm font-semibold">
-							Start Date
-						</label>
-					
-						<div className="relative w-full text-sm font-semibold text-black placeholder:text-black border-2 rounded-md mt-1 cursor-pointer" style={inputBoxStyle}
-						>
-							<span>{startDate ? startDate : '12 August, 2022 - 01:20 PM'}</span>
-							{/* icon */}
-							<div className="text-base text-[#79808E] absolute top-1/2 -translate-y-1/2 right-2">
-								<MdOutlineKeyboardArrowUp style={{marginBottom:"-0.4rem"}}/>
-								<MdOutlineKeyboardArrowDown/>
-							</div>
-							<input
-							type="datetime-local"
-							onChange={(e) => {
-								const formatDate = moment(e.target.value).format('D MMMM YYYY, h:mm:ss a')
-								setStartDate(() => formatDate)
-							}
-							}
-							className={
-								"formDate w-full text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1 absolute inset-0 -top-1 opacity-0" +
-								inputFocusColor
-							}/>
-						</div>
-					</div>
+					<Date title="Start Date" defaultDate="12 August, 2022 - 01:20 PM"/>
 					{/* endDate */}
-					<div>
-						<label htmlFor="endDate" className="text-sm font-semibold">
-							End Date
-						</label>
-						<div className="w-full text-sm font-semibold text-black placeholder:text-black border-2 rounded-md mt-1 relative cursor-pointer" style={inputBoxStyle}>
-						<span>{endDate ? endDate : '12 August, 2023 - 11:20 AM'}</span>
-							
-							{/* icon */}
-							<div className="text-base text-[#79808E] absolute top-1/2 -translate-y-1/2 right-2">
-								<MdOutlineKeyboardArrowUp style={{marginBottom:"-0.4rem"}}/>
-								<MdOutlineKeyboardArrowDown/>
-							</div>
-							<input
-							type="datetime-local"
-							onChange={(e) => {
-								const formatDate = moment(e.target.value).format('D MMMM YYYY, h:mm:ss a')
-								setEndDate(() => formatDate)
-							}
-							}
-							className={
-								"formDate w-full text-sm font-semibold text-black placeholder:text-black border-2 rounded-md mt-1 absolute inset-0 -top-1 opacity-0" +
-								inputFocusColor
-							}/>
-						</div>
-					</div>
+					<Date title="End Date" defaultDate="12 August, 2023 - 11:20 AM"/>
 				</div>
 
 				{/* Radio */}
