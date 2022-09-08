@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { AiFillQuestionCircle } from "react-icons/ai";
+import DraggableSelect from "../components/Form/DraggableSelect"
+import Hero from "../components/Hero";
+
 const CampaignSetupPage = () => {
-	const inputFocusColor = " focus:border-[#2cc79d]";
+	//state
+	const [form, setForm] = useState({
+		title: "",
+		location: [],
+		showProfile: "",
+	});
+
 	return (
-		<div className="w-full h-full overflow-y-scroll space-y-4 hideScroll">
+		<div className="w-full h-screen overflow-y-scroll space-y-4 hideScroll">
+			<div className="w-full mt-8">
+				<Hero
+					instruction={
+						"These are the questions corresponding to the template you have selected, you can modify, add or delete them."
+					}
+					title="Campaign Information"
+				/>
+			</div>
+
 			<div className="border-2 border-[#2cc79d] w-11/12 mx-auto rounded-lg p-6">
 				<div className="flex flex-row space-x-2 items-center text-[#77808F] mb-5">
 					<h4 className="text-sm font-semibold">Campaign Information</h4>
@@ -17,29 +35,32 @@ const CampaignSetupPage = () => {
 					</label>
 					<input
 						type="text"
-						placeholder="အကောင်းဆုံးရဲ့အကောင်းဆုံးတွေကိုကြိုက်နှစ်သက်သူများအတွက်"
+						value={form.title}
+						onChange={(e) => setForm({ ...form, title: e.target.value })}
+						placeholder="Aa"
 						className={
-							"w-full bg-white text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1" +
-							inputFocusColor
+							"w-full bg-white text-sm font-semibold text-black px-3 py-2 border-2 rounded-md mt-1 placeholder:text-gray-400 focus:border-[#2cc79d]"
 						}
 					/>
 				</div>
 
-				<div className="mb-3">
+				{/* <div className="mb-3">
 					<label
 						htmlFor=""
 						className="text-sm font-semibold flex flex-row space-x-1 items-center"
 					>
-						<span>Location</span>{" "}
+						<span>Location</span>
 						<AiFillQuestionCircle className="text-[#77808F]" />
 					</label>
 					<input
 						type="text"
 						className={
-							"w-full text-sm font-semibold text-black px-3 py-2 border-2 rounded-md mt-1" +
-							inputFocusColor
+							"w-full text-sm font-semibold text-black px-3 py-2 border-2 rounded-md mt-1 focus:border-[#2cc79d]"
 						}
 					/>
+				</div> */}
+				<div>
+					<DraggableSelect />
 				</div>
 
 				<div className="mb-3 grid grid-cols-2 gap-x-2">
@@ -50,8 +71,7 @@ const CampaignSetupPage = () => {
 						<input
 							type="datetime-local"
 							className={
-								"w-full text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1" +
-								inputFocusColor
+								"w-full text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1 focus:border-[#2cc79d]"
 							}
 						/>
 					</div>
@@ -62,8 +82,7 @@ const CampaignSetupPage = () => {
 						<input
 							type="datetime-local"
 							className={
-								"w-full text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1" +
-								inputFocusColor
+								"w-full text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1 focus:border-[#2cc79d]"
 							}
 						/>
 					</div>
