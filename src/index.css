@@ -44,3 +44,6 @@ select {
   width: 0;
 }
 
+.formDate::-webkit-calendar-picker-indicator{
+  width: 100%;
+}
