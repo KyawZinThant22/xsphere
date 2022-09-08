@@ -74,6 +74,38 @@ const CampaignSetupPage = () => {
 						}
 					/>
 				</div> */}
+        <div>
+          <DraggableSelect
+            onChange={(data) => setLocation(data)}
+            value={location}
+            lable="Location"
+          />
+        </div>
+
+        <div className="mb-3 grid grid-cols-2 gap-x-2">
+          <div>
+            <label htmlFor="" className="text-sm font-semibold">
+              Start Date
+            </label>
+            <input
+              type="datetime-local"
+              className={
+                "w-full text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1 focus:border-[#2cc79d]"
+              }
+            />
+          </div>
+          <div>
+            <label htmlFor="" className="text-sm font-semibold">
+              Start Date
+            </label>
+            <input
+              type="datetime-local"
+              className={
+                "w-full text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1 focus:border-[#2cc79d]"
+              }
+            />
+          </div>
+        </div>
         <div className="mb-3">
           <DraggableSelect />
         </div>
