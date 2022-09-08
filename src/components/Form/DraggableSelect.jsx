@@ -3,7 +3,6 @@ import {MdOutlineDragIndicator} from 'react-icons/md'
 import CancleIcon from "../../assets/CancleIcon";
 import { ReactSortable } from "react-sortablejs";
 import { useRef } from "react";
-import { useEffect } from "react";
 
 const DraggableSelect = ({ lable }) => {
   const optionsList = [
@@ -28,6 +27,7 @@ const DraggableSelect = ({ lable }) => {
   const inputRef = useRef();
   const handleCatchValue = (data) => {
     setOpen(false)
+    setSearchValue('')
     const id = value.length + 1;
     const newData = {id,value:data};
     if(value.length > 0) {
@@ -55,33 +55,34 @@ const DraggableSelect = ({ lable }) => {
           className="cursor-pointer rounded-md px-3 py-1 border-2 relative"
           style={{padding: value.length > 0 ? "0.25rem 0.75rem" : "0.60rem 0.75rem"}}
           onClick={() => {
-            setOpen(!open)
+            setOpen(true)
             inputRef.current.focus()
           }}
         >
           <div>
             <ReactSortable list={value} setList={(newValue) => setValue(newValue)} className="flex flex-row items-center space-x-3">
-            {value.length > 0 && value.map(el =><div key={el.id} className="text-sm font-semibold bg-[#F3F7FE] rounded flex flex-row items-center gap-x-2" style={{padding:'0.4rem 0.4rem 0.4rem 0.2rem'}}>
+            {value.length > 0 && value.map(el =><div key={el.id} className="text-sm font-semibold bg-[#F3F7FE] rounded flex flex-row items-center gap-x-2 z-10" style={{padding:'0.4rem 0.4rem 0.4rem 0.2rem'}}
+            onClick={() => {setOpen(false)}}
+            >
               <MdOutlineDragIndicator className="text-[#ADB2B8]"/> 
               <span>{el.value}</span>
               <CancleIcon onClick={() => deleteValue(el.id)}/>
             </div>)}
             </ReactSortable>
-            {value.length <= 0 && <p className="text-sm font-semibold">None Selected</p>}
-
-            
+            {value.length <= 0 && <p className="text-sm font-semibold">None Selected</p>}        
           </div>
-          <input type="text" className="absolute h-0 bottom-0 left-0 right-0 opacity-0" ref={inputRef} value={searchValue} onChange={(e) => {setSearchValue(e.target.value)}}/>
         </div>
 
         {open && (
           <div className="mt-1 mb-2 flex flex-col gap-2 bg-white border-2 py-2 shadow-md rounded absolute w-full z-10">
+            <input type="text" className="border-2 mx-3 mt-1 py-1 px-2 rounded-md text-sm font-medium" ref={inputRef} placeholder="Search" value={searchValue} onChange={(e) => {setSearchValue(e.target.value)}}/>
             {optionsList.filter((data) => {
               if(searchValue === ""){
                 return data;
               }else if(data.value.toLowerCase().includes(searchValue.toLocaleLowerCase())){
                 return data
               }
+              return data;
             }).map((data) => (
               <p
                 key={data.value}
