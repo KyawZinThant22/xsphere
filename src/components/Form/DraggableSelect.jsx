@@ -2,6 +2,8 @@ import { useState } from "react";
 import {MdOutlineDragIndicator} from 'react-icons/md'
 import CancleIcon from "../../assets/CancleIcon";
 import { ReactSortable } from "react-sortablejs";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 const DraggableSelect = ({ lable }) => {
   const optionsList = [
@@ -21,7 +23,9 @@ const DraggableSelect = ({ lable }) => {
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState([]);
+  const [searchValue,setSearchValue] = useState('')
 
+  const inputRef = useRef();
   const handleCatchValue = (data) => {
     setOpen(false)
     const id = value.length + 1;
@@ -48,9 +52,12 @@ const DraggableSelect = ({ lable }) => {
       <label className="text-sm font-semibold">Locations</label>
       <div className="mt-1">
         <div
-          className="cursor-pointer rounded-md px-3 py-1 border-2"
+          className="cursor-pointer rounded-md px-3 py-1 border-2 relative"
           style={{padding: value.length > 0 ? "0.25rem 0.75rem" : "0.60rem 0.75rem"}}
-          onClick={() => setOpen(!open)}
+          onClick={() => {
+            setOpen(!open)
+            inputRef.current.focus()
+          }}
         >
           <div>
             <ReactSortable list={value} setList={(newValue) => setValue(newValue)} className="flex flex-row items-center space-x-3">
@@ -64,10 +71,18 @@ const DraggableSelect = ({ lable }) => {
 
             
           </div>
+          <input type="text" className="absolute h-0 bottom-0 left-0 right-0 opacity-0" ref={inputRef} value={searchValue} onChange={(e) => {setSearchValue(e.target.value)}}/>
         </div>
+
         {open && (
           <div className="mt-1 mb-2 flex flex-col gap-2 bg-white border-2 py-2 shadow-md rounded absolute w-full z-10">
-            {optionsList.map((data) => (
+            {optionsList.filter((data) => {
+              if(searchValue === ""){
+                return data;
+              }else if(data.value.toLowerCase().includes(searchValue.toLocaleLowerCase())){
+                return data
+              }
+            }).map((data) => (
               <p
                 key={data.value}
                 className="cursor-pointer font-semibold text-sm hover:bg-paleGreen px-3 py-2"
