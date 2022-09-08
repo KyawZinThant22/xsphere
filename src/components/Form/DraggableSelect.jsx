@@ -82,7 +82,6 @@ const DraggableSelect = ({ lable }) => {
               }else if(data.value.toLowerCase().includes(searchValue.toLocaleLowerCase())){
                 return data
               }
-              return data;
             }).map((data) => (
               <p
                 key={data.value}
