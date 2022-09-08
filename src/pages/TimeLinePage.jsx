@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { AiFillQuestionCircle } from "react-icons/ai";
+import {MdOutlineKeyboardArrowUp,MdOutlineKeyboardArrowDown} from 'react-icons/md'
 import Hero from "../components/Hero";
+import moment from "moment";
 
 const TimeLinePage = () => {
+	const [startDate,setStartDate] = useState()
+	const [endDate,setEndDate] = useState()
+
+	// style for inputBox
 	const inputFocusColor = " focus:border-[#61C09D]";
+	const inputBoxStyle = {
+		padding: '0.55rem 0.75rem'
+	}
 	return (
 		<div className="w-full h-screen overflow-y-scroll">
 			<div className="w-full mt-8">
@@ -21,6 +30,7 @@ const TimeLinePage = () => {
 					<FaUserCircle />
 				</div>
 
+				{/* Campaign Title */}
 				<div className="mb-3">
 					<label htmlFor="" className="text-sm font-semibold">
 						Campaign Title
@@ -34,7 +44,8 @@ const TimeLinePage = () => {
 						}
 					/>
 				</div>
-
+				
+				{/* Location */}
 				<div className="mb-3">
 					<label
 						htmlFor=""
@@ -52,33 +63,64 @@ const TimeLinePage = () => {
 					/>
 				</div>
 
+				{/* Date */}
 				<div className="mb-3 grid grid-cols-2 gap-x-2">
+					{/* startDate */}
 					<div>
-						<label htmlFor="" className="text-sm font-semibold">
+						<label htmlFor="startDate" className="text-sm font-semibold">
 							Start Date
 						</label>
-						<input
+					
+						<div className="relative w-full text-sm font-semibold text-black placeholder:text-black border-2 rounded-md mt-1 cursor-pointer" style={inputBoxStyle}
+						>
+							<span>{startDate ? startDate : '12 August, 2022 - 01:20 PM'}</span>
+							{/* icon */}
+							<div className="text-base text-[#79808E] absolute top-1/2 -translate-y-1/2 right-2">
+								<MdOutlineKeyboardArrowUp style={{marginBottom:"-0.4rem"}}/>
+								<MdOutlineKeyboardArrowDown/>
+							</div>
+							<input
 							type="datetime-local"
-							className={
-								"w-full text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1" +
-								inputFocusColor
+							onChange={(e) => {
+								const formatDate = moment(e.target.value).format('D MMMM YYYY, h:mm:ss a')
+								setStartDate(() => formatDate)
 							}
-						/>
+							}
+							className={
+								"formDate w-full text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1 absolute inset-0 -top-1 opacity-0" +
+								inputFocusColor
+							}/>
+						</div>
 					</div>
+					{/* endDate */}
 					<div>
-						<label htmlFor="" className="text-sm font-semibold">
-							Start Date
+						<label htmlFor="endDate" className="text-sm font-semibold">
+							End Date
 						</label>
-						<input
+						<div className="w-full text-sm font-semibold text-black placeholder:text-black border-2 rounded-md mt-1 relative cursor-pointer" style={inputBoxStyle}>
+						<span>{endDate ? endDate : '12 August, 2023 - 11:20 AM'}</span>
+							
+							{/* icon */}
+							<div className="text-base text-[#79808E] absolute top-1/2 -translate-y-1/2 right-2">
+								<MdOutlineKeyboardArrowUp style={{marginBottom:"-0.4rem"}}/>
+								<MdOutlineKeyboardArrowDown/>
+							</div>
+							<input
 							type="datetime-local"
-							className={
-								"w-full text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1" +
-								inputFocusColor
+							onChange={(e) => {
+								const formatDate = moment(e.target.value).format('D MMMM YYYY, h:mm:ss a')
+								setEndDate(() => formatDate)
 							}
-						/>
+							}
+							className={
+								"formDate w-full text-sm font-semibold text-black placeholder:text-black border-2 rounded-md mt-1 absolute inset-0 -top-1 opacity-0" +
+								inputFocusColor
+							}/>
+						</div>
 					</div>
 				</div>
 
+				{/* Radio */}
 				<div className="mb-4">
 					<h6 className="text-sm font-semibold mb-2">Show Profile</h6>
 					<div className="flex flex-row items-center">
@@ -90,7 +132,7 @@ const TimeLinePage = () => {
 							className="w-4 h-4"
 						/>
 						<label
-							for="xsphere"
+							htmlFor="xsphere"
 							className="uppercase text-sm font-semibold text-[#565D63]"
 						>
 							xsphere
@@ -100,7 +142,7 @@ const TimeLinePage = () => {
 					<div className="flex flex-row items-center">
 						<input type="radio" id="getbak" name="profile" value="getbak" />
 						<label
-							for="getbak"
+							htmlFor="getbak"
 							className="uppercase text-sm font-semibold text-[#565D63]"
 						>
 							getbak
@@ -110,10 +152,10 @@ const TimeLinePage = () => {
 				</div>
 
 				<div className="flex flex-row space-x-2 items-stretch">
-					<button className="bg-[#166ADE] text-white text-sm font-bold px-10 py-2 rounded-lg">
+					<button className="bg-[#166ADE] text-white text-sm font-bold px-10 py-2 rounded-md">
 						Published
 					</button>
-					<button className=" bg-cancelBtn text-black text-sm font-bold px-8 py-2 rounded-lg">
+					<button className=" bg-cancelBtn text-black text-sm font-bold px-8 py-2 rounded-md">
 						Back to
 					</button>
 				</div>

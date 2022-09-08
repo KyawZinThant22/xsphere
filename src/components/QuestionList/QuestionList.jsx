@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import QuestionDetails from "./QuestionDetails";
 import { ReactSortable } from "react-sortablejs";
-
+import { nanoid } from 'nanoid'
 const questiondata = [
   {
     question:
@@ -36,7 +36,7 @@ const QuestionList = () => {
     >
       {data.map((data, index) => (
         <div>
-          <QuestionDetails data={data} />
+          <QuestionDetails key={nanoid()} data={data} />
         </div>
       ))}
     </ReactSortable>

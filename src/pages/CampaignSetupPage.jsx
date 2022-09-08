@@ -1,16 +1,31 @@
 import React, { useState, useRef } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import DraggableSelect from "../components/Form/DraggableSelect";
+import {
+  MdOutlineKeyboardArrowUp,
+  MdOutlineKeyboardArrowDown,
+} from "react-icons/md";
 import Hero from "../components/Hero";
+import moment from "moment";
 
 const CampaignSetupPage = () => {
   //state
+
+  const [location, setLocation] = useState([]);
+  // style for inputBox
+  const inputFocusColor = " focus:border-[#61C09D]";
+  const inputBoxStyle = {
+    padding: "0.55rem 0.75rem",
+  };
+  //state
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+
   const [form, setForm] = useState({
     title: "",
     location: [],
     showProfile: "",
   });
-  const [location, setLocation] = useState([]);
 
   return (
     <div className="w-full h-screen overflow-y-scroll space-y-4 hideScroll">
@@ -59,36 +74,73 @@ const CampaignSetupPage = () => {
 						}
 					/>
 				</div> */}
-        <div>
-          <DraggableSelect
-            onChange={(data) => setLocation(data)}
-            value={location}
-            lable="Location"
-          />
+        <div className="mb-3">
+          <DraggableSelect />
         </div>
 
+        {/* Date */}
         <div className="mb-3 grid grid-cols-2 gap-x-2">
+          {/* startDate */}
           <div>
-            <label htmlFor="" className="text-sm font-semibold">
+            <label htmlFor="startDate" className="text-sm font-semibold">
               Start Date
             </label>
-            <input
-              type="datetime-local"
-              className={
-                "w-full text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1 focus:border-[#2cc79d]"
-              }
-            />
+            <div
+              className="relative w-full text-sm font-semibold text-black placeholder:text-black border-2 rounded-md mt-1 cursor-pointer"
+              style={inputBoxStyle}
+            >
+              <span>
+                {startDate ? startDate : "12 August, 2022 - 01:20 PM"}
+              </span>
+              {/* icon */}
+              <div className="text-base text-[#79808E] absolute top-1/2 -translate-y-1/2 right-2">
+                <MdOutlineKeyboardArrowUp style={{ marginBottom: "-0.4rem" }} />
+                <MdOutlineKeyboardArrowDown />
+              </div>
+              <input
+                type="datetime-local"
+                onChange={(e) => {
+                  const formatDate = moment(e.target.value).format(
+                    "D MMMM YYYY, h:mm:ss a"
+                  );
+                  setStartDate(() => formatDate);
+                }}
+                className={
+                  "formDate w-full text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1 absolute inset-0 -top-1 opacity-0" +
+                  inputFocusColor
+                }
+              />
+            </div>
           </div>
+          {/* endDate */}
           <div>
-            <label htmlFor="" className="text-sm font-semibold">
-              Start Date
+            <label htmlFor="endDate" className="text-sm font-semibold">
+              End Date
             </label>
-            <input
-              type="datetime-local"
-              className={
-                "w-full text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1 focus:border-[#2cc79d]"
-              }
-            />
+            <div
+              className="w-full text-sm font-semibold text-black placeholder:text-black border-2 rounded-md mt-1 relative cursor-pointer"
+              style={inputBoxStyle}
+            >
+              <span>{endDate ? endDate : "12 August, 2023 - 11:20 AM"}</span>
+              {/* icon */}
+              <div className="text-base text-[#79808E] absolute top-1/2 -translate-y-1/2 right-2">
+                <MdOutlineKeyboardArrowUp style={{ marginBottom: "-0.4rem" }} />
+                <MdOutlineKeyboardArrowDown />
+              </div>
+              <input
+                type="datetime-local"
+                onChange={(e) => {
+                  const formatDate = moment(e.target.value).format(
+                    "D MMMM YYYY, h:mm:ss a"
+                  );
+                  setEndDate(() => formatDate);
+                }}
+                className={
+                  "formDate w-full text-sm font-semibold text-black placeholder:text-black border-2 rounded-md mt-1 absolute inset-0 -top-1 opacity-0" +
+                  inputFocusColor
+                }
+              />
+            </div>
           </div>
         </div>
 
