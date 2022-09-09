@@ -12,8 +12,8 @@ const App = () => {
   };
 
   return (
-    <div className="font-roboto w-screen h-screen px-2 pb-60">
-      <div className="grid grid-cols-12">
+    <div className="font-roboto w-screen h-screen overflow-hidden px-2 pb-60">
+      <div className="grid grid-cols-12  gap-x-4">
         {/* <div className="col-span-12">
           <Navbar callback={changeRoute} route={route} />
         </div> */}
@@ -22,7 +22,7 @@ const App = () => {
             <LeftSidebar route={route} callback={changeRoute} />
           </div>
         </div>
-        <div className="col-span-6 h-full mb-5">
+        <div className="col-span-6 h-full mb-10">
           {route === "campaign-setup" ? (
             <CampaignSetupPage />
           ) : route === "question-list" ? (
@@ -32,7 +32,7 @@ const App = () => {
           )}
         </div>
         <div className="col-span-3 h-full">
-          <div className="flex h-full items-center justify-center">
+          <div className="flex items-center w-full h-full">
             <RightSideBar />
           </div>
         </div>

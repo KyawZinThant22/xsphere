@@ -33,7 +33,7 @@ const Sidebar = ({ route, callback }) => {
   window.addEventListener("scroll", toggleVisible);
 
   return (
-    <div className="w-auto text-gray-600 space-y-4">
+    <div className="w-auto text-gray-600 space-y-2">
       <AnimatePresence initial={false}>
         {questions.map((item, key) => (
           <motion.div
@@ -44,7 +44,7 @@ const Sidebar = ({ route, callback }) => {
               delay: key * 0.2,
             }}
             key={item.text}
-            className={`flex items-center space-x-3 ml-2 cursor-pointer ${
+            className={`flex flex-row items-center space-x-3 ml-2 cursor-pointer ${
               item.route === route ? "bg-paleGreen text-green" : ""
             } rounded-md w-[14rem]`}
             style={{ padding: "0.6rem 1rem" }}

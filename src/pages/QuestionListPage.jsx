@@ -5,7 +5,7 @@ import QuestionList from "../components/QuestionList/QuestionList";
 
 const QuestionListPage = () => {
   return (
-    <div className="w-full h-screen overflow-y-scroll">
+    <div className="w-full h-screen overflow-y-scroll border">
       <div className="w-full mt-8">
         <Hero
           showCount

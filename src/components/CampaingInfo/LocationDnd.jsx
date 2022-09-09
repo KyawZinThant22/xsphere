@@ -59,7 +59,7 @@ const List = (props) => {
   );
 };
 
-const DraggableSelect = () => {
+const LocationDnd = () => {
   // Demo API
   const [demoList, setDemoList] = useState([
     {
@@ -152,7 +152,7 @@ const DraggableSelect = () => {
     document.addEventListener("click", handleLocationList, true);
   }, [handleLocationList]);
   return (
-    <div className="my-2">
+    <div className="mt-2 mb-3">
       <label className="text-sm font-medium flex flex-row items-center space-x-1">
         <span>Location</span>{" "}
         <BsQuestionCircleFill className="text-[#77808F] text-[0.75rem]" />
@@ -207,4 +207,4 @@ const DraggableSelect = () => {
   );
 };
 
-export default DraggableSelect;
+export default LocationDnd;
