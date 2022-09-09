@@ -1,19 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaUserCircle } from "react-icons/fa";
+import { BsQuestionCircleFill } from "react-icons/bs";
 import DraggableSelect from "../components/Form/DraggableSelect";
 import Hero from "../components/Hero";
-import Date from "../components/Date/Date";
 
 const CampaignSetupPage = () => {
-  //state
-  const [form, setForm] = useState({
-    title: "",
-    location: [],
-    showProfile: "",
-  });
-
+  // style for inputBox
+  const inputFocusColor = "focus:border-[#61C09D]";
   return (
-    <div className="w-full h-screen overflow-y-scroll space-y-4 hideScroll">
+    <div className="w-full h-screen overflow-y-scroll scrollbar-hide">
       <div className="w-full mt-8">
         <Hero
           instruction={
@@ -22,80 +17,72 @@ const CampaignSetupPage = () => {
           title="Campaign Information"
         />
       </div>
-
-      <div className="border-2 border-[#2cc79d] w-11/12 mx-auto rounded-lg p-6">
-        <div className="flex flex-row space-x-2 items-center text-[#77808F] mb-5">
-          <h4 className="text-sm font-semibold">Campaign Information</h4>
-          <FaUserCircle />
+      <div className="border-2 w-11/12 mx-auto rounded-lg p-8">
+        <div className="flex flex-row space-x-2 items-center text-[#ADB2B8] mb-5">
+          <h4 className="text-sm font-[500]">Campaign Information</h4>
+          <FaUserCircle className="text-[#77808F]" />
         </div>
 
+        {/* Campaign Title */}
         <div className="mb-3">
-          <label htmlFor="" className="text-sm font-semibold">
+          <label htmlFor="" className="text-sm font-medium">
             Campaign Title
           </label>
           <input
             type="text"
-            value={form.title}
-            onChange={(e) => setForm({ ...form, title: e.target.value })}
-            placeholder="Aa"
+            defaultValue="အကောင်းဆုံးရဲ့အကောင်းဆုံးတွေကိုကြိုက်နှစ်သက်သူများအတွက်"
             className={
-              "w-full bg-white text-sm font-semibold text-black px-3 py-2 border-2 rounded-md mt-1 placeholder:text-gray-400 focus:border-[#2cc79d]"
+              "w-full text-sm font-semibold text-black placeholder:text-black px-3 py-2 border-2 rounded-md mt-1" +
+              inputFocusColor
             }
           />
         </div>
 
-        {/* <div className="mb-3">
-					<label
-						htmlFor=""
-						className="text-sm font-semibold flex flex-row space-x-1 items-center"
-					>
-						<span>Location</span>
-						<AiFillQuestionCircle className="text-[#77808F]" />
-					</label>
-					<input
-						type="text"
-						className={
-							"w-full text-sm font-semibold text-black px-3 py-2 border-2 rounded-md mt-1 focus:border-[#2cc79d]"
-						}
-					/>
-				</div> */}
-        
+        {/* Location */}
         <div className="mb-3">
           <DraggableSelect />
         </div>
 
-				{/* Date */}
-				<div className="mb-3 grid grid-cols-2 gap-x-2">
-					{/* startDate */}
-					<Date title="Start Date" defaultDate="12 August, 2022 - 01:20 PM"/>
-					{/* endDate */}
-					<Date title="End Date" defaultDate="12 August, 2023 - 11:20 AM"/>
-				</div>
-
-        <div className="mb-4 space-y-2">
-          <h6 className="text-sm font-semibold">Show Profile</h6>
+        <div className="mb-3">
+          <label className="text-sm font-medium flex flex-row items-center space-x-1">
+            <span>Format Preview</span>{" "}
+            <BsQuestionCircleFill className="text-[#77808F] text-[0.75rem]" />
+          </label>
+          <div className="bg-[#F2F6FD] w-full h-32 mt-1 rounded-lg grid place-items-center">
+            <div className="bg-white text-sm font-medium text-[#77808F] px-4 py-2  rounded-md border">
+              Upload Campaign Image
+            </div>
+          </div>
+        </div>
+        {/* Radio */}
+        <div className="mb-4">
+          <h6 className="text-sm font-medium mb-2">Show Profile</h6>
           <div className="flex flex-row items-center">
             <input
               type="radio"
               id="xsphere"
               name="profile"
               value="xsphere"
-              className="w-4 h-4"
+              className="w-[0.7rem] h-[0.7rem] focus:ring-[#2CC97D] dark:focus:ring-[#2CC97D] border-2 focus:ring-2"
             />
             <label
               htmlFor="xsphere"
-              className="uppercase text-sm font-semibold text-[#565D63]"
-            >
+              className="uppercase text-sm font-medium text-[#565D63]">
               xsphere
             </label>
             <br></br>
           </div>
           <div className="flex flex-row items-center">
-            <input type="radio" id="getbak" name="profile" value="getbak" />
+            <input
+              type="radio"
+              id="getbak"
+              name="profile"
+              value="getbak"
+              className="w-[0.7rem] h-[0.7rem] focus:ring-[#2CC97D] dark:focus:ring-[#2CC97D] border-2 focus:ring-2"
+            />
             <label
               htmlFor="getbak"
-              className="uppercase text-sm font-semibold text-[#565D63]"
-            >
+              className="uppercase text-sm font-medium text-[#565D63]">
               getbak
             </label>
             <br></br>
@@ -103,10 +90,10 @@ const CampaignSetupPage = () => {
         </div>
 
         <div className="flex flex-row space-x-2 items-stretch">
-          <button className="bg-[#2cc79d] text-white text-sm font-bold px-4 py-2 rounded-lg">
+          <button className="bg-[#166ADE] text-white text-sm font-medium px-14 py-2 rounded-md">
             Next Page
           </button>
-          <button className=" bg-cancelBtn text-gray-500 text-sm font-bold px-4 py-2 border-2 border-gray-200 rounded-lg">
+          <button className=" bg-cancelBtn text-black text-sm font-medium px-10 py-2 rounded-md">
             Clear
           </button>
         </div>

@@ -22,11 +22,11 @@ const Date = (props) => {
 
   return (
     <div>
-      <label htmlFor="startDate" className="text-sm font-semibold">
+      <label htmlFor="startDate" className="text-sm font-medium">
         {props.title}
       </label>
       <div
-        className="relative w-full text-sm font-semibold text-black placeholder:text-black border-2 rounded-md mt-1 cursor-pointer"
+        className="relative w-full text-sm font-medium text-black placeholder:text-black border-2 rounded-md mt-1 cursor-pointer"
         style={inputBoxStyle}>
         <span>
           {selectedDate ? selectedDate : "12 August, 2022 - 01:20 PM"}

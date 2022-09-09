@@ -1,24 +1,23 @@
-import { MdTimer } from "react-icons/md";
-import { AnimatePresence, motion } from "framer-motion";
-import Wrench from "../../assets/Wrench";
-import Clock from "../../assets/Clock";
-import QuestionMark from "../../assets/QuestionMark";
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { FaWrench } from "react-icons/fa";
+import { BsFillQuestionCircleFill } from "react-icons/bs";
+import { MdOutlineTimer } from "react-icons/md";
 
 const questions = [
   {
-    icon: Wrench,
-    text: "1. Campaingn list",
+    icon: FaWrench,
+    text: "Campaign setup",
     route: "campaign-setup",
   },
   {
-    icon: QuestionMark,
-    text: "2. Questions list",
+    icon: BsFillQuestionCircleFill,
+    text: "Questions list",
     route: "question-list",
   },
   {
-    icon: Clock,
-    text: "3. Timeline",
+    icon: MdOutlineTimer,
+    text: "Timeline",
     route: "timeline",
   },
 ];
@@ -45,15 +44,23 @@ const Sidebar = ({ route, callback }) => {
               delay: key * 0.2,
             }}
             key={item.text}
-            className={`flex items-end gap-3 ml-2 cursor-pointer ${
+            className={`flex items-center space-x-3 ml-2 cursor-pointer ${
               item.route === route ? "bg-paleGreen text-green" : ""
-            } px-2 py-2 rounded-md w-[15rem] my-2`}
-            onClick={() => callback(item.route)}
-          >
-            {/* {item.img && <img src={item.img} alt={item.text} className="w-6" />} */}
-            {item.icon && <item.icon />}
+            } rounded-md w-[14rem]`}
+            style={{ padding: "0.6rem 1rem" }}
+            onClick={() => callback(item.route)}>
+            <item.icon
+              className={`text-lg ${
+                item.route === route ? "text-green" : "text-[#77808F]"
+              } ${item.text === "Campaign setup" && " scale-x-flip"}`}
+            />
 
-            <h4 className="font-bold">{item.text}</h4>
+            <h4
+              className={`text-sm font-semibold ${
+                item.route === route ? "font-bold" : "text-[#77808F]"
+              }`}>
+              {key + 1}. {item.text}
+            </h4>
           </motion.div>
         ))}
       </AnimatePresence>

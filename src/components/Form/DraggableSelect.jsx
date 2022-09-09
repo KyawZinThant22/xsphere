@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { MdOutlineDragIndicator } from "react-icons/md";
+import { BsQuestionCircleFill } from "react-icons/bs";
 import CancleIcon from "../../assets/CancleIcon";
 import { ReactSortable } from "react-sortablejs";
+import { useCallback } from "react";
 
 const SelectedItem = (props) => {
   return (
     <div
-      className="text-sm font-semibold bg-[#F3F7FE] rounded flex flex-row items-center gap-x-1 select-none z-20"
+      className="text-sm font-medium bg-[#F3F7FE] rounded flex flex-row items-center gap-x-1 select-none z-20"
       style={{ padding: "0.4rem 0.4rem 0.4rem 0.2rem" }}>
       <MdOutlineDragIndicator className="text-[#ADB2B8] text-base" />
       <span>{props.el.location}</span>
@@ -27,12 +29,12 @@ const List = (props) => {
       <input
         type="text"
         placeholder="Search location"
-        className="text-sm font-semibold border-2 w-full p-2 rounded-md"
+        className="text-sm font-medium border-2 w-full p-2 rounded-md"
         value={searchValue}
         ref={props.searchRef}
         onChange={(e) => setSearchValue(e.target.value)}
       />
-      <div className="text-sm font-semibold mt-3 max-h-32 overflow-y-auto">
+      <div className="text-sm font-medium mt-3 max-h-32 overflow-y-auto">
         {props.demoList
           .filter((val) => {
             if (searchValue === "") return val;
@@ -99,6 +101,7 @@ const DraggableSelect = () => {
   const [value, setValue] = useState([]);
   // Ref
   const searchBarRef = useRef(null);
+  const locationListRef = useRef(null);
   // Add and Remove Function
   const addLocationToInputBox = (data) => {
     const filter = demoList.filter((el) => el.id !== data.id);
@@ -121,6 +124,21 @@ const DraggableSelect = () => {
     setDemoList((prevValue) => [...prevValue, ...removedValue]);
   };
 
+  const handleLocationList = useCallback(
+    (e) => {
+      if (openList) {
+        if (locationListRef) {
+          if (!locationListRef.current.contains(e.target)) {
+            setOpenList(false);
+          } else {
+            setOpenList(true);
+          }
+        }
+      }
+    },
+    [openList]
+  );
+
   // useEffect
   useEffect(() => {
     if (openList) return searchBarRef.current.focus();
@@ -130,13 +148,18 @@ const DraggableSelect = () => {
       setOpenList(false);
     }
   }, [demoList]);
-
+  useEffect(() => {
+    document.addEventListener("click", handleLocationList, true);
+  }, [handleLocationList]);
   return (
     <div className="my-2">
-      <label className="text-sm font-semibold">Locations</label>
+      <label className="text-sm font-medium flex flex-row items-center space-x-1">
+        <span>Location</span>{" "}
+        <BsQuestionCircleFill className="text-[#77808F] text-[0.75rem]" />
+      </label>
       <div className="mt-1 relative">
         <div
-          className="cursor-pointer rounded-md px-3 py-1 border-2 relative"
+          className="cursor-pointer rounded-md border-2 relative"
           style={{
             padding: value.length > 0 ? "0.25rem 0.75rem" : "0.60rem 0.75rem",
           }}>
@@ -159,23 +182,25 @@ const DraggableSelect = () => {
               ))}
           </ReactSortable>
           {value.length <= 0 && (
-            <p className="text-sm font-semibold">None Selected</p>
+            <p className="text-sm font-medium">None Selected</p>
           )}
           <div
             className="absolute inset-0"
             onClick={() => {
               if (demoList.length > 0) {
-                setOpenList(!openList);
+                setOpenList(true);
               }
             }}></div>
         </div>
         {openList && (
-          <List
-            demoList={demoList}
-            addData={addLocationToInputBox}
-            setOpenList={setOpenList}
-            searchRef={searchBarRef}
-          />
+          <div ref={locationListRef}>
+            <List
+              demoList={demoList}
+              addData={addLocationToInputBox}
+              setOpenList={setOpenList}
+              searchRef={searchBarRef}
+            />
+          </div>
         )}
       </div>
     </div>
