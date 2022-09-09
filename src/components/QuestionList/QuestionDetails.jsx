@@ -34,8 +34,7 @@ const QuestionDetails = ({ data }) => {
         <div
           className={`border-2 border-solid ${
             questionBox ? "border-green" : "border-gray-300"
-          }  rounded-xl px-10 py-10 cursor-pointer bg-white`}
-        >
+          }  rounded-xl px-10 py-10 cursor-pointer bg-white`}>
           <div className="flex items-center gap-2 justify-between">
             <div className="flex items-center gap-2">
               <p className="text-gray-500">
@@ -64,9 +63,7 @@ const QuestionDetails = ({ data }) => {
               {data.question}
             </p>
           </div>
-          <div
-          //  className={`${questionBox ? "visible" : "invisible h-0 "}`}
-          >
+          <div className={`${questionBox ? "visible" : "invisible h-0 "}`}>
             <ResizablePanel id={questionBox}>
               {questionBox && (
                 <AddQuestionBox data={data} setQuestionBox={setQuestionBox} />
