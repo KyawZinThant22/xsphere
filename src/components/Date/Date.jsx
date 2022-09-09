@@ -19,6 +19,7 @@ const Date = (props) => {
       <MdOutlineKeyboardArrowDown />
     </div>
   );
+
   return (
     <div>
       <label htmlFor="startDate" className="text-sm font-semibold">
@@ -26,12 +27,13 @@ const Date = (props) => {
       </label>
       <div
         className="relative w-full text-sm font-semibold text-black placeholder:text-black border-2 rounded-md mt-1 cursor-pointer"
-        style={inputBoxStyle}
-      >
+        style={inputBoxStyle}>
         <span>
           {selectedDate ? selectedDate : "12 August, 2022 - 01:20 PM"}
         </span>
+
         {customIcom}
+
         <input
           type="datetime-local"
           onChange={(e) => {

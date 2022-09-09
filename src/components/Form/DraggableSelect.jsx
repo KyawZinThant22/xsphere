@@ -141,6 +141,10 @@ const DraggableSelect = () => {
             padding: value.length > 0 ? "0.25rem 0.75rem" : "0.60rem 0.75rem",
           }}>
           <ReactSortable
+            animation={200}
+            VdelayOnTouchStart={true}
+            ghostClass="ghost"
+            delay={2}
             list={value}
             setList={(newValue) => setValue(newValue)}
             className="flex flex-row flex-wrap items-center gap-x-3 gap-y-2">
