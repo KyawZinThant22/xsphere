@@ -11,6 +11,7 @@ module.exports = {
         yellow: "#fef6e8",
         paleBlue: "#f2f7fd",
         cancelBtn: "rgb(168,184,199,15%)",
+        iconGray: "#77808F",
       },
       fontFamily: {
         roboto: ["Roboto"],

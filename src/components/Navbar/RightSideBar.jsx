@@ -23,7 +23,6 @@ const RightSideBar = ({ route }) => {
       count: 0,
     },
   ];
-  console.log(route);
   return (
     <div
       className={`w-2/3 ${route === "question-list" ? "mt-[21rem]" : "mt-80"}`}>

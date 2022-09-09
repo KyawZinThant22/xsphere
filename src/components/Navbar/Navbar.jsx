@@ -19,9 +19,9 @@ const Navbar = ({ callback, route }) => {
 
   return (
     <nav
-      className={`flex justify-between items-center w-11/12 mx-auto h-14 ${
+      className={`flex flex-row justify-between items-center w-full h-14 mx-auto px-16 ${
         visible && "bg-white/40 backdrop-blur-sm"
-      }`}>
+      } z-30`}>
       <div className="flex items-center gap-3">
         <MdOutlineArrowBackIosNew size={14} />
         <a href="/" className="font-medium text-sm">

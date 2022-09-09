@@ -1,7 +1,12 @@
-import * as React from "react"
+import * as React from "react";
 
 const SvgComponent = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={23} height={23} {...props}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={17}
+    height={17}
+    viewBox="0 0 23 23"
+    {...props}>
     <g data-name="Group 10" transform="translate(-626 -573)">
       <circle
         data-name="Ellipse 1"
@@ -18,14 +23,13 @@ const SvgComponent = (props) => (
         fontSize={13}
         fontFamily="HelveticaNeue-Medium, Helvetica Neue"
         fontWeight={500}
-        letterSpacing=".015em"
-      >
+        letterSpacing=".015em">
         <tspan x={0} y={0}>
           {"?"}
         </tspan>
       </text>
     </g>
   </svg>
-)
+);
 
-export default SvgComponent
+export default SvgComponent;
