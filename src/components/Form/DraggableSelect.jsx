@@ -1,97 +1,160 @@
-import { useState } from "react";
-import {MdOutlineDragIndicator} from 'react-icons/md'
+import { useState, useEffect, useRef } from "react";
+import { MdOutlineDragIndicator } from "react-icons/md";
 import CancleIcon from "../../assets/CancleIcon";
 import { ReactSortable } from "react-sortablejs";
-import { useRef } from "react";
 
-const DraggableSelect = ({ lable }) => {
-  const optionsList = [
+const SelectedItem = (props) => {
+  return (
+    <div
+      className="text-sm font-semibold bg-[#F3F7FE] rounded flex flex-row items-center gap-x-2 select-none z-20"
+      style={{ padding: "0.4rem 0.4rem 0.4rem 0.2rem" }}
+    >
+      <MdOutlineDragIndicator className="text-[#ADB2B8]" />
+      <span>{props.el.location}</span>
+      <CancleIcon
+        onClick={() => {
+          props.setOpenList(false);
+          props.removeLocation(props.el.id);
+        }}
+      />
+    </div>
+  );
+};
+
+const List = (props) => {
+  const [searchValue, setSearchValue] = useState("");
+  return (
+    <div
+      className="border-2 border-t-0 rounded-md absolute left-0 right-0 bg-[#ffff] z-10 p-3 mt-0 select-none"
+      onMouseOver={() => props.setOpenList(true)}
+    >
+      <input
+        type="text"
+        placeholder="Search location"
+        className="text-sm font-semibold border-2 w-full p-2 rounded-md"
+        value={searchValue}
+        ref={props.searchRef}
+        onChange={(e) => setSearchValue(e.target.value)}
+      />
+      <div className="text-sm font-semibold mt-3 max-h-32 overflow-y-auto">
+        {props.demoList
+          .filter((val) => {
+            if (searchValue === "") return val;
+            if (val.location.toLowerCase().includes(searchValue.toLowerCase()))
+              return val;
+          })
+          .map((el) => (
+            <p
+              key={el.id}
+              className="p-2 rounded-md hover:bg-[#E9F9F5]"
+              onClick={() => {
+                props.addData(el);
+              }}
+            >
+              {el.location}
+            </p>
+          ))}
+      </div>
+    </div>
+  );
+};
+
+const DraggableSelect = () => {
+  // Demo API
+  const demoList = [
     {
-      id:0,
-      value:'Bago'
+      id: 0,
+      location: "Bago",
     },
     {
-      id:1,
-      value:'Yangon'
+      id: 1,
+      location: "Yangon",
     },
     {
-      id:0,
-      value:'Mandalay'
-    }
+      id: 2,
+      location: "Mandalay",
+    },
+    {
+      id: 3,
+      location: "Taunggyi",
+    },
+    {
+      id: 4,
+      location: "Mawlamyine",
+    },
   ];
 
-  const [open, setOpen] = useState(false);
+  // State
+  const [openList, setOpenList] = useState(false);
   const [value, setValue] = useState([]);
-  const [searchValue,setSearchValue] = useState('')
-
-  const inputRef = useRef();
-  const handleCatchValue = (data) => {
-    setOpen(false)
-    setSearchValue('')
-    const id = value.length + 1;
-    const newData = {id,value:data};
-    if(value.length > 0) {
-      const find = value.find((el) => el.value === newData.value)
-      if(!find){
-         setValue((prev) => [...prev,newData])
-      }else{
-        setValue((prev) => [...prev])
+  // Ref
+  const searchBarRef = useRef(null);
+  // Add and Remove Function
+  const addLocationToInputBox = (data) => {
+    if (value.length > 0) {
+      const findAddedValue = value.find((el) => el.id === data.id);
+      if (!findAddedValue) {
+        setValue((prevValue) => [...prevValue, data]);
+      } else {
+        setValue((prevValue) => [...prevValue]);
       }
-    }else{
-      setValue(() => [newData]);
-      console.log(value);
+    } else {
+      setValue(() => [data]);
     }
-
   };
-  const deleteValue = (id) => {
-    const filter = value.filter((e) => e.id !== id)
+  const removeLocation = (id) => {
+    const filter = value.filter((el) => el.id !== id);
     setValue(filter);
-  }
-  return (
-    <div className="relative my-2">
-      <label className="text-sm font-semibold">Locations</label>
-      <div className="mt-1">
-        <div
-          className="cursor-pointer rounded-md px-3 py-1 border-2 relative"
-          style={{padding: value.length > 0 ? "0.25rem 0.75rem" : "0.60rem 0.75rem"}}
-          onClick={() => {
-            setOpen(true)
-            inputRef.current.focus()
-          }}
-        >
-          <div>
-            <ReactSortable list={value} setList={(newValue) => setValue(newValue)} className="flex flex-row items-center space-x-3">
-            {value.length > 0 && value.map(el =><div key={el.id} className="text-sm font-semibold bg-[#F3F7FE] rounded flex flex-row items-center gap-x-2 z-10" style={{padding:'0.4rem 0.4rem 0.4rem 0.2rem'}}
-            onClick={() => {setOpen(false)}}
-            >
-              <MdOutlineDragIndicator className="text-[#ADB2B8]"/> 
-              <span>{el.value}</span>
-              <CancleIcon onClick={() => deleteValue(el.id)}/>
-            </div>)}
-            </ReactSortable>
-            {value.length <= 0 && <p className="text-sm font-semibold">None Selected</p>}        
-          </div>
-        </div>
+  };
 
-        {open && (
-          <div className="mt-1 mb-2 flex flex-col gap-2 bg-white border-2 py-2 shadow-md rounded absolute w-full z-10">
-            <input type="text" className="border-2 mx-3 mt-1 py-1 px-2 rounded-md text-sm font-medium" ref={inputRef} placeholder="Search" value={searchValue} onChange={(e) => {setSearchValue(e.target.value)}}/>
-            {optionsList.filter((data) => {
-              if(searchValue === ""){
-                return data;
-              }else if(data.value.toLowerCase().includes(searchValue.toLocaleLowerCase())){
-                return data
-              }
-            }).map((data) => (
-              <p
-                key={data.value}
-                className="cursor-pointer font-semibold text-sm hover:bg-paleGreen px-3 py-2"
-                onClick={() => handleCatchValue(data.value)}
-              >
-                {data.value}
-              </p>
-            ))}
-          </div>
+  useEffect(() => {
+    if (openList) return searchBarRef.current.focus();
+  }, [openList]);
+
+  return (
+    <div className="my-2">
+      <label className="text-sm font-semibold">Locations</label>
+      <div className="mt-1 relative">
+        <div
+          className="cursor-pointer rounded-md px-3 py-1 border-2 relative overflow-x-auto"
+          style={{
+            padding: value.length > 0 ? "0.25rem 0.75rem" : "0.60rem 0.75rem",
+          }}
+          onMouseLeave={() => setOpenList(false)}
+        >
+          <ReactSortable
+            list={value}
+            setList={(newValue) => setValue(newValue)}
+            className="flex flex-row items-center space-x-3"
+          >
+            {value.length > 0 &&
+              value.map((el) => (
+                <SelectedItem
+                  key={el.id}
+                  el={el}
+                  removeLocation={removeLocation}
+                  setOpenList={setOpenList}
+                />
+              ))}
+          </ReactSortable>
+
+          {value.length <= 0 && (
+            <p className="text-sm font-semibold">None Selected</p>
+          )}
+          <div
+            className="absolute inset-0"
+            onClick={() => {
+              setOpenList(!openList);
+            }}
+          ></div>
+        </div>
+        {openList && (
+          <List
+            demoList={demoList}
+            addData={addLocationToInputBox}
+            setOpenList={setOpenList}
+            searchRef={searchBarRef}
+          />
         )}
       </div>
     </div>
