@@ -6,11 +6,10 @@ import QuestionMark from "../../assets/QuestionMark";
 const Nav = ({ visible, callback, route }) => {
   return (
     <motion.div
-      className="flex items-center  "
+      className="flex items-center "
       initial={{ opacity: 0, translateY: -30 }}
       animate={{ opacity: 1, translateY: visible < 100 ? -150 : 0 }}
-      transition={{ duration: 0.5, delay: 0.1 }}
-    >
+      transition={{ duration: 0.5, delay: 0.1 }}>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -18,10 +17,9 @@ const Nav = ({ visible, callback, route }) => {
         className={`${
           route === "campaign-setup" ? "bg-paleGreen text-green " : ""
         } flex items-center gap-2 text-gray-600 cursor-pointer p-2 px-4 pr-12 rounded-md`}
-        onClick={() => callback("campaign-setup")}
-      >
+        onClick={() => callback("campaign-setup")}>
         <Wrench />
-        <h3 className=" font-bold">1. Campaingn setup</h3>
+        <h3 className=" font-bold text-sm">1. Campaingn setup</h3>
       </motion.div>
 
       <motion.div
@@ -31,10 +29,9 @@ const Nav = ({ visible, callback, route }) => {
         className={`${
           route === "question-list" ? "bg-paleGreen text-green " : ""
         } flex items-center gap-2 p-2 px-4 pr-12 rounded-md text-gray-600 cursor-pointer`}
-        onClick={() => callback("question-list")}
-      >
+        onClick={() => callback("question-list")}>
         <QuestionMark />
-        <h3 className="font-bold">2. Questions list</h3>
+        <h3 className="font-bold text-sm">2. Questions list</h3>
       </motion.div>
 
       <motion.div
@@ -44,10 +41,9 @@ const Nav = ({ visible, callback, route }) => {
         className={`${
           route === "timeline" ? "bg-paleGreen text-green " : ""
         } flex items-end gap-2 text-gray-600 cursor-pointer p-2 px-4 pr-12 rounded-md`}
-        onClick={() => callback("timeline")}
-      >
+        onClick={() => callback("timeline")}>
         <Clock />
-        <h3 className="font-bold ">3. Timeline</h3>
+        <h3 className="font-bold text-sm">3. Timeline</h3>
       </motion.div>
     </motion.div>
   );

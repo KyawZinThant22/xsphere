@@ -6,31 +6,30 @@ import GetBak from "../../assets/GetbakLogo.svg";
 import Nav from "./Nav";
 
 const Navbar = ({ callback, route }) => {
-	const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
 
-	useEffect(() => {
-		window.addEventListener("scroll", () => {
-			if (document.documentElement.scrollTop > 100) {
-				setVisible(true);
-			} else {
-				setVisible(false);
-			}
-		});
-	}, [document.documentElement.scrollTop]);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (document.documentElement.scrollTop > 100) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+    });
+  }, [document.documentElement.scrollTop]);
 
-	return (
-		<nav className="w-full py-4 flex justify-between items-center bg-white">
-			<div className="flex items-center gap-3">
-				<MdOutlineArrowBackIosNew size={14} />
-				<a href="/" className="font-semibold">
-					Back to Dashboard
-				</a>
-			</div>
-
-			<Nav callback={callback} route={route} />
-			<img src={GetBak} alt="GetBak logo" className="w-28" />
-		</nav>
-	);
+  return (
+    <nav className="py-4 flex justify-between items-center w-11/12 mx-auto bg-white/30 backdrop-blur-md">
+      <div className="flex items-center gap-3">
+        <MdOutlineArrowBackIosNew size={14} />
+        <a href="/" className="font-medium text-sm">
+          Back to Dashboard
+        </a>
+      </div>
+      <Nav callback={callback} route={route} />
+      <img src={GetBak} alt="GetBak logo" className="w-24" />
+    </nav>
+  );
 };
 
 export default Navbar;

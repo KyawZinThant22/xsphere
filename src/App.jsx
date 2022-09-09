@@ -14,9 +14,9 @@ const App = () => {
   return (
     <div className="font-roboto w-screen h-screen overflow-hidden px-2 pb-60">
       <div className="grid grid-cols-12  gap-x-4">
-        {/* <div className="col-span-12">
+        <div className="col-span-12 fixed w-full top-0">
           <Navbar callback={changeRoute} route={route} />
-        </div> */}
+        </div>
         <div className="col-span-3 h-full">
           <div className="flex justify-center items-center w-full h-full -mt-12">
             <LeftSidebar route={route} callback={changeRoute} />
@@ -32,8 +32,8 @@ const App = () => {
           )}
         </div>
         <div className="col-span-3 h-full">
-          <div className="flex items-center w-full h-full">
-            <RightSideBar />
+          <div className="flex w-full">
+            <RightSideBar route={route} />
           </div>
         </div>
       </div>
