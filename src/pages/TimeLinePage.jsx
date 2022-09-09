@@ -28,7 +28,7 @@ const TimeLinePage = () => {
     </div>
   );
   return (
-    <div className="w-full h-screen overflow-y-scroll scrollbar-hide">
+    <div className="w-full h-screen scrollbar-hide">
       <div className="w-full mt-8">
         <Hero
           instruction={

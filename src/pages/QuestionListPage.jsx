@@ -28,7 +28,7 @@ const QuestionListPage = () => {
     },
   ]);
   return (
-    <div className="w-full h-screen overflow-y-scroll scrollbar-hide">
+    <div className="w-full h-screen">
       <div className="mt-8">
         <Hero
           showCount
@@ -53,7 +53,7 @@ const QuestionListPage = () => {
           setList={(newValue) => setQuestionList(newValue)}
           className="grid place-items-center gap-y-3">
           {questionList.length > 0 &&
-            questionList.map((el) => <QuestionList />)}
+            questionList.map((el, index) => <QuestionList index={index} />)}
         </ReactSortable>
       </div>
     </div>

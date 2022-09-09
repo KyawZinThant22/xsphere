@@ -6,7 +6,7 @@ import QuestionMark from "../../assets/QuestionMark";
 const Nav = ({ visible, callback, route }) => {
   return (
     <motion.div
-      className="flex items-center "
+      className="flex items-center"
       initial={{ opacity: 0, translateY: -30 }}
       animate={{ opacity: 1, translateY: visible < 100 ? -150 : 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}>
@@ -26,11 +26,17 @@ const Nav = ({ visible, callback, route }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
-        className={`${
-          route === "question-list" ? "bg-paleGreen text-green " : ""
-        } flex items-center gap-2 p-2 px-4 pr-12 rounded-md text-gray-600 cursor-pointer`}
+        className={`flex items-center gap-2 p-2 px-4 pr-12 rounded-md cursor-pointer ${
+          route === "question-list"
+            ? "bg-[#166ADE] text-white"
+            : "text-gray-600"
+        }`}
         onClick={() => callback("question-list")}>
-        <QuestionMark />
+        <QuestionMark
+          className={` ${
+            route === "question-list" ? "bg-[#fff] text-black" : "text-gray-600"
+          }`}
+        />
         <h3 className="font-bold text-sm">2. Questions list</h3>
       </motion.div>
 
