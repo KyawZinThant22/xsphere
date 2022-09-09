@@ -1,4 +1,4 @@
-import React,{ useState, useRef } from 'react'
+import React, { useState } from "react";
 import {
   MdOutlineKeyboardArrowUp,
   MdOutlineKeyboardArrowDown,
@@ -12,7 +12,13 @@ export const inputBoxStyle = {
 
 const Date = (props) => {
   const [selectedDate, setSelectedDate] = useState();
-  
+
+  const customIcom = (
+    <div className="text-base text-[#79808E] absolute top-1/2 -translate-y-1/2 right-2">
+      <MdOutlineKeyboardArrowUp style={{ marginBottom: "-0.4rem" }} />
+      <MdOutlineKeyboardArrowDown />
+    </div>
+  );
   return (
     <div>
       <label htmlFor="startDate" className="text-sm font-semibold">
@@ -20,15 +26,12 @@ const Date = (props) => {
       </label>
       <div
         className="relative w-full text-sm font-semibold text-black placeholder:text-black border-2 rounded-md mt-1 cursor-pointer"
-        style={inputBoxStyle}>
+        style={inputBoxStyle}
+      >
         <span>
           {selectedDate ? selectedDate : "12 August, 2022 - 01:20 PM"}
         </span>
-        {/* icon */}
-        <div className="text-base text-[#79808E] absolute top-1/2 -translate-y-1/2 right-2">
-          <MdOutlineKeyboardArrowUp style={{ marginBottom: "-0.4rem" }} />
-          <MdOutlineKeyboardArrowDown />
-        </div>
+        {customIcom}
         <input
           type="datetime-local"
           onChange={(e) => {
@@ -43,8 +46,8 @@ const Date = (props) => {
           }
         />
       </div>
-  </div>
-  )
-}
+    </div>
+  );
+};
 
-export default Date
+export default Date;
