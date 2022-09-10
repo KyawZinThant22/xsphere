@@ -41,10 +41,9 @@ const Sidebar = ({ route, callback }) => {
               delay: key * 0.2,
             }}
             key={item.text}
-            className={`flex flex-row items-center space-x-3 ml-2 cursor-pointer ${
-              item.route === route ? "bg-paleGreen text-green" : ""
-            } rounded-md w-52`}
-            style={{ padding: "0.7rem 1rem" }}
+            className={`flex flex-row items-center space-x-3 ml-2 cursor-pointer rounded-md w-52 
+            ${item.route === route && "bg-paleGreen text-green"} `}
+            style={{ padding: "0.6rem 1rem" }}
             onClick={() => callback(item.route)}>
             <div>
               <item.icon />

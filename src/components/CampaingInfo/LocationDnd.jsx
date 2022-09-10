@@ -60,6 +60,7 @@ const List = (props) => {
 };
 
 const LocationDnd = () => {
+  const inputFocusColor = " focus:border-[#61C09D]";
   // Demo API
   const [demoList, setDemoList] = useState([
     {
@@ -123,15 +124,14 @@ const LocationDnd = () => {
     const removedValue = value.filter((el) => el.id === id);
     setDemoList((prevValue) => [...prevValue, ...removedValue]);
   };
-
   const handleLocationList = useCallback(
     (e) => {
       if (openList) {
-        if (locationListRef) {
-          if (!locationListRef.current.contains(e.target)) {
-            setOpenList(false);
-          } else {
+        if (locationListRef !== null) {
+          if (locationListRef.current.contains(e.target)) {
             setOpenList(true);
+          } else {
+            setOpenList(false);
           }
         }
       }
@@ -151,6 +151,7 @@ const LocationDnd = () => {
   useEffect(() => {
     document.addEventListener("click", handleLocationList, true);
   }, [handleLocationList]);
+
   return (
     <div className="mt-2 mb-3">
       <label className="text-sm font-medium flex flex-row items-center space-x-1">
@@ -159,7 +160,7 @@ const LocationDnd = () => {
       </label>
       <div className="mt-1 relative">
         <div
-          className="cursor-pointer rounded-md border-2 relative"
+          className={`cursor-pointer rounded-md border-2 relative ${inputFocusColor}`}
           style={{
             padding: value.length > 0 ? "0.25rem 0.75rem" : "0.60rem 0.75rem",
           }}>

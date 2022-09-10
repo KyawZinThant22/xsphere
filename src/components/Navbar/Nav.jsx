@@ -1,56 +1,69 @@
 import { motion } from "framer-motion";
 import Wrench from "../../assets/Wrench";
-import Clock from "../../assets/Clock";
 import QuestionMark from "../../assets/QuestionMark";
+import Clock from "../../assets/Clock";
 
-const Nav = ({ visible, callback, route }) => {
+const NavLink = ({ route, callback, routeText, title, Icon, delay }) => {
+  const navButtonStyle =
+    "flex items-center justify-center gap-x-2 p-2 px-4 pr-12 rounded-md cursor-pointer text-iconGray";
+  const navLinkHoverEffect = "bg-[#166ADE] text-[#fff]";
   return (
     <motion.div
-      className="flex items-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay }}
+      className={`${navButtonStyle} ${
+        route === routeText && navLinkHoverEffect
+      }`}
+      onClick={() => callback(routeText)}>
+      <Icon />
+      <h3 className="font-bold text-sm">{title}</h3>
+    </motion.div>
+  );
+};
+
+const Nav = ({ visible, callback, route }) => {
+  const navLink = [
+    {
+      id: 1,
+      title: "1. Campaign setup",
+      routeText: "campaign-setup",
+      icon: Wrench,
+      delay: 0.3,
+    },
+    {
+      id: 2,
+      title: "2. Questions list",
+      routeText: "question-list",
+      icon: QuestionMark,
+      delay: 0.6,
+    },
+    {
+      id: 3,
+      title: "3. Timeline",
+      routeText: "timeline",
+      icon: Clock,
+      delay: 0.9,
+    },
+  ];
+  return (
+    <motion.div
+      className="grid grid-cols-3 gap-x-3"
       initial={{ opacity: 0, translateY: -30 }}
       animate={{ opacity: 1, translateY: visible < 100 ? -150 : 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className={`${
-          route === "campaign-setup" ? "bg-paleGreen text-green " : ""
-        } flex items-center gap-2 text-gray-600 cursor-pointer p-2 px-4 pr-12 rounded-md`}
-        onClick={() => callback("campaign-setup")}>
-        <Wrench />
-        <h3 className=" font-bold text-sm">1. Campaingn setup</h3>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        className={`flex items-center gap-2 p-2 px-4 pr-12 rounded-md cursor-pointer ${
-          route === "question-list"
-            ? "bg-[#166ADE] text-white"
-            : "text-gray-600"
-        }`}
-        onClick={() => callback("question-list")}>
-        <QuestionMark
-          className={` ${
-            route === "question-list" ? "bg-[#fff] text-black" : "text-gray-600"
-          }`}
-        />
-        <h3 className="font-bold text-sm">2. Questions list</h3>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.9 }}
-        className={`${
-          route === "timeline" ? "bg-paleGreen text-green " : ""
-        } flex items-end gap-2 text-gray-600 cursor-pointer p-2 px-4 pr-12 rounded-md`}
-        onClick={() => callback("timeline")}>
-        <Clock />
-        <h3 className="font-bold text-sm">3. Timeline</h3>
-      </motion.div>
+      {navLink &&
+        navLink.map((el, index) => (
+          <NavLink
+            key={el.id}
+            route={route}
+            callback={callback}
+            routeText={el.routeText}
+            title={el.title}
+            Icon={el.icon}
+            delay={el.delay}
+          />
+        ))}
     </motion.div>
   );
 };

@@ -3,7 +3,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { MdDragIndicator } from "react-icons/md";
 const QuestionList = ({ index }) => {
   return (
-    <div className="w-full flex flex-row justify-between items-center gap-x-4">
+    <div className="w-full flex flex-row justify-center items-center gap-x-4">
       <MdDragIndicator className="text-2xl text-[#77808F]" />
       <div className="border-2 px-9 py-8 rounded-lg bg-white cursor-pointer select-none">
         <div className="text-[#77808F] flex felx-row justify-between items-center mb-3">
