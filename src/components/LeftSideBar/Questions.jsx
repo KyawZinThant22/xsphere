@@ -45,8 +45,7 @@ const Questions = () => {
               className={`flex items-end gap-3  cursor-pointer ${
                 question.bgcolor &&
                 "bg-paleGreen px-2 py-2 rounded-md w-[15rem] "
-              }`}
-            >
+              }`}>
               {question.img && (
                 <img src={question.img} alt={question.text} className="w-6" />
               )}

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Wrench from "../../assets/Wrench";
 import QuestionMark from "../../assets/QuestionMark";
 import Clock from "../../assets/Clock";
@@ -52,18 +52,20 @@ const Nav = ({ visible, callback, route }) => {
       initial={{ opacity: 0, translateY: -30 }}
       animate={{ opacity: 1, translateY: visible < 100 ? -150 : 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}>
-      {navLink &&
-        navLink.map((el, index) => (
-          <NavLink
-            key={el.id}
-            route={route}
-            callback={callback}
-            routeText={el.routeText}
-            title={el.title}
-            Icon={el.icon}
-            delay={el.delay}
-          />
-        ))}
+      <AnimatePresence>
+        {navLink &&
+          navLink.map((el) => (
+            <NavLink
+              key={el.id}
+              route={route}
+              callback={callback}
+              routeText={el.routeText}
+              title={el.title}
+              Icon={el.icon}
+              delay={el.delay}
+            />
+          ))}
+      </AnimatePresence>
     </motion.div>
   );
 };

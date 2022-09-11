@@ -19,9 +19,7 @@ const Navbar = ({ callback, route }) => {
 
   return (
     <nav
-      className={`grid grid-cols-5 items-center w-full h-16 mx-auto px-16 ${
-        visible && "bg-white/40 backdrop-blur-sm"
-      } z-30`}>
+      className={`grid grid-cols-5 items-center w-full h-16 mx-auto px-16 bg-white/40 backdrop-blur-sm z-30`}>
       <div className="flex items-center gap-3 ">
         <MdOutlineArrowBackIosNew size={14} />
         <a href="/" className="font-medium text-sm">

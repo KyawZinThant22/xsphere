@@ -44,7 +44,7 @@ const AddQuestionBox = ({ data, setQuestionBox }) => {
       <h1 className="font-bold">Questions</h1>
       <textarea
         type="text"
-        placeholder={data.question}
+        placeholder={data?.question}
         className="mt-2  w-full border border-solid p-3  text-gray-800 text-[18px] rounded-lg resize-none "
       />
       <div className="mt-4 flex items-center gap-4">
@@ -72,15 +72,13 @@ const AddQuestionBox = ({ data, setQuestionBox }) => {
       <div className="flex items-center mt-8 text-center gap-1">
         <button
           aria-label="add question"
-          className="bg-btnColor font-bold   text-white p-2 px-6 rounded hover:bg-blue-500"
-        >
+          className="bg-btnColor font-bold   text-white p-2 px-6 rounded hover:bg-blue-500">
           Add question
         </button>
         <button
           onClick={() => setQuestionBox(false)}
           aria-label="cancel quesiton"
-          className="bg-gray-200 px-8 font-bold p-2 rounded"
-        >
+          className="bg-gray-200 px-8 font-bold p-2 rounded">
           Cancel
         </button>
       </div>
