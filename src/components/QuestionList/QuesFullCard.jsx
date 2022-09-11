@@ -22,7 +22,7 @@ const ChoiceComponent = ({ defaultValue, add }) => {
       <MdDragIndicator className="text-lg text-iconGray" />
       <input
         type="text"
-        className={`${inputBoxStyle} w-2/4`}
+        className={`${inputBoxStyle}`}
         defaultValue={defaultValue}
       />
       {!add ? (
@@ -76,6 +76,28 @@ const QuesFullCard = ({ data }) => {
       add: true,
     },
   ]);
+  const formatBtns = [
+    {
+      id: 0,
+      title: "Not at all",
+      checked: false,
+    },
+    {
+      id: 1,
+      title: "Not really",
+      checked: true,
+    },
+    {
+      id: 2,
+      title: "A bit",
+      checked: true,
+    },
+    {
+      id: 3,
+      title: "Very Much",
+      checked: false,
+    },
+  ];
   // Variable
   const questionInput = (
     <div className="questionInput mb-3">
@@ -96,24 +118,22 @@ const QuesFullCard = ({ data }) => {
       <Label title={"Format Preview"} Icon={BsQuestionCircleFill} />
       <div className="bg-[#F2F6FD] w-full h-32 mt-1 rounded-lg grid place-items-center">
         <div className="flex flex-row items-stretch gap-x-2">
-          <button className="bg-white text-sm font-medium text-iconGray px-4 py-2 rounded-md border">
-            Not at all
-          </button>
-          <button className="bg-white text-sm font-medium text-iconGray px-4 py-2 rounded-md border">
-            Not really
-          </button>
-          <button className="bg-white text-sm font-medium text-iconGray px-4 py-2 rounded-md border">
-            A bit
-          </button>
-          <button className="bg-white text-sm font-medium text-iconGray px-4 py-2 rounded-md border">
-            Very Much
-          </button>
+          {formatBtns.length > 0 &&
+            formatBtns.map((el) => (
+              <button
+                key={el.id}
+                className={`bg-white text-sm font-medium text-iconGray px-4 py-2 rounded-md border-2 ${
+                  el.checked && "border-[#166ADE]"
+                }`}>
+                {el.title}
+              </button>
+            ))}
         </div>
       </div>
     </div>
   );
   const choices = (
-    <div className="choices mb-4">
+    <div className="choices mb-4 w-2/4">
       <Label title={"Choices"} Icon={BsQuestionCircleFill} />
       <ReactSortable
         animation={200}
