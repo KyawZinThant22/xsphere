@@ -34,7 +34,8 @@ const RightSideBar = ({ route }) => {
         <div>
           {title}
           <div className="flex flex-col">
-            {demoData && demoData.map((el) => <QuestionListRadio el={el} />)}
+            {demoData &&
+              demoData.map((el) => <QuestionListRadio key={el.id} el={el} />)}
           </div>
         </div>
       )}

@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import {
-  MdOutlineKeyboardArrowUp,
-  MdOutlineKeyboardArrowDown,
-} from "react-icons/md";
 import moment from "moment";
+import { customIcon } from "../Csx/Csx";
 
 export const inputFocusColor = " focus:border-[#61C09D]";
 export const inputBoxStyle = {
@@ -12,14 +9,6 @@ export const inputBoxStyle = {
 
 const Date = (props) => {
   const [selectedDate, setSelectedDate] = useState();
-
-  const customIcom = (
-    <div className="text-base text-[#79808E] absolute top-1/2 -translate-y-1/2 right-2">
-      <MdOutlineKeyboardArrowUp style={{ marginBottom: "-0.4rem" }} />
-      <MdOutlineKeyboardArrowDown />
-    </div>
-  );
-
   return (
     <div>
       <label htmlFor="startDate" className="text-sm font-medium">
@@ -32,7 +21,7 @@ const Date = (props) => {
           {selectedDate ? selectedDate : "12 August, 2022 - 01:20 PM"}
         </span>
 
-        {customIcom}
+        {customIcon}
 
         <input
           type="datetime-local"

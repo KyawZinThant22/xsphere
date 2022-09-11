@@ -5,7 +5,7 @@ import Clock from "../../assets/Clock";
 
 const NavLink = ({ route, callback, routeText, title, Icon, delay }) => {
   const navButtonStyle =
-    "flex items-center justify-center gap-x-2 p-2 px-4 pr-12 rounded-md cursor-pointer text-iconGray";
+    "flex items-center justify-center gap-x-2 p-2 px-4 pr-12 rounded-md cursor-pointer ";
   const navLinkHoverEffect = "bg-[#166ADE] text-[#fff]";
   return (
     <motion.div
@@ -13,7 +13,7 @@ const NavLink = ({ route, callback, routeText, title, Icon, delay }) => {
       animate={{ opacity: 1 }}
       transition={{ delay }}
       className={`${navButtonStyle} ${
-        route === routeText && navLinkHoverEffect
+        route === routeText ? navLinkHoverEffect : "text-iconGray"
       }`}
       onClick={() => callback(routeText)}>
       <Icon />

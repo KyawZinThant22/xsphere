@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import LeftSidebar from "./components/Navbar/LeftSidebar";
+import LeftSidebar from "./components/LeftSideBar/LeftSidebar";
 import { CampaignSetupPage, QuestionListPage, TimeLinePage } from "./pages";
-import RightSideBar from "./components/Navbar/RightSideBar";
+import RightSideBar from "./components/RightSideBar/RightSideBar";
 
 const App = () => {
   const [route, setRoute] = useState("question-list");
@@ -12,17 +12,17 @@ const App = () => {
   };
 
   return (
-    <div className="font-roboto w-screen h-screen px-2 pb-60">
+    <div className="font-roboto">
       <div className="grid grid-cols-12 gap-x-4 relative">
-        <div className="col-span-12 sticky top-0 z-20">
+        <div className="navbar col-span-12 sticky top-0 z-20">
           <Navbar callback={changeRoute} route={route} />
         </div>
-        <div className="col-span-3 h-full">
+        <div className="leftSideBar col-span-3 h-full">
           <div className="flex justify-center items-center w-full h-full -mt-12">
             <LeftSidebar route={route} callback={changeRoute} />
           </div>
         </div>
-        <div className="col-span-6 h-full mb-10">
+        <div className="main col-span-6 h-full mb-10">
           {route === "campaign-setup" ? (
             <CampaignSetupPage />
           ) : route === "question-list" ? (
@@ -31,7 +31,7 @@ const App = () => {
             <TimeLinePage />
           )}
         </div>
-        <div className="col-span-3 h-full">
+        <div className="rightSideBar col-span-3 h-full">
           <div className="flex w-full">
             <RightSideBar route={route} />
           </div>

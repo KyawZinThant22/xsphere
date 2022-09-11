@@ -3,26 +3,31 @@ import { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { ReactSortable } from "react-sortablejs";
 import Hero from "../components/Hero";
-import QuestionList from "./../components/QuestionList/QuestionList";
+import QuestionCard from "../components/QuestionList/QuestionCard";
 const QuestionListPage = () => {
   const [questionList, setQuestionList] = useState([
     {
+      id: 0,
       question:
         "Do you find yourself struggling more than usual with the current COVID-19 situation?",
     },
     {
+      id: 1,
       question:
         "Do you find yourself struggling more than usual with the current COVID-19 situation?",
     },
     {
+      id: 2,
       question:
         "Do you find yourself struggling more than usual with the current COVID-19 situation?",
     },
     {
+      id: 3,
       question:
         "Do you find yourself struggling more than usual with the current COVID-19 situation?",
     },
     {
+      id: 4,
       question:
         "Do you find yourself struggling more than usual with the current COVID-19 situation?",
     },
@@ -43,7 +48,7 @@ const QuestionListPage = () => {
           </div>
         </Hero>
       </div>
-      <div className="w-11/12 mx-auto mt-16 mb-5">
+      <div className="w-11/12 mx-auto mt-16">
         <ReactSortable
           animation={200}
           VdelayOnTouchStart={true}
@@ -53,7 +58,9 @@ const QuestionListPage = () => {
           setList={(newValue) => setQuestionList(newValue)}
           className="grid place-items-center gap-y-3">
           {questionList.length > 0 &&
-            questionList.map((el, index) => <QuestionList index={index} />)}
+            questionList.map((el) => (
+              <QuestionCard key={el.id} index={el.id} data={el} />
+            ))}
         </ReactSortable>
       </div>
     </div>
