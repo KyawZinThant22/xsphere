@@ -10,62 +10,70 @@ import { useState } from "react";
 const CampaignSetupPage = () => {
 	const [form, setForm] = useState({
 		title: "",
-		loaction: [],
 		image: "",
 		profile: "",
 	});
 
-  const createdCampaing = localStorage.getItem("createdCampaignId");
+	const [location, setLocation] = useState([
+		{
+			id: 0,
+			location: "Bago",
+		},
+		{
+			id: 1,
+			location: "Yangon",
+		},
+	]);
 
-  const [locationList, setlocationList] = useState([
-    {
-      id: 0,
-      location: "Bago",
-      default: true,
-    },
-    {
-      id: 1,
-      location: "Yangon",
-      default: true,
-    },
-    {
-      id: 2,
-      location: "Mandalay",
-    },
-    {
-      id: 3,
-      location: "Taunggyi",
-    },
-    {
-      id: 4,
-      location: "Mawlamyine",
-    },
-    {
-      id: 5,
-      location: "United State",
-    },
-    {
-      id: 6,
-      location: "Australia",
-    },
-    {
-      id: 7,
-      location: "Japan",
-    },
-  ]);
+	const createdCampaing = localStorage.getItem("createdCampaignId");
 
-  const createdCampaignHandler = (id) => {
-    if (id) {
-      setForm({
-        title: "အကောင်းဆုံးရဲ့အကောင်းဆုံးတွေကိုကြိုက်နှစ်သက်သူများအတွက်",
-      });
-    } else {
-    }
-  };
+	const [locationList, setlocationList] = useState([
+		{
+			id: 0,
+			location: "Bago",
+		},
+		{
+			id: 1,
+			location: "Yangon",
+		},
+		{
+			id: 2,
+			location: "Mandalay",
+		},
+		{
+			id: 3,
+			location: "Taunggyi",
+		},
+		{
+			id: 4,
+			location: "Mawlamyine",
+		},
+		{
+			id: 5,
+			location: "United State",
+		},
+		{
+			id: 6,
+			location: "Australia",
+		},
+		{
+			id: 7,
+			location: "Japan",
+		},
+	]);
 
-  useEffect(() => {
-    createdCampaignHandler(createdCampaing);
-  }, [createdCampaing]);
+	const createdCampaignHandler = (id) => {
+		if (id) {
+			setForm({
+				title: "အကောင်းဆုံးရဲ့အကောင်းဆုံးတွေကိုကြိုက်နှစ်သက်သူများအတွက်",
+			});
+		} else {
+		}
+	};
+
+	useEffect(() => {
+		createdCampaignHandler(createdCampaing);
+	}, [createdCampaing]);
 
 	return (
 		<div className="w-full h-screen">
@@ -89,24 +97,10 @@ const CampaignSetupPage = () => {
 					}}
 				/>
 				<LocationDnd
-					item={locationList}
-					// value={form.loaction}
-					// value={[
-					// 	{
-					// 		id: 0,
-					// 		location: "Bago",
-					// 	},
-					// 	{
-					// 		id: 1,
-					// 		location: "Yangon",
-					// 	},
-					// ]}
-					onChange={(value) =>
-						setForm({
-							...form,
-							loaction: value,
-						})
-					}
+					data={locationList}
+					value={location}
+					// onChange={(value) => console.log(value)}
+					onChange={(value) => setLocation(value)}
 				/>
 				<FormatPreview
 					onChange={(value) => {
@@ -137,7 +131,7 @@ const CampaignSetupPage = () => {
 					<button
 						className="bg-[#166ADE] text-white text-sm font-medium px-14 py-2 rounded-md"
 						onClick={() => {
-							console.log(form);
+							console.log(form, location);
 						}}
 					>
 						Next Page

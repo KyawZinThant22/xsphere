@@ -5,7 +5,7 @@ import { CampaignSetupPage, QuestionListPage, TimeLinePage } from "./pages";
 import RightSideBar from "./components/RightSideBar/RightSideBar";
 
 const App = () => {
-  const [route, setRoute] = useState("question-list");
+  const [route, setRoute] = useState("campaign-setup");
 
   const changeRoute = (route) => {
     setRoute(route);
