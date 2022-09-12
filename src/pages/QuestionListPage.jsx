@@ -5,8 +5,12 @@ import { ReactSortable } from "react-sortablejs";
 import Hero from "../components/Hero";
 import QuestionCard from "../components/QuestionList/QuestionCard";
 import NewQuestion from "../components/QuestionList/NewQuestion";
+import EditQuestion from "../components/QuestionList/EditQuestion";
+
 const QuestionListPage = () => {
 	const [questionList, setQuestionList] = useState([]);
+	const [editQeustion, setEditQuestion] = useState({});
+	const [isEdit, setIsEdit] = useState(false);
 
 	const questionDeleteHandler = (id) => {
 		let temp = questionList.filter((item, key) => {
@@ -17,6 +21,13 @@ const QuestionListPage = () => {
 		} else {
 			setQuestionList([]);
 		}
+	};
+
+	const questionEditHandler = (id) => {
+		let temp = questionList.filter((item, key) => {
+			return key === id;
+		});
+		setEditQuestion(temp);
 	};
 
 	return (
@@ -53,6 +64,7 @@ const QuestionListPage = () => {
 								index={key}
 								data={el}
 								handleDelete={questionDeleteHandler}
+								handleEdit={questionEditHandler}
 							/>
 						))}
 					</ReactSortable>
@@ -67,9 +79,17 @@ const QuestionListPage = () => {
 				</div>
 			</div>
 
-			{/* <div className={`fixed top-0 left-0 w-screen h-screen  z-50 bg-white bg-opac`}>
-
-			</div> */}
+			<div
+				className={`${isEdit ? "fixed" : "hidden"} top-0 left-0 w-screen h-screen z-50 bg-white bg-opacity-30 backdrop-blur-sm flex items-center`}
+			>
+				<div className="w-full grid grid-cols-12 gap-x-8 relative">
+					<div className="col-span-3" />
+					<div className="col-span-6">
+						<EditQuestion index={1} />
+					</div>
+					<div className="col-span-3" />
+				</div>
+			</div>
 		</div>
 	);
 };

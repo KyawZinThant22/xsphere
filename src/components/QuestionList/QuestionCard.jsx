@@ -8,7 +8,7 @@ import Radio from "../CampaingInfo/Radio";
 import { BiMinusCircle } from "react-icons/bi";
 import { IoMdAddCircleOutline } from "react-icons/io";
 // Main Component
-const QuestionCard = ({ index, data, submit, handleDelete }) => {
+const QuestionCard = ({ index, data, handleDelete, handleEdit }) => {
 	const [visible, setVisible] = useState(false);
 
 	const [currentForm, setCurrentForm] = useState({
@@ -21,9 +21,8 @@ const QuestionCard = ({ index, data, submit, handleDelete }) => {
 	const answerer = ["end-user", "all"];
 	const questionType = ["single", "multiple"];
 
-	const handleSubmit = async () => {
-		//final
-		submit({ ...currentForm });
+	const editHandler = () => {
+		handleEdit(index);
 	};
 
 	const deleteHandler = () => {
@@ -38,7 +37,12 @@ const QuestionCard = ({ index, data, submit, handleDelete }) => {
 					onClick={() => setVisible(!visible)}
 				/>
 				{visible && <IoMdAddCircleOutline className="text-lg text-iconGray" />}
-				{visible && <BiMinusCircle className="text-lg text-iconGray cursor-pointer" onClick={deleteHandler} />}
+				{visible && (
+					<BiMinusCircle
+						className="text-lg text-iconGray cursor-pointer"
+						onClick={deleteHandler}
+					/>
+				)}
 			</div>
 
 			<div
@@ -54,11 +58,7 @@ const QuestionCard = ({ index, data, submit, handleDelete }) => {
 						<div className="flex flex-row text-sm space-x-1">
 							<span>Asked to:</span>
 							<h4 className="flex flex-row items-center space-x-2 font-medium ">
-								<span>
-									{data?.answerer
-										? capitalCase(data.answerer)
-										: ""}
-								</span>{" "}
+								<span>{data?.answerer ? capitalCase(data.answerer) : ""}</span>{" "}
 								<FaUserCircle />
 							</h4>
 						</div>
@@ -235,17 +235,13 @@ const QuestionCard = ({ index, data, submit, handleDelete }) => {
 									<div className="mt-1 pl-1">
 										<Radio
 											value={"allow-comments"}
-											checked={
-												data.option === "allow-comments" ? true : false
-											}
+											checked={data.option === "allow-comments" ? true : false}
 											disabled={true}
 										/>
 										<Radio
 											value={"required-question"}
 											checked={
-												data.option === "required-question"
-													? true
-													: false
+												data.option === "required-question" ? true : false
 											}
 											disabled={true}
 										/>
@@ -254,7 +250,7 @@ const QuestionCard = ({ index, data, submit, handleDelete }) => {
 								<div className="flex flex-row items-stretch space-x-2">
 									<button
 										className="bg-blue-500 text-white text-sm font-medium rounded-md px-10 py-2"
-										onClick={handleSubmit}
+										onClick={editHandler}
 									>
 										Edit
 									</button>
