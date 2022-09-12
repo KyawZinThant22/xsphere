@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Wrench from "../../assets/Wrench";
-import QuestionMark from "../../assets/QuestionMark";
+import QuestionAlt from "../../assets/QuestionAlt";
 import Clock from "../../assets/Clock";
 
 const NavLink = ({ route, callback, routeText, title, Icon, delay }) => {
@@ -16,7 +16,7 @@ const NavLink = ({ route, callback, routeText, title, Icon, delay }) => {
         route === routeText && navLinkHoverEffect
       }`}
       onClick={() => callback(routeText)}>
-      <Icon />
+      <Icon fillcolor={route === routeText ? "#166ADE" : "#fff"} />
       <h3 className="font-bold text-sm">{title}</h3>
     </motion.div>
   );
@@ -35,7 +35,7 @@ const Nav = ({ visible, callback, route }) => {
       id: 2,
       title: "2. Questions list",
       routeText: "question-list",
-      icon: QuestionMark,
+      icon: QuestionAlt,
       delay: 0.6,
     },
     {

@@ -10,7 +10,7 @@ const Radio = () => {
           id="xsphere"
           name="profile"
           value="xsphere"
-          className="w-[0.7rem] h-[0.7rem] focus:ring-[#2CC97D] dark:focus:ring-[#2CC97D] border-2 focus:ring-2"
+          className="w-[0.7rem] h-[0.7rem] focus:ring-[#2CC97D] dark:focus:ring-[#2CC97D] border-2 focus:ring-2 cursor-pointer"
         />
         <label
           htmlFor="xsphere"
@@ -25,7 +25,7 @@ const Radio = () => {
           id="getbak"
           name="profile"
           value="getbak"
-          className="w-[0.7rem] h-[0.7rem] focus:ring-[#2CC97D] dark:focus:ring-[#2CC97D] border-2 focus:ring-2"
+          className="w-[0.7rem] h-[0.7rem] focus:ring-[#2CC97D] dark:focus:ring-[#2CC97D] border-2 focus:ring-2 cursor-pointer"
         />
         <label
           htmlFor="getbak"
