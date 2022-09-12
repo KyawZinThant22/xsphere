@@ -9,8 +9,8 @@ const QuestionSelect = () => {
         <BsQuestionCircleFill className="text-iconGray" />
       </label>
       <div className={`${inputBoxStyle} text-iconGray relative`}>
-        <select className="w-full">
-          <option value="">GetBak End-user</option>
+        <select className="w-full bg-none">
+          <option value="GetBak End-user">GetBak End-user</option>
         </select>
         {customIcon}
       </div>

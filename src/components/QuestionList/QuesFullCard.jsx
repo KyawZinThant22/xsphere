@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { MdDragIndicator } from "react-icons/md";
 import { BsQuestionCircleFill } from "react-icons/bs";
 import { BiMinusCircle } from "react-icons/bi";
@@ -12,7 +12,7 @@ const ChoiceComponent = ({ defaultValue, add }) => {
   const iconStyle = "text-xl text-iconGray";
   return (
     <div className="flex flex-row justify-start items-center gap-x-2">
-      <MdDragIndicator className="text-lg text-iconGray" />
+      <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
       <input
         type="text"
         className={`${inputBoxStyle} font-medium text-iconGray`}
@@ -46,7 +46,6 @@ const RadioComponent = ({ idText, name, value, isChecked }) => {
 };
 
 const QuesFullCard = ({ data }) => {
-  const textareaRef = useRef(null);
   // Demo Data
   const [demoDataForChoice, setDemoDataForChoice] = useState([
     {
@@ -92,19 +91,14 @@ const QuesFullCard = ({ data }) => {
       checked: false,
     },
   ];
-  // Side Effect
-  useEffect(() => {
-    textareaRef.current.focus();
-  }, []);
   return (
-    <div className="fullcardView  px-6">
+    <div className="fullcardView mt-6 ">
       <div className="questionInput mb-3">
         <Label title={"Questions"} />
         <textarea
           className={`${inputBoxStyle} text-iconGray font-medium placeholder:text-iconGray resize-none leading-relaxed `}
-          ref={textareaRef}
           placeholder={data.question}
-        ></textarea>
+        />
       </div>
       <div className="questionSelect grid grid-cols-2 gap-x-2 mb-4">
         <QuestionSelect />

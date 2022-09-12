@@ -8,12 +8,14 @@ import QuesFullCard from "./QuesFullCard";
 // Main Component
 const QuestionCard = ({ index, data }) => {
   const [visible, setVisible] = useState(false);
-  // Variables
 
   return (
     <div className="flex gap-3 ">
       <div className="flex flex-col space-y-2 justify-center items-center">
-        <MdDragIndicator className="text-xl text-iconGray cursor-pointer" />
+        <MdDragIndicator
+          className="text-xl text-iconGray cursor-pointer"
+          onClick={() => setVisible(!visible)}
+        />
         {visible && <IoMdAddCircleOutline className="text-lg text-iconGray" />}
         {visible && <BiMinusCircle className="text-lg text-iconGray" />}
       </div>
@@ -21,9 +23,9 @@ const QuestionCard = ({ index, data }) => {
       <div
         className={`${
           visible ? "border-green" : "border-gray-200"
-        } w-full border-2  border-solid p-4 px-6 rounded-lg`}
+        } w-full border-2 border-solid p-9 bg-white rounded-lg transition-all`}
       >
-        <div className="w-[46rem] p-6">
+        <div className="w-[46rem]">
           <div className="text-[#77808F] flex felx-row justify-between items-center mb-3">
             <div className="flex flex-row text-sm space-x-1">
               <span>Asked to:</span>
@@ -34,9 +36,9 @@ const QuestionCard = ({ index, data }) => {
             <div>
               <span className="text-sm font-medium">
                 {visible ? (
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 items-center">
                     <p>Multiple Choice</p>
-                    <input type="radio" checked />
+                    <input type="radio" checked className="w-4 h-4" />
                   </div>
                 ) : (
                   <p>
@@ -47,8 +49,8 @@ const QuestionCard = ({ index, data }) => {
             </div>
           </div>
 
-          <div className="flex flex-row items-start space-x-3">
-            <span className=" w-7 h-[1.4rem] grid place-items-center rounded-full text-white text-sm bg-green">
+          <div className="flex flex-row items-start space-x-3 mt-6">
+            <span className=" w-6 h-[1.45rem] grid place-items-center rounded-full text-white text-xs bg-green">
               {index + 1}
             </span>
             <h4
@@ -59,23 +61,18 @@ const QuestionCard = ({ index, data }) => {
             </h4>
           </div>
         </div>
-
-        {visible && (
-          <div>
-            <AnimatePresence>
-              <motion.div
-                key={visible}
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 1 }}
-                className="overflow-hidden"
-              >
-                {visible && <QuesFullCard data={data} />}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        )}
+        <AnimatePresence>
+          <motion.div
+            key={visible}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="overflow-hidden"
+          >
+            {visible && <QuesFullCard data={data} />}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
