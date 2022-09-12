@@ -11,7 +11,7 @@ const QuestionCard = ({ index, data }) => {
   // Variables
 
   return (
-    <div className="flex gap-3 w-full">
+    <div className="flex gap-3 ">
       <div className="flex flex-col space-y-2 justify-center items-center">
         <MdDragIndicator className="text-xl text-iconGray cursor-pointer" />
         {visible && <IoMdAddCircleOutline className="text-lg text-iconGray" />}
@@ -21,9 +21,9 @@ const QuestionCard = ({ index, data }) => {
       <div
         className={`${
           visible ? "border-green" : "border-gray-200"
-        } w-full border-2  border-solid p-4  rounded-lg`}
+        } w-full border-2  border-solid p-4 px-6 rounded-lg`}
       >
-        <div className="w-full  p-6">
+        <div className="w-[46rem] p-6">
           <div className="text-[#77808F] flex felx-row justify-between items-center mb-3">
             <div className="flex flex-row text-sm space-x-1">
               <span>Asked to:</span>
@@ -34,7 +34,10 @@ const QuestionCard = ({ index, data }) => {
             <div>
               <span className="text-sm font-medium">
                 {visible ? (
-                  <div>Multiple Choice</div>
+                  <div className="flex gap-2">
+                    <p>Multiple Choice</p>
+                    <input type="radio" checked />
+                  </div>
                 ) : (
                   <p>
                     Text Answer <span className="text-lg font-semibold">A</span>
