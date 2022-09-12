@@ -10,7 +10,7 @@ const QuestionCard = ({ index, data }) => {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div className="flex flex-row gap-3 w-full">
+    <div className="w-full flex flex-row gap-x-2">
       <div className="flex flex-col space-y-2 justify-center items-center">
         <MdDragIndicator
           className="text-xl text-iconGray cursor-pointer"
