@@ -10,7 +10,7 @@ const QuestionCard = ({ index, data }) => {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div className="flex gap-3 ">
+    <div className="flex flex-row gap-3 w-full">
       <div className="flex flex-col space-y-2 justify-center items-center">
         <MdDragIndicator
           className="text-xl text-iconGray cursor-pointer"
@@ -23,9 +23,8 @@ const QuestionCard = ({ index, data }) => {
       <div
         className={`${
           visible ? "border-green" : "border-gray-200"
-        } w-full border-2 border-solid p-9 bg-white rounded-lg transition-all`}
-      >
-        <div className="w-[46rem]">
+        } grow border-2 border-solid p-9 bg-white rounded-lg transition-all`}>
+        <div className="w-full">
           <div className="text-[#77808F] flex felx-row justify-between items-center mb-3">
             <div className="flex flex-row text-sm space-x-1">
               <span>Asked to:</span>
@@ -48,15 +47,13 @@ const QuestionCard = ({ index, data }) => {
               </span>
             </div>
           </div>
-
           <div className="flex flex-row items-start space-x-3 mt-6">
             <span className=" w-6 h-[1.45rem] grid place-items-center rounded-full text-white text-xs bg-green">
               {index + 1}
             </span>
             <h4
               className="font-medium leading-relaxed cursor-pointer"
-              onClick={() => setVisible(!visible)}
-            >
+              onClick={() => setVisible(!visible)}>
               {data.question}
             </h4>
           </div>
@@ -68,8 +65,7 @@ const QuestionCard = ({ index, data }) => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 1 }}
-            className="overflow-hidden"
-          >
+            className="overflow-hidden">
             {visible && <QuesFullCard data={data} />}
           </motion.div>
         </AnimatePresence>

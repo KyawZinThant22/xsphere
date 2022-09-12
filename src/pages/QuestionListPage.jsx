@@ -40,8 +40,7 @@ const QuestionListPage = () => {
           instruction={
             "These are the questions corresponding to the template you have selected, you can modify, add or delete them."
           }
-          title="Question list"
-        >
+          title="Question list">
           <div className="flex items-center gap-2 text-blue-500 mt-4">
             <FaEye size={19} />
             <p className="font-semibold text-[0.85rem]">Preview questions</p>
@@ -56,8 +55,7 @@ const QuestionListPage = () => {
           delay={2}
           list={questionList}
           setList={(newValue) => setQuestionList(newValue)}
-          className="grid place-items-center gap-y-3"
-        >
+          className="grid place-items-center gap-y-3">
           {questionList.length > 0 &&
             questionList.map((el) => (
               <QuestionCard key={el.id} index={el.id} data={el} />
