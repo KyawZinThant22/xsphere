@@ -24,22 +24,3 @@ export const Label = ({ title, Icon }) => {
     </label>
   );
 };
-
-export const RadioComponent = ({ idText, name, value, isChecked }) => {
-  return (
-    <div className="flex flex-row items-center">
-      <input
-        type="radio"
-        id={idText}
-        name={name}
-        value={value}
-        defaultChecked={isChecked}
-        className="w-[0.7rem] h-[0.7rem] focus:ring-[#2CC97D] dark:focus:ring-[#2CC97D] border-2 focus:ring-2"
-      />
-      <label htmlFor={idText} className="text-sm font-medium text-[#565D63]">
-        {value}
-      </label>
-      <br></br>
-    </div>
-  );
-};

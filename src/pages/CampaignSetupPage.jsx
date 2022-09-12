@@ -12,6 +12,7 @@ const CampaignSetupPage = () => {
 		title: "",
 		loaction: [],
 		image: "",
+		profile: "",
 	});
 
 	const createdCampaing = localStorage.getItem("createdCampaignId");
@@ -113,7 +114,23 @@ const CampaignSetupPage = () => {
 						});
 					}}
 				/>
-				<Radio />
+				<div className="mb-4">
+					<h6 className="text-sm font-medium mb-2">Show Profile</h6>
+					<Radio
+						value={"Xsphere"}
+						checked={form.profile === "Xsphere" ? true : false}
+						onChange={(val) => {
+							setForm({ ...form, profile: val });
+						}}
+					/>
+					<Radio
+						value={"Getbak"}
+						checked={form.profile === "Getbak" ? true : false}
+						onChange={(val) => {
+							setForm({ ...form, profile: val });
+						}}
+					/>
+				</div>
 				<div className="flex flex-row space-x-2 items-stretch">
 					<button
 						className="bg-[#166ADE] text-white text-sm font-medium px-14 py-2 rounded-md"
