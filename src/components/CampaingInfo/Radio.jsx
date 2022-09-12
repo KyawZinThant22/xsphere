@@ -1,7 +1,7 @@
 import React from "react";
 import { capitalCase } from "change-case";
 
-const Radio = ({ checked, value, onChange }) => {
+const Radio = ({ checked, value, onChange, disabled }) => {
 	return (
 		<div className="flex flex-row items-center">
 			<input
@@ -10,6 +10,7 @@ const Radio = ({ checked, value, onChange }) => {
 				checked={checked}
 				className="w-[0.7rem] h-[0.7rem] focus:ring-[#2CC97D] dark:focus:ring-[#2CC97D] border-2 focus:ring-2"
 				onChange={() => onChange(value)}
+				disabled={disabled}
 			/>
 			<label className="text-sm font-medium text-[#565D63]">
 				{capitalCase(value)}
