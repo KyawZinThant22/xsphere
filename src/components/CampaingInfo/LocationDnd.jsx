@@ -26,7 +26,7 @@ const SelectedItem = ({ key, el, setOpenList, removeLocation }) => {
   );
 };
 
-const List = ({ searchRef, data, addData }) => {
+const List = ({ searchRef, data, addData, selectedData }) => {
   const [searchValue, setSearchValue] = useState("");
   return (
     <div className="mt-2 border-2 rounded-md absolute left-0 right-0 bg-[#ffff] z-10 p-3 select-none">
@@ -52,18 +52,23 @@ const List = ({ searchRef, data, addData }) => {
             .sort((a, b) => {
               return a.id - b.id;
             })
-            .map((el) => (
-              <p
-                key={el.id}
-                className="p-2 rounded-md hover:bg-[#E9F9F5]"
-                onClick={() => {
-                  addData(el);
-                  setSearchValue("");
-                }}
-              >
-                {el.location}
-              </p>
-            ))
+            .map((el) => {
+              const active = selectedData.find((val) => el.id === val.id);
+              return (
+                <p
+                  key={el.id}
+                  className={`p-2 rounded-md hover:bg-[#E9F9F5] mb-1 ${
+                    active && "bg-[#E9F9F5]"
+                  }`}
+                  onClick={() => {
+                    addData(el);
+                    setSearchValue("");
+                  }}
+                >
+                  {el.location}
+                </p>
+              );
+            })
         ) : (
           <p className="p-2 rounded-md hover:bg-[#E9F9F5]">No Data Avaliable</p>
         )}
@@ -180,6 +185,7 @@ const LocationDnd = ({ onChange, data, value }) => {
           <div ref={locationListRef}>
             <List
               data={data}
+              selectedData={selectedValue}
               addData={addLocationToInputBox}
               setOpenList={setOpenList}
               searchRef={searchBarRef}
