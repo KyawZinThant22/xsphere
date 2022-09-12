@@ -4,6 +4,7 @@ import { FaEye } from "react-icons/fa";
 import { ReactSortable } from "react-sortablejs";
 import Hero from "../components/Hero";
 import QuestionCard from "../components/QuestionList/QuestionCard";
+import NewQuestion from "../components/QuestionList/NewQuestion";
 const QuestionListPage = () => {
 	const [questionList, setQuestionList] = useState([
 		{
@@ -16,6 +17,10 @@ const QuestionListPage = () => {
 				"Do you find yourself struggling more than usual with the current COVID-19 situation?",
 		},
 	]);
+
+	const [currentQuestion, setCurrentQuestion] = useState({
+		question: "",
+	});
 	return (
 		<div className="w-full h-screen">
 			<div className="mt-8">
@@ -34,7 +39,7 @@ const QuestionListPage = () => {
 				</Hero>
 			</div>
 			<div className=" mt-16 pb-20">
-				<ReactSortable
+				{/* <ReactSortable
 					animation={200}
 					VdelayOnTouchStart={true}
 					ghostClass="ghost"
@@ -47,7 +52,13 @@ const QuestionListPage = () => {
 						questionList.map((el) => (
 							<QuestionCard key={el.id} index={el.id} data={el} />
 						))}
-				</ReactSortable>
+				</ReactSortable> */}
+				<div className="grid place-items-center gap-y-3">
+					<NewQuestion
+						index={questionList.length}
+						submit={(value) => setQuestionList([...questionList, value])}
+					/>
+				</div>
 			</div>
 		</div>
 	);
