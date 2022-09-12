@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import moment from "moment/moment";
 import Hero from "../components/Hero";

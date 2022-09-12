@@ -7,18 +7,19 @@ import { ReactSortable } from "react-sortablejs";
 import CancleIcon from "../../assets/CancleIcon";
 import { Label } from "../Csx/Csx";
 
-const SelectedItem = (props) => {
+const SelectedItem = ({ key, el, setOpenList, removeLocation }) => {
 	return (
 		<div
 			className="text-sm font-medium bg-[#F3F7FE] rounded flex flex-row items-center gap-x-1 select-none z-20"
 			style={{ padding: "0.4rem 0.4rem 0.4rem 0.2rem" }}
+			key={key}
 		>
 			<MdOutlineDragIndicator className="text-[#ADB2B8] text-base" />
-			<span>{props.el.location}</span>
+			<span>{el.location}</span>
 			<CancleIcon
 				onClick={() => {
-					props.setOpenList(true);
-					props.removeLocation(props.el.id);
+					setOpenList(true);
+					removeLocation(el.id);
 				}}
 			/>
 		</div>
@@ -154,13 +155,13 @@ const LocationDnd = ({ onChange, data, value }) => {
 						ghostClass="ghost"
 						delay={2}
 						list={selectedValue}
-						setList={(newValue) => setSelectedValue(newValue)}
+						setList={(newValue) => onChange(newValue)}
 						className="flex flex-row flex-wrap items-center gap-x-3 gap-y-2"
 					>
 						{selectedValue.length > 0 &&
-							selectedValue.map((el, key) => (
+							selectedValue.map((el) => (
 								<SelectedItem
-									key={key}
+									key={el.id}
 									el={el}
 									removeLocation={removeLocation}
 									setOpenList={setOpenList}
