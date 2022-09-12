@@ -8,8 +8,7 @@ const QuestionListPage = () => {
   const [questionList, setQuestionList] = useState([
     {
       id: 0,
-      question:
-        "Do you find yourself struggling more than usual with the current COVID-19 situation?",
+      question: "Do you find yourself struggling ",
     },
     {
       id: 1,
@@ -41,14 +40,15 @@ const QuestionListPage = () => {
           instruction={
             "These are the questions corresponding to the template you have selected, you can modify, add or delete them."
           }
-          title="Question list">
+          title="Question list"
+        >
           <div className="flex items-center gap-2 text-blue-500 mt-4">
             <FaEye size={19} />
             <p className="font-semibold text-[0.85rem]">Preview questions</p>
           </div>
         </Hero>
       </div>
-      <div className="w-11/12 mx-auto mt-16 pb-20">
+      <div className=" mt-16 pb-20">
         <ReactSortable
           animation={200}
           VdelayOnTouchStart={true}
@@ -56,7 +56,8 @@ const QuestionListPage = () => {
           delay={2}
           list={questionList}
           setList={(newValue) => setQuestionList(newValue)}
-          className="grid place-items-center gap-y-3">
+          className="grid place-items-center gap-y-3"
+        >
           {questionList.length > 0 &&
             questionList.map((el) => (
               <QuestionCard key={el.id} index={el.id} data={el} />
