@@ -1,8 +1,8 @@
+import React, { useState } from "react";
 import { MdTimer } from "react-icons/md";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { AnimatePresence, motion } from "framer-motion";
 import wrench from "../assets/wrench.svg";
-import { useState } from "react";
 
 const questions = [
   {

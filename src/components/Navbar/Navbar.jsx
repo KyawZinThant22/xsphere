@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import Nav from "./Nav";
 import GetBak from "../../assets/GetbakLogo.svg";
