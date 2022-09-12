@@ -100,7 +100,6 @@ const CampaignSetupPage = () => {
 				<LocationDnd
 					data={locationList}
 					value={location}
-					// onChange={(value) => console.log(value)}
 					onChange={(value) => setLocation(value)}
 				/>
 				<FormatPreview
@@ -132,7 +131,7 @@ const CampaignSetupPage = () => {
 					<button
 						className="bg-[#166ADE] text-white text-sm font-medium px-14 py-2 rounded-md"
 						onClick={() => {
-							console.log(form, location);
+							console.log({ ...form, location });
 						}}
 					>
 						Next Page
