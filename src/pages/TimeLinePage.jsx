@@ -5,6 +5,7 @@ import MainTitle from "../components/CampaingInfo/MainTitle";
 import CampaignTitle from "../components/CampaingInfo/CampaignTitle";
 import LocationDnd from "../components/CampaingInfo/LocationDnd";
 import Radio from "../components/CampaingInfo/Radio";
+import { useState } from "react";
 
 const Buttons = () => {
   return (
@@ -19,6 +20,48 @@ const Buttons = () => {
   );
 };
 const TimeLinePage = () => {
+  const [form, setForm] = useState({
+    title: "အကောင်းဆုံးရဲ့အကောင်းဆုံးတွေကိုကြိုက်နှစ်သက်သူများအတွက်",
+    loaction: [],
+    image: "",
+  });
+  const [locationList, setlocationList] = useState([
+    {
+      id: 0,
+      location: "Bago",
+      default: true,
+    },
+    {
+      id: 1,
+      location: "Yangon",
+      default: true,
+    },
+    {
+      id: 2,
+      location: "Mandalay",
+    },
+    {
+      id: 3,
+      location: "Taunggyi",
+    },
+    {
+      id: 4,
+      location: "Mawlamyine",
+    },
+    {
+      id: 5,
+      location: "United State",
+    },
+    {
+      id: 6,
+      location: "Australia",
+    },
+    {
+      id: 7,
+      location: "Japan",
+    },
+  ]);
+
   const date = (
     <div className="mb-3 grid grid-cols-2 gap-x-2">
       {/* startDate */}
@@ -40,7 +83,15 @@ const TimeLinePage = () => {
       <div className="border-2 w-11/12 mx-auto rounded-lg p-8">
         <MainTitle />
         <CampaignTitle />
-        <LocationDnd />
+        <LocationDnd
+          item={locationList}
+          onChange={(value) =>
+            setForm({
+              ...form,
+              loaction: value,
+            })
+          }
+        />
         {date}
         <Radio />
         <Buttons />
