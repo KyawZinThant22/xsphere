@@ -15,55 +15,57 @@ const CampaignSetupPage = () => {
 		profile: "",
 	});
 
-	const createdCampaing = localStorage.getItem("createdCampaignId");
+  const createdCampaing = localStorage.getItem("createdCampaignId");
 
-	const [locationList, setlocationList] = useState([
-		{
-			id: 0,
-			location: "Bago",
-		},
-		{
-			id: 1,
-			location: "Yangon",
-		},
-		{
-			id: 2,
-			location: "Mandalay",
-		},
-		{
-			id: 3,
-			location: "Taunggyi",
-		},
-		{
-			id: 4,
-			location: "Mawlamyine",
-		},
-		{
-			id: 5,
-			location: "United State",
-		},
-		{
-			id: 6,
-			location: "Australia",
-		},
-		{
-			id: 7,
-			location: "Japan",
-		},
-	]);
+  const [locationList, setlocationList] = useState([
+    {
+      id: 0,
+      location: "Bago",
+      default: true,
+    },
+    {
+      id: 1,
+      location: "Yangon",
+      default: true,
+    },
+    {
+      id: 2,
+      location: "Mandalay",
+    },
+    {
+      id: 3,
+      location: "Taunggyi",
+    },
+    {
+      id: 4,
+      location: "Mawlamyine",
+    },
+    {
+      id: 5,
+      location: "United State",
+    },
+    {
+      id: 6,
+      location: "Australia",
+    },
+    {
+      id: 7,
+      location: "Japan",
+    },
+  ]);
 
-	const createdCampaignHandler = (id) => {
-		if (id) {
-			setForm({
-				title: "အကောင်းဆုံးရဲ့အကောင်းဆုံးတွေကိုကြိုက်နှစ်သက်သူများအတွက်",
-			});
-		} else {
-		}
-	};
+  const createdCampaignHandler = (id) => {
+    if (id) {
+      setForm({
+        title: "အကောင်းဆုံးရဲ့အကောင်းဆုံးတွေကိုကြိုက်နှစ်သက်သူများအတွက်",
+      });
+    } else {
+    }
+  };
 
-	useEffect(() => {
-		createdCampaignHandler(createdCampaing);
-	}, [createdCampaing]);
+  useEffect(() => {
+    createdCampaignHandler(createdCampaing);
+  }, [createdCampaing]);
 
 	return (
 		<div className="w-full h-screen">
