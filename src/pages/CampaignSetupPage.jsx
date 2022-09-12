@@ -16,7 +16,40 @@ const CampaignSetupPage = () => {
 
 	const createdCampaing = localStorage.getItem("createdCampaignId");
 
-	const [locationList, setlocationList] = useState([]);
+	const [locationList, setlocationList] = useState([
+		{
+			id: 0,
+			location: "Bago",
+		},
+		{
+			id: 1,
+			location: "Yangon",
+		},
+		{
+			id: 2,
+			location: "Mandalay",
+		},
+		{
+			id: 3,
+			location: "Taunggyi",
+		},
+		{
+			id: 4,
+			location: "Mawlamyine",
+		},
+		{
+			id: 5,
+			location: "United State",
+		},
+		{
+			id: 6,
+			location: "Australia",
+		},
+		{
+			id: 7,
+			location: "Japan",
+		},
+	]);
 
 	const createdCampaignHandler = (id) => {
 		if (id) {
@@ -30,44 +63,6 @@ const CampaignSetupPage = () => {
 	useEffect(() => {
 		createdCampaignHandler(createdCampaing);
 	}, [createdCampaing]);
-
-	//TODO: Delete later
-	useEffect(() => {
-		setlocationList([
-			{
-				id: 0,
-				location: "Bago",
-			},
-			{
-				id: 1,
-				location: "Yangon",
-			},
-			{
-				id: 2,
-				location: "Mandalay",
-			},
-			{
-				id: 3,
-				location: "Taunggyi",
-			},
-			{
-				id: 4,
-				location: "Mawlamyine",
-			},
-			{
-				id: 5,
-				location: "United State",
-			},
-			{
-				id: 6,
-				location: "Australia",
-			},
-			{
-				id: 7,
-				location: "Japan",
-			},
-		]);
-	}, []);
 
 	return (
 		<div className="w-full h-screen">
@@ -92,11 +87,21 @@ const CampaignSetupPage = () => {
 				/>
 				<LocationDnd
 					item={locationList}
-					value={form.loaction}
+					// value={form.loaction}
+					// value={[
+					// 	{
+					// 		id: 0,
+					// 		location: "Bago",
+					// 	},
+					// 	{
+					// 		id: 1,
+					// 		location: "Yangon",
+					// 	},
+					// ]}
 					onChange={(value) =>
 						setForm({
 							...form,
-							localStorage: value,
+							loaction: value,
 						})
 					}
 				/>
