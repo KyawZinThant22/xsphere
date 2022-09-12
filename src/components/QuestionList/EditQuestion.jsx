@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FaUserCircle } from "react-icons/fa";
 import { ReactSortable } from "react-sortablejs";
@@ -13,7 +13,7 @@ import {
 } from "react-icons/io";
 import { RiEditBoxLine } from "react-icons/ri";
 // Main Component
-const EditQuestion = ({ index, submit }) => {
+const EditQuestion = ({ index, data, handleCancel, handleUpdate }) => {
 	const [currentForm, setCurrentForm] = useState({
 		question: "",
 		option: "",
@@ -36,7 +36,7 @@ const EditQuestion = ({ index, submit }) => {
 	const [choiceError, setChoiceError] = useState(false);
 	const [additionalError, setAdditionalError] = useState(false);
 
-	const handleSubmit = async () => {
+	const handleEdit = async () => {
 		if (currentForm.question === "") {
 			setQuestionError(true);
 		}
@@ -53,7 +53,7 @@ const EditQuestion = ({ index, submit }) => {
 			setChoiceError(true);
 			setFormatPreviewError(true);
 		} else {
-			submit({ ...currentForm, choices });
+			handleUpdate({ ...currentForm, choices });
 			setCurrentForm({
 				question: "",
 				option: "",
@@ -61,11 +61,45 @@ const EditQuestion = ({ index, submit }) => {
 				questinType: "",
 			});
 			setChoice([]);
+			handleCancel();
 		}
 	};
 
+	const choiceEditHandler = async (key) => {
+		let temp = choices;
+		temp[key] = { value: editChoice };
+		// alert(JSON.stringify(temp));
+		setChoice(temp);
+		setFocus(false);
+		setSelectedChoice("");
+	};
+
+	const onHandleCancel = () => {
+		handleCancel();
+		setCurrentForm({
+			question: "",
+			option: "",
+			answerer: "",
+			questinType: "",
+		});
+	};
+
+	useEffect(() => {
+		setCurrentForm({
+			question: data.question,
+			option: data.option,
+			answerer: data.answerer,
+			questinType: data.questionType,
+		});
+		setChoice(data.choices);
+	}, [data]);
+
 	return (
 		<div className="flex flex-row gap-3 w-full">
+			<div className="flex flex-col space-y-2 justify-center items-center">
+				<MdDragIndicator className="text-xl text-iconGray cursor-pointer" />
+			</div>
+
 			<div
 				className={`border-green
         } grow border-2 border-solid p-9 bg-white rounded-lg transition-all`}
@@ -88,12 +122,17 @@ const EditQuestion = ({ index, submit }) => {
 								{currentForm?.questinType === "multiple" ? (
 									<div className="flex gap-2 items-center">
 										<p>Multiple Choice</p>
-										<input type="radio" checked className="w-4 h-4" />
+										<input type="radio" checked className="w-4 h-4" readOnly />
+									</div>
+								) : currentForm?.questinType === "single" ? (
+									<div className="flex gap-2 items-center">
+										<p>Single Choice</p>
+										<input type="radio" checked className="w-4 h-4" readOnly />
 									</div>
 								) : (
 									<div className="flex gap-2 items-center">
 										<p>-</p>
-										<input type="radio" checked className="w-4 h-4" />
+										<input type="radio" checked className="w-4 h-4" readOnly />
 									</div>
 								)}
 							</span>
@@ -167,13 +206,11 @@ const EditQuestion = ({ index, submit }) => {
 												})
 											}
 										>
-											<option value="none" selected>
-												Choose one
-											</option>
+											<option value="none">Choose one</option>
 											{answerer.map((item, key) => {
 												return (
 													<option key={key} value={item}>
-														<span className="block">{capitalCase(item)}</span>
+														{capitalCase(item)}
 													</option>
 												);
 											})}
@@ -199,7 +236,7 @@ const EditQuestion = ({ index, submit }) => {
                     } rounded-md text-iconGray relative`}
 									>
 										<select
-											classadditionalErrorName="w-full bg-none"
+											className="w-full bg-none"
 											value={currentForm.questinType}
 											onChange={(e) =>
 												setCurrentForm({
@@ -208,13 +245,11 @@ const EditQuestion = ({ index, submit }) => {
 												})
 											}
 										>
-											<option value="none" selected>
-												Choose one
-											</option>
+											<option value="none">Choose one</option>
 											{questionType.map((item, key) => {
 												return (
 													<option key={key} value={item}>
-														<span className="block">{capitalCase(item)}</span>
+														{capitalCase(item)}
 													</option>
 												);
 											})}
@@ -237,13 +272,13 @@ const EditQuestion = ({ index, submit }) => {
                   }`}
 								>
 									<div className="flex flex-row items-stretch gap-x-2">
-										{choices.length > 0 &&
-											choices.map((el, key) => (
+										{choices?.length > 0 &&
+											choices?.map((el, key) => (
 												<button
 													key={key}
 													className={`bg-white text-sm font-medium text-iconGray px-4 py-2 rounded-md border-2`}
 												>
-													{el}
+													{el.value}
 												</button>
 											))}
 									</div>
@@ -262,7 +297,10 @@ const EditQuestion = ({ index, submit }) => {
 										ghostClass="ghost"
 										delay={2}
 										list={choices}
-										setList={setChoice}
+										setList={(newValue) => {
+											console.log(newValue);
+											setChoice(newValue);
+										}}
 										className="flex flex-col space-y-2"
 									>
 										{choices?.length > 0 &&
@@ -273,28 +311,27 @@ const EditQuestion = ({ index, submit }) => {
 														className="flex flex-row justify-start items-center gap-x-2"
 													>
 														<MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
-														{focus ? (
-															<input
-																type="text"
-																value={editChoice}
-																onChange={(e) => {
-																	setEditChoice(e.target.value);
-																}}
-																className={`w-2/5 text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray focus:border-emerald-500 ${
-																	focus && "border-emerald-500"
-																}`}
-															/>
-														) : (
-															<input
-																type="text"
-																value={el}
-																className={`w-2/5 text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray${
-																	focus && "border-emerald-500"
-																}`}
-															/>
-														)}
+														<input
+															type="text"
+															value={
+																focus && selectedChoice === key
+																	? editChoice
+																	: el.value
+															}
+															onChange={(e) => {
+																setEditChoice(e.target.value);
+															}}
+															disabled={
+																focus && selectedChoice === key ? false : true
+															}
+															className={`w-48 text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray ${
+																focus && selectedChoice === key
+																	? "border-emerald-500"
+																	: ""
+															}`}
+														/>
 
-														<div className="flex flex-row space-x-2 items-center">
+														<div className="w-20 flex flex-row space-x-2 items-center">
 															<BiMinusCircle
 																className="text-xl text-iconGray"
 																onClick={() => {
@@ -306,23 +343,17 @@ const EditQuestion = ({ index, submit }) => {
 																	}
 																}}
 															/>
-															{focus ? (
+															{focus && selectedChoice === key ? (
 																<IoIosCheckmarkCircleOutline
 																	className="text-xl text-iconGray"
-																	onClick={() => {
-																		const currentIndex = choices.indexOf(el);
-																		setChoice((prev) => {
-																			prev[currentIndex] = editChoice;
-																			return [...prev];
-																		});
-																	}}
+																	onClick={() => choiceEditHandler(key)}
 																/>
 															) : (
 																<RiEditBoxLine
 																	className="text-xl text-iconGray"
 																	onClick={() => {
 																		setSelectedChoice(key);
-																		setEditChoice(() => el);
+																		setEditChoice(() => el.value);
 																		setFocus(!focus);
 																	}}
 																/>
@@ -341,23 +372,24 @@ const EditQuestion = ({ index, submit }) => {
 										<input
 											type="text"
 											value={currentChoice}
-											className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray`}
+											className={`w-48 text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray`}
 											onChange={(e) => setCurrentChoice(e.target.value)}
 										/>
 
-										<IoMdAddCircleOutline
-											className="text-xl text-iconGray"
-											onClick={() => {
-												setCurrentChoice("");
-												setChoice([...choices, currentChoice]);
-											}}
-										/>
+										<div className="w-20">
+											<IoMdAddCircleOutline
+												className="text-xl text-iconGray"
+												onClick={() => {
+													setCurrentChoice("");
+													setChoice([...choices, { value: currentChoice }]);
+												}}
+											/>
+										</div>
 									</div>
 								</div>
 							</div>
 							<div className="mb-6">
 								<label className="text-sm font-medium flex flex-row items-center space-x-2">
-									<span>Additional options</span>
 									<div className="flex items-center gap-2">
 										<span>Additional options</span>
 										{additionalError && (
@@ -389,11 +421,14 @@ const EditQuestion = ({ index, submit }) => {
 							<div className="flex flex-row items-stretch space-x-2">
 								<button
 									className="bg-[#166ADE] text-white text-sm font-medium rounded-md px-10 py-2"
-									onClick={handleSubmit}
+									onClick={handleEdit}
 								>
-									Add question
+									Edit
 								</button>
-								<button className="bg-cancelBtn text-black text-sm font-medium rounded-md px-8 py-2">
+								<button
+									className="bg-cancelBtn text-black text-sm font-medium rounded-md px-8 py-2"
+									onClick={onHandleCancel}
+								>
 									Cancel
 								</button>
 							</div>

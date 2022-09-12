@@ -197,7 +197,7 @@ const QuestionCard = ({ index, data, handleDelete, handleEdit }) => {
 														key={key}
 														className={`bg-white text-sm font-medium text-iconGray px-4 py-2 rounded-md border-2`}
 													>
-														{el}
+														{el.value}
 													</button>
 												))}
 										</div>
@@ -218,7 +218,7 @@ const QuestionCard = ({ index, data, handleDelete, handleEdit }) => {
 													<MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
 													<input
 														type="text"
-														value={el}
+														value={el.value}
 														disabled
 														className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray`}
 													/>
