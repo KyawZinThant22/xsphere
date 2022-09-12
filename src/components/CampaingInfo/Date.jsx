@@ -1,28 +1,18 @@
 import React, { useState } from "react";
 import moment from "moment";
-import { customIcon } from "../Csx/Csx";
-
-export const inputFocusColor = " focus:border-[#61C09D]";
-export const inputBoxStyle = {
-  padding: "0.55rem 0.75rem",
-};
+import { customIcon, inputBoxStyle, inputFocusColor, Label } from "../Csx/Csx";
 
 const Date = (props) => {
   const [selectedDate, setSelectedDate] = useState();
   return (
     <div>
-      <label htmlFor="startDate" className="text-sm font-medium">
-        {props.title}
-      </label>
+      <Label title={props.title} />
       <div
-        className="relative w-full text-sm font-medium text-black placeholder:text-black border-2 rounded-md mt-1 cursor-pointer"
-        style={inputBoxStyle}>
+        className={`${inputBoxStyle} ${inputFocusColor} font-semibold relative`}>
         <span>
           {selectedDate ? selectedDate : "12 August, 2022 - 01:20 PM"}
         </span>
-
         {customIcon}
-
         <input
           type="datetime-local"
           onChange={(e) => {

@@ -48,7 +48,7 @@ const QuestionListPage = () => {
           </div>
         </Hero>
       </div>
-      <div className="w-11/12 mx-auto mt-16">
+      <div className="w-11/12 mx-auto mt-16 pb-20">
         <ReactSortable
           animation={200}
           VdelayOnTouchStart={true}

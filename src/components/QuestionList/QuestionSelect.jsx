@@ -8,7 +8,7 @@ const QuestionSelect = () => {
         <span>Who answers?</span>
         <BsQuestionCircleFill className="text-iconGray" />
       </label>
-      <div className={`${inputBoxStyle} relative`}>
+      <div className={`${inputBoxStyle} text-iconGray relative`}>
         <select className="w-full">
           <option value="">GetBak End-user</option>
         </select>

@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { MdOutlineDragIndicator } from "react-icons/md";
 import { BsQuestionCircleFill } from "react-icons/bs";
-import CancleIcon from "../../assets/CancleIcon";
 import { ReactSortable } from "react-sortablejs";
-import { useCallback } from "react";
+import CancleIcon from "../../assets/CancleIcon";
+import { Label } from "../Csx/Csx";
 
 const SelectedItem = (props) => {
   return (
@@ -36,6 +36,7 @@ const List = (props) => {
       />
       <div className="text-sm font-medium mt-3 max-h-32 overflow-y-auto">
         {props.demoList
+          // eslint-disable-next-line
           .filter((val) => {
             if (searchValue === "") return val;
             if (val.location.toLowerCase().includes(searchValue.toLowerCase()))
@@ -154,10 +155,7 @@ const LocationDnd = () => {
 
   return (
     <div className="mt-2 mb-3">
-      <label className="text-sm font-medium flex flex-row items-center space-x-1">
-        <span>Location</span>{" "}
-        <BsQuestionCircleFill className="text-[#77808F] text-[0.75rem]" />
-      </label>
+      <Label title={"Location"} Icon={BsQuestionCircleFill} />
       <div className="mt-1 relative">
         <div
           className={`cursor-pointer rounded-md border-2 relative ${inputFocusColor}`}

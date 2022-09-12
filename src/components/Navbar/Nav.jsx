@@ -1,3 +1,4 @@
+import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Wrench from "../../assets/Wrench";
 import QuestionMark from "../../assets/QuestionMark";

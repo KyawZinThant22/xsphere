@@ -1,20 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { MdDragIndicator } from "react-icons/md";
 import { BsQuestionCircleFill } from "react-icons/bs";
 import { BiMinusCircle } from "react-icons/bi";
 import { IoMdAddCircleOutline } from "react-icons/io";
-import { labelStyle, inputBoxStyle } from "../Csx/Csx";
-import QuestionSelect from "./QuestionSelect";
 import { ReactSortable } from "react-sortablejs";
+import { inputBoxStyle, Label } from "../Csx/Csx";
+import QuestionSelect from "./QuestionSelect";
+
 // Component
-const Label = ({ title, Icon }) => {
-  return (
-    <label className={labelStyle}>
-      <span>{title}</span>
-      {Icon && <Icon className="text-iconGray" />}
-    </label>
-  );
-};
 const ChoiceComponent = ({ defaultValue, add }) => {
   const iconStyle = "text-xl text-iconGray";
   return (
@@ -22,7 +15,7 @@ const ChoiceComponent = ({ defaultValue, add }) => {
       <MdDragIndicator className="text-lg text-iconGray" />
       <input
         type="text"
-        className={`${inputBoxStyle}`}
+        className={`${inputBoxStyle} font-medium text-iconGray`}
         defaultValue={defaultValue}
       />
       {!add ? (
@@ -53,6 +46,7 @@ const RadioComponent = ({ idText, name, value, isChecked }) => {
 };
 
 const QuesFullCard = ({ data }) => {
+  const textareaRef = useRef(null);
   // Demo Data
   const [demoDataForChoice, setDemoDataForChoice] = useState([
     {
@@ -103,7 +97,8 @@ const QuesFullCard = ({ data }) => {
     <div className="questionInput mb-3">
       <Label title={"Questions"} />
       <textarea
-        className={`${inputBoxStyle} placeholder:text-iconGray resize-none leading-relaxed`}
+        className={`${inputBoxStyle} text-iconGray font-medium placeholder:text-iconGray resize-none leading-relaxed`}
+        ref={textareaRef}
         placeholder={data.question}></textarea>
     </div>
   );
@@ -182,7 +177,10 @@ const QuesFullCard = ({ data }) => {
       </button>
     </div>
   );
-
+  // Side Effect
+  useEffect(() => {
+    textareaRef.current.focus();
+  }, []);
   return (
     <div className="fullcardView mt-6">
       {questionInput}
