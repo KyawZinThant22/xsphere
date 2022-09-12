@@ -8,7 +8,6 @@ import QuesFullCard from "./QuesFullCard";
 // Main Component
 const QuestionCard = ({ index, data }) => {
   const [visible, setVisible] = useState(false);
-  // Variables
 
   return (
     <div className="flex gap-3 w-full">
@@ -21,9 +20,8 @@ const QuestionCard = ({ index, data }) => {
       <div
         className={`${
           visible ? "border-green" : "border-gray-200"
-        } w-full border-2  border-solid p-4  rounded-lg`}
-      >
-        <div className="w-full  p-6">
+        } w-full border-2 border-solid p-9 bg-white rounded-lg transition-all`}>
+        <div className="w-full">
           <div className="text-[#77808F] flex felx-row justify-between items-center mb-3">
             <div className="flex flex-row text-sm space-x-1">
               <span>Asked to:</span>
@@ -34,7 +32,7 @@ const QuestionCard = ({ index, data }) => {
             <div>
               <span className="text-sm font-medium">
                 {visible ? (
-                  <div>Multiple Choice</div>
+                  <p>Multiple Choice</p>
                 ) : (
                   <p>
                     Text Answer <span className="text-lg font-semibold">A</span>
@@ -45,34 +43,27 @@ const QuestionCard = ({ index, data }) => {
           </div>
 
           <div className="flex flex-row items-start space-x-3">
-            <span className=" w-7 h-[1.4rem] grid place-items-center rounded-full text-white text-sm bg-green">
+            <span className=" w-6 h-[1.45rem] grid place-items-center rounded-full text-white text-xs bg-green">
               {index + 1}
             </span>
             <h4
               className="font-medium leading-relaxed cursor-pointer"
-              onClick={() => setVisible(!visible)}
-            >
+              onClick={() => setVisible(!visible)}>
               {data.question}
             </h4>
           </div>
         </div>
-
-        {visible && (
-          <div>
-            <AnimatePresence>
-              <motion.div
-                key={visible}
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 1 }}
-                className="overflow-hidden"
-              >
-                {visible && <QuesFullCard data={data} />}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        )}
+        <AnimatePresence>
+          <motion.div
+            key={visible}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="overflow-hidden">
+            {visible && <QuesFullCard data={data} />}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
