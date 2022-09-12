@@ -7,7 +7,11 @@ import { capitalCase } from "change-case";
 import { BsQuestionCircleFill } from "react-icons/bs";
 import Radio from "../CampaingInfo/Radio";
 import { BiMinusCircle } from "react-icons/bi";
-import { IoMdAddCircleOutline } from "react-icons/io";
+import {
+	IoMdAddCircleOutline,
+	IoIosCheckmarkCircleOutline,
+} from "react-icons/io";
+import { RiEditBoxLine } from "react-icons/ri";
 // Main Component
 const NewQuestion = ({ index, submit }) => {
 	const [currentForm, setCurrentForm] = useState({
@@ -19,15 +23,18 @@ const NewQuestion = ({ index, submit }) => {
 
 	const [choices, setChoice] = useState([]);
 	const [currentChoice, setCurrentChoice] = useState("");
+	const [focus, setFocus] = useState(false);
+	const [selectedChoice, setSelectedChoice] = useState("");
+	const [editChoice, setEditChoice] = useState("");
+	const answerer = ["end-user", "all"];
+	const questionType = ["single", "multiple"];
+
 	const [questionError, setQuestionError] = useState(false);
 	const [whoAnswerError, setwhoAnswerError] = useState(false);
 	const [QuestionTypeError, setQuestionTypeError] = useState(false);
 	const [formatPreviewError, setFormatPreviewError] = useState(false);
 	const [choiceError, setChoiceError] = useState(false);
 	const [additionalError, setAdditionalError] = useState(false);
-
-	const answerer = ["end-user", "all"];
-	const questionType = ["single", "multiple"];
 
 	const handleSubmit = async () => {
 		if (currentForm.question === "") {
@@ -263,21 +270,71 @@ const NewQuestion = ({ index, submit }) => {
 										className="flex flex-col space-y-2"
 									>
 										{choices?.length > 0 &&
-											choices?.map((el, key) => (
-												<div
-													key={key}
-													className="flex flex-row justify-start items-center gap-x-2"
-												>
-													<MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
-													<input
-														type="text"
-														value={"sortable " + el}
-														className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray`}
-													/>
+											choices?.map((el, key) => {
+												return (
+													<div
+														key={key}
+														className="flex flex-row justify-start items-center gap-x-2"
+													>
+														<MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
+														{focus ? (
+															<input
+																type="text"
+																value={editChoice}
+																onChange={(e) => {
+																	setEditChoice(e.target.value);
+																}}
+																className={`w-2/5 text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray focus:border-emerald-500 ${
+																	focus && "border-emerald-500"
+																}`}
+															/>
+														) : (
+															<input
+																type="text"
+																value={el}
+																className={`w-2/5 text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray${
+																	focus && "border-emerald-500"
+																}`}
+															/>
+														)}
 
-													<BiMinusCircle className="text-xl text-iconGray" />
-												</div>
-											))}
+														<div className="flex flex-row space-x-2 items-center">
+															<BiMinusCircle
+																className="text-xl text-iconGray"
+																onClick={() => {
+																	const filter = choices.filter(
+																		(val) => val !== el
+																	);
+																	if (filter) {
+																		setChoice(filter);
+																	}
+																}}
+															/>
+															{focus ? (
+																<IoIosCheckmarkCircleOutline
+																	className="text-xl text-iconGray"
+																	onClick={() => {
+																		const currentIndex = choices.indexOf(el);
+																		setChoice((prev) => {
+																			prev[currentIndex] = editChoice;
+																			return [...prev];
+																		});
+																	}}
+																/>
+															) : (
+																<RiEditBoxLine
+																	className="text-xl text-iconGray"
+																	onClick={() => {
+																		setSelectedChoice(key);
+																		setEditChoice(() => el);
+																		setFocus(!focus);
+																	}}
+																/>
+															)}
+														</div>
+													</div>
+												);
+											})}
 									</ReactSortable>
 								) : (
 									""
@@ -304,6 +361,7 @@ const NewQuestion = ({ index, submit }) => {
 							</div>
 							<div className="mb-6">
 								<label className="text-sm font-medium flex flex-row items-center space-x-2">
+									<span>Additional options</span>
 									<div className="flex items-center gap-2">
 										<span>Additional options</span>
 										{additionalError && (
