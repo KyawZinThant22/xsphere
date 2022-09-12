@@ -6,21 +6,19 @@ import Hero from "../components/Hero";
 import QuestionCard from "../components/QuestionList/QuestionCard";
 import NewQuestion from "../components/QuestionList/NewQuestion";
 const QuestionListPage = () => {
-	const [questionList, setQuestionList] = useState([
-		{
-			id: 0,
-			question: "Do you find yourself struggling ",
-		},
-		{
-			id: 1,
-			question:
-				"Do you find yourself struggling more than usual with the current COVID-19 situation?",
-		},
-	]);
+	const [questionList, setQuestionList] = useState([]);
 
-	const [currentQuestion, setCurrentQuestion] = useState({
-		question: "",
-	});
+	const questionDeleteHandler = (id) => {
+		let temp = questionList.filter((item, key) => {
+			return key !== id;
+		});
+		if (temp.length > 0) {
+			setQuestionList(temp);
+		} else {
+			setQuestionList([]);
+		}
+	};
+
 	return (
 		<div className="w-full h-screen">
 			<div className="mt-8">
@@ -39,21 +37,29 @@ const QuestionListPage = () => {
 				</Hero>
 			</div>
 			<div className=" mt-16 pb-20">
-				{/* <ReactSortable
-					animation={200}
-					VdelayOnTouchStart={true}
-					ghostClass="ghost"
-					delay={2}
-					list={questionList}
-					setList={(newValue) => setQuestionList(newValue)}
-					className="grid place-items-center gap-y-3"
-				>
-					{questionList.length > 0 &&
-						questionList.map((el) => (
-							<QuestionCard key={el.id} index={el.id} data={el} />
+				{questionList.length > 0 ? (
+					<ReactSortable
+						animation={200}
+						VdelayOnTouchStart={true}
+						ghostClass="ghost"
+						delay={2}
+						list={questionList}
+						setList={(newValue) => setQuestionList(newValue)}
+						className="grid place-items-center gap-y-3"
+					>
+						{questionList.map((el, key) => (
+							<QuestionCard
+								key={key}
+								index={key}
+								data={el}
+								handleDelete={questionDeleteHandler}
+							/>
 						))}
-				</ReactSortable> */}
-				<div className="grid place-items-center gap-y-3">
+					</ReactSortable>
+				) : (
+					""
+				)}
+				<div className="grid place-items-center mt-3">
 					<NewQuestion
 						index={questionList.length}
 						submit={(value) => setQuestionList([...questionList, value])}
