@@ -6,60 +6,60 @@
 @tailwind utilities;
 
 @font-face {
-	font-family: "Theme";
-	font-weight: 500;
-	src: url("./fonts/HelveticaNeueMedium.ttf");
+  font-family: "Theme";
+  font-weight: 500;
+  src: url("./fonts/HelveticaNeueMedium.ttf");
 }
 @font-face {
-	font-family: "Theme";
-	font-weight: 700;
-	src: url("./fonts/HelveticaNeueBold.ttf");
+  font-family: "Theme";
+  font-weight: 700;
+  src: url("./fonts/HelveticaNeueBold.ttf");
 }
 
 body {
-	margin: 0;
-	font-family: sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 input[type="radio"] {
-	height: 1.1rem;
-	width: 1.1rem;
-	margin-right: 0.5rem;
+  height: 1.1rem;
+  width: 1.1rem;
+  margin-right: 0.5rem;
 }
 
 input[type="radio"]:checked {
-	appearance: none;
-	-webkit-appearance: none;
-	border-radius: 50%;
-	background: #2cc97d;
-	border: 3px solid #fff;
-	box-shadow: 0 0 0 1px #2cc97d;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 50%;
+  background: #2cc97d;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1px #2cc97d;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-	outline: none;
+  outline: none;
 }
 
 select {
-	background-image: url("./assets/selector.svg");
-	background-repeat: no-repeat;
-	background-position: right;
-	background-size: 17px;
-	-webkit-appearance: none;
-	background-position-x: 280px;
+  background-image: url("./assets/selector.svg");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 17px;
+  -webkit-appearance: none;
+  background-position-x: 280px;
 }
 .hideScroll::-webkit-scrollbar {
-	width: 0;
+  width: 0;
 }
 
 .formDate::-webkit-calendar-picker-indicator {
-	width: 100%;
+  width: 100%;
 }
 
 select {
-	background: white;
+  background: white;
 }

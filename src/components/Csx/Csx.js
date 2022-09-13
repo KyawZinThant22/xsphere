@@ -2,9 +2,9 @@ import {
   MdOutlineKeyboardArrowUp,
   MdOutlineKeyboardArrowDown,
 } from "react-icons/md";
-
+export const inputFontSize = "text-sm 2xl:text-[18px]";
 export const labelStyle =
-  "text-sm font-medium flex flex-row items-center space-x-2";
+  "text-sm 2xl:text-[18px] font-medium flex flex-row items-center space-x-2";
 export const inputBoxStyle =
   "w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md";
 export const inputFocusColor = " focus:border-[#61C09D]";

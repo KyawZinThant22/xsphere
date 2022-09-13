@@ -271,7 +271,7 @@ const NewQuestion = ({ index, submit }) => {
                   </div>
                 </div>
               </div>
-              <div className="choices mb-4 w-2/5">
+              <div className="choices mb-4 w-2/4">
                 <label className="text-sm font-medium flex flex-row items-center space-x-2">
                   <span>Choices</span>
                   <BsQuestionCircleFill className="text-iconGray" />
@@ -295,7 +295,9 @@ const NewQuestion = ({ index, submit }) => {
                             <div
                               key={key}
                               className="flex flex-row justify-start items-center gap-x-2">
-                              <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
+                              <div>
+                                <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
+                              </div>
                               <input
                                 type="text"
                                 value={el.value}
@@ -303,7 +305,7 @@ const NewQuestion = ({ index, submit }) => {
                                   setEditChoice(e.target.value);
                                 }}
                                 disabled
-                                className={`w-48 text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray ${
+                                className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray ${
                                   focus && selectedChoice === key
                                     ? "border-emerald-500"
                                     : ""
@@ -322,6 +324,7 @@ const NewQuestion = ({ index, submit }) => {
                                     }
                                   }}
                                 />
+
                                 {focus && selectedChoice === key ? (
                                   <IoIosCheckmarkCircleOutline
                                     className="text-xl text-iconGray"
@@ -347,11 +350,13 @@ const NewQuestion = ({ index, submit }) => {
                   )}
                   <div className="flex flex-col mt-2">
                     <div className="flex flex-row justify-start items-center gap-x-2">
-                      <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
+                      <div>
+                        <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
+                      </div>
                       <input
                         type="text"
                         value={currentChoice}
-                        className={`w-48 text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray`}
+                        className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray`}
                         onChange={(e) => setCurrentChoice(e.target.value)}
                       />
 
@@ -359,8 +364,10 @@ const NewQuestion = ({ index, submit }) => {
                         <IoMdAddCircleOutline
                           className="text-xl text-iconGray"
                           onClick={() => {
-                            setCurrentChoice("");
-                            setChoice([...choices, { value: currentChoice }]);
+                            if (currentChoice !== "") {
+                              setCurrentChoice("");
+                              setChoice([...choices, { value: currentChoice }]);
+                            }
                           }}
                         />
                       </div>
@@ -369,7 +376,7 @@ const NewQuestion = ({ index, submit }) => {
                   <div
                     className={`${
                       focus ? "flex" : "hidden"
-                    } absolute top-0 left-0 w-full h-full items-center backdrop-blur-sm`}>
+                    } absolute inset-0 w-96 h-full items-center backdrop-blur-sm`}>
                     <div className="flex flex-row justify-start items-center gap-x-2">
                       <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
                       <input
@@ -381,18 +388,7 @@ const NewQuestion = ({ index, submit }) => {
                         className={`w-48 text-sm mt-1 px-3 py-2 border-2 rounded-md font-medium text-iconGray disabled:bg-gray-500 border-emerald-500`}
                       />
 
-                      <div className="w-20 flex flex-row space-x-2 items-center">
-                        <BiMinusCircle
-                          className="text-xl text-iconGray"
-                          onClick={() => {
-                            const filter = choices.filter(
-                              (val) => val !== selectedChoice
-                            );
-                            if (filter) {
-                              setChoice(filter);
-                            }
-                          }}
-                        />
+                      <div className="flex flex-row space-x-2 items-center">
                         <IoIosCheckmarkCircleOutline
                           className="text-xl text-iconGray"
                           onClick={() => choiceEditHandler(selectedChoice)}
