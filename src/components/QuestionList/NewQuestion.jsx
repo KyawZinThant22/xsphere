@@ -146,7 +146,11 @@ const NewQuestion = ({ index, submit }) => {
               {index + 1}
             </span>
             <h4 className="font-medium leading-relaxed cursor-pointer">
-              {currentForm.question === "" && <p>Create New Question</p>}
+              {currentForm.question === "" ? (
+                <p>Create New Question</p>
+              ) : (
+                currentForm.question
+              )}
             </h4>
           </div>
         </div>
