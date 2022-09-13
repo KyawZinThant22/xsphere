@@ -77,7 +77,7 @@ const List = ({ searchRef, data, addData, selectedData }) => {
   );
 };
 
-const LocationDnd = ({ onChange, data, value }) => {
+const LocationDnd = ({ onChange, data, value, required }) => {
   const inputFocusColor = " focus:border-[#61C09D]";
   const [openList, setOpenList] = useState(false);
   const [selectedValue, setSelectedValue] = useState([]);
@@ -145,7 +145,11 @@ const LocationDnd = ({ onChange, data, value }) => {
 
   return (
     <div className="mt-2 mb-3">
-      <Label title={"Location"} Icon={BsQuestionCircleFill} />
+      <Label
+        title={"Location"}
+        Icon={BsQuestionCircleFill}
+        required={required}
+      />
       <div className="mt-1 relative">
         <div
           className={`cursor-pointer rounded-md border-2 relative ${inputFocusColor}`}

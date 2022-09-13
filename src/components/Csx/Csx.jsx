@@ -16,11 +16,12 @@ export const customIcon = (
   </div>
 );
 
-export const Label = ({ title, Icon }) => {
+export const Label = ({ title, Icon, required }) => {
   return (
     <label className={labelStyle}>
       <span>{title}</span>
       {Icon && <Icon className="text-iconGray" />}
+      {required && <p className="text-red-400">required *</p>}
     </label>
   );
 };
