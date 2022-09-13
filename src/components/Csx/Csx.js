@@ -15,13 +15,15 @@ export const customIcon = (
     <MdOutlineKeyboardArrowDown />
   </div>
 );
-
 export const Label = ({ title, Icon, required }) => {
   return (
     <label className={labelStyle}>
-      <span>{title}</span>
+      <div className="flex items-center gap-2">
+        <span>{title}</span>
+        {!Icon && required && <p className="text-red-400">required *</p>}
+      </div>
       {Icon && <Icon className="text-iconGray" />}
-      {required && <p className="text-red-400">required *</p>}
+      {Icon && required && <p className="text-red-400">required *</p>}
     </label>
   );
 };
