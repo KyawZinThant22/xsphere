@@ -19,18 +19,22 @@ const Navbar = ({ callback, route }) => {
 
   return (
     <nav
-      className={`px-[120px] grid grid-cols-5 items-center w-full h-24 mx-auto bg-white/40 backdrop-blur-sm z-30`}>
+      className={`px-[70px] 2xl:px-[120px] grid grid-cols-5 items-center w-full h-24 mx-auto bg-white/40 backdrop-blur-sm z-30`}>
       <div className="flex items-center gap-3 ">
         <MdOutlineArrowBackIosNew size={14} />
         <a href="/" className="font-medium text-sm">
           Back to Dashboard
         </a>
       </div>
-      <div className="col-span-3  px-10">
+      <div className="col-span-3  2xl:px-10">
         {visible && <Nav callback={callback} route={route} />}
       </div>
       <div>
-        <img src={GetBak} alt="GetBak logo" className="w-[137.6px] float-right" />
+        <img
+          src={GetBak}
+          alt="GetBak logo"
+          className="w-[137.6px] float-right"
+        />
       </div>
     </nav>
   );
