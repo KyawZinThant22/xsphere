@@ -469,7 +469,10 @@ const NewQuestion = ({ index, submit }) => {
                   >
                     Add question
                   </button>
-                  <button className="bg-cancelBtn text-black text-sm font-medium rounded-md px-8 py-2">
+                  <button
+                    className="bg-cancelBtn text-black text-sm font-medium rounded-md px-8 py-2"
+                    onClick={() => setVisible(false)}
+                  >
                     Cancel
                   </button>
                 </div>
