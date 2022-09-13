@@ -37,6 +37,8 @@ const NewQuestion = ({ index, submit }) => {
   const [choiceError, setChoiceError] = useState(false);
   const [additionalError, setAdditionalError] = useState(false);
 
+  const [visible, setVisible] = useState(false);
+
   const handleSubmit = async () => {
     if (currentForm.question === "") {
       setQuestionError(true);
@@ -100,8 +102,12 @@ const NewQuestion = ({ index, submit }) => {
 
       <div
         className={`border-green
-        } grow border-2 border-solid p-9 bg-white rounded-border transition-all`}>
-        <div className="w-full">
+        } grow border-2 border-solid p-9 bg-white rounded-border transition-all`}
+      >
+        <div
+          className="w-full cursor-pointer"
+          onClick={() => setVisible(!visible)}
+        >
           <div className="text-[#77808F] flex felx-row justify-between items-center mb-3">
             <div className="flex flex-row text-sm space-x-1">
               <span>Asked to:</span>
@@ -135,320 +141,340 @@ const NewQuestion = ({ index, submit }) => {
               </span>
             </div>
           </div>
-          <div className="flex flex-row items-start space-x-3 mt-6">
+          <div className="flex flex-row items-start space-x-3 mt-6 ">
             <span className=" w-6 h-[1.45rem] grid place-items-center rounded-full text-white text-xs bg-green">
               {index + 1}
             </span>
-            <h4
-              className="font-medium leading-relaxed cursor-pointer"
-              onClick={() => alert("Hello")}>
-              {currentForm.question}
+            <h4 className="font-medium leading-relaxed cursor-pointer">
+              {currentForm.question === "" && <p>Create New Question</p>}
             </h4>
           </div>
         </div>
         <AnimatePresence>
           <motion.div
+            key={visible}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 1 }}
-            className="overflow-hidden">
-            <div className="fullcardView mt-6 ">
-              <div className="questionInput mb-3">
-                <label className="text-sm font-medium flex flex-row items-center space-x-2">
-                  <div className="flex items-center gap-2">
-                    <span>Questions</span>
-                    {questionError && (
-                      <p className="text-red-400">required *</p>
-                    )}
-                  </div>
-                </label>
-                <textarea
-                  rows={1}
-                  className={`border-gray-200  w-full min-h-[40px] max-h-48 overflow-auto text-sm mt-1 px-3 py-2 border-2  rounded-md text-iconGray font-medium placeholder:text-iconGray leading-relaxed focus:border-green`}
-                  placeholder="Aa"
-                  value={currentForm.question}
-                  onChange={(e) =>
-                    setCurrentForm({
-                      ...currentForm,
-                      question: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              <div className="questionSelect grid grid-cols-2 gap-x-2 mb-4">
-                <div>
-                  <label
-                    htmlFor=""
-                    className="text-sm font-medium flex flex-row items-center space-x-2">
-                    <div className="flex itmes-center gap-3 ">
-                      <span>Who answers?</span>
-                      {whoAnswerError && (
+            className="overflow-hidden"
+          >
+            {visible && (
+              <div className="fullcardView mt-6 ">
+                <div className="questionInput mb-3">
+                  <label className="text-sm font-medium flex flex-row items-center space-x-2">
+                    <div className="flex items-center gap-2">
+                      <span>Questions</span>
+                      {questionError && (
                         <p className="text-red-400">required *</p>
                       )}
                     </div>
-                    <BsQuestionCircleFill className="text-iconGray" />
                   </label>
-                  <div
-                    className={`w-full text-sm mt-1 px-3 py-2 border-2 "border-red-400" : "border-gray-200"
-                     rounded-md text-iconGray relative`}>
-                    <select
-                      className="w-full bg-none"
-                      value={currentForm.answerer}
-                      onChange={(e) =>
-                        setCurrentForm({
-                          ...currentForm,
-                          answerer: e.target.value,
-                        })
-                      }>
-                      <option value="none">Choose one</option>
-                      {answerer.map((item, key) => {
-                        return (
-                          <option key={key} value={item}>
-                            {capitalCase(item)}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    {/* {customIcon} */}
-                  </div>
+                  <textarea
+                    rows={1}
+                    autoFocus
+                    className={`border-gray-200  w-full min-h-[40px] max-h-48 overflow-auto text-sm mt-1 px-3 py-2 border-2  rounded-md text-iconGray font-medium placeholder:text-iconGray leading-relaxed focus:border-green`}
+                    placeholder="Aa"
+                    value={currentForm.question}
+                    onChange={(e) =>
+                      setCurrentForm({
+                        ...currentForm,
+                        question: e.target.value,
+                      })
+                    }
+                  />
                 </div>
-                <div>
-                  <label
-                    htmlFor=""
-                    className="text-sm font-medium flex flex-row items-center space-x-2">
-                    <div className="flex items-center gap-3">
-                      <span>Question type?</span>
-                      {QuestionTypeError && (
-                        <p className="text-red-400">required *</p>
-                      )}
-                    </div>
-                    <BsQuestionCircleFill className="text-iconGray" />
-                  </label>
-                  <div
-                    className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200"
-                    } rounded-md text-iconGray relative`}>
-                    <select
-                      className="w-full bg-none"
-                      value={currentForm.questinType}
-                      onChange={(e) =>
-                        setCurrentForm({
-                          ...currentForm,
-                          questinType: e.target.value,
-                        })
-                      }>
-                      <option value="none">Choose one</option>
-                      {questionType.map((item, key) => {
-                        return (
-                          <option key={key} value={item}>
-                            {capitalCase(item)}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    {/* {customIcon} */}
-                  </div>
-                </div>
-              </div>
-              {/* //format preiview */}
-              <div className="formatPreview mb-3">
-                <label className="text-sm font-medium flex flex-row items-center space-x-2">
-                  <span>Format preview</span>
-                  <BsQuestionCircleFill className="text-iconGray" />
-                  {formatPreviewError && (
-                    <p className="text-red-400">required *</p>
-                  )}
-                </label>
-                <div
-                  className={`bg-[#F2F6FD] w-full h-32 mt-1 rounded-lg grid place-items-center border-2  "border-gray-200"
-                  }`}>
-                  <div className="flex flex-row items-stretch gap-x-2">
-                    {choices.length > 0 &&
-                      choices.map((el, key) => (
-                        <button
-                          key={key}
-                          className={`bg-white text-sm font-medium text-iconGray px-4 py-2 rounded-md border-2`}>
-                          {el.value}
-                        </button>
-                      ))}
-                  </div>
-                </div>
-              </div>
-              <div className="choices mb-4 w-2/4">
-                <label className="text-sm font-medium flex flex-row items-center space-x-2">
-                  <span>Choices</span>
-                  <BsQuestionCircleFill className="text-iconGray" />
-                  {choiceError && <p className="text-red-400">required *</p>}
-                </label>
-                <div className="relative">
-                  {choices?.length > 0 ? (
-                    <ReactSortable
-                      animation={200}
-                      VdelayOnTouchStart={true}
-                      ghostClass="ghost"
-                      delay={2}
-                      list={choices}
-                      setList={(newValue) => {
-                        setChoice(newValue);
-                      }}
-                      className="flex flex-col space-y-2">
-                      {choices?.length > 0 &&
-                        choices?.map((el, key) => {
+                <div className="questionSelect grid grid-cols-2 gap-x-2 mb-4">
+                  <div>
+                    <label
+                      htmlFor=""
+                      className="text-sm font-medium flex flex-row items-center space-x-2"
+                    >
+                      <div className="flex itmes-center gap-3 ">
+                        <span>Who answers?</span>
+                        {whoAnswerError && (
+                          <p className="text-red-400">required *</p>
+                        )}
+                      </div>
+                      <BsQuestionCircleFill className="text-iconGray" />
+                    </label>
+                    <div
+                      className={`w-full text-sm mt-1 px-3 py-2 border-2 "border-red-400" : "border-gray-200"
+                     rounded-md text-iconGray relative`}
+                    >
+                      <select
+                        className="w-full bg-none"
+                        value={currentForm.answerer}
+                        onChange={(e) =>
+                          setCurrentForm({
+                            ...currentForm,
+                            answerer: e.target.value,
+                          })
+                        }
+                      >
+                        <option value="none">Choose one</option>
+                        {answerer.map((item, key) => {
                           return (
-                            <div
-                              key={key}
-                              className="flex flex-row justify-start items-center gap-x-2">
-                              <div>
-                                <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
-                              </div>
-                              <input
-                                type="text"
-                                value={el.value}
-                                onChange={(e) => {
-                                  setEditChoice(e.target.value);
-                                }}
-                                disabled
-                                className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray ${
-                                  focus && selectedChoice === key
-                                    ? "border-emerald-500"
-                                    : ""
-                                }`}
-                              />
-
-                              <div className="w-20 flex flex-row space-x-2 items-center">
-                                <BiMinusCircle
-                                  className="text-xl text-iconGray"
-                                  onClick={() => {
-                                    const filter = choices.filter(
-                                      (val) => val !== el
-                                    );
-                                    if (filter) {
-                                      setChoice(filter);
-                                    }
-                                  }}
-                                />
-
-                                {focus && selectedChoice === key ? (
-                                  <IoIosCheckmarkCircleOutline
-                                    className="text-xl text-iconGray"
-                                    onClick={() => choiceEditHandler(key)}
-                                  />
-                                ) : (
-                                  <RiEditBoxLine
-                                    className="text-xl text-iconGray"
-                                    onClick={() => {
-                                      setSelectedChoice(key);
-                                      setEditChoice(() => el.value);
-                                      setFocus(true);
-                                    }}
-                                  />
-                                )}
-                              </div>
-                            </div>
+                            <option key={key} value={item}>
+                              {capitalCase(item)}
+                            </option>
                           );
                         })}
-                    </ReactSortable>
-                  ) : (
-                    ""
-                  )}
-                  <div className="flex flex-col mt-2">
-                    <div className="flex flex-row justify-start items-center gap-x-2">
-                      <div>
-                        <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
-                      </div>
-                      <input
-                        type="text"
-                        value={currentChoice}
-                        className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray ${
-                          emptyChoice && "border-red-500"
-                        }`}
-                        onChange={(e) => {
-                          setCurrentChoice(e.target.value);
-                          setEmptyChoices(false);
-                        }}
-                      />
-
-                      <div className="w-20">
-                        <IoMdAddCircleOutline
-                          className="text-xl text-iconGray"
-                          onClick={() => {
-                            if (currentChoice !== "") {
-                              setCurrentChoice("");
-                              setChoice([...choices, { value: currentChoice }]);
-                            } else {
-                              setEmptyChoices(true);
-                            }
-                          }}
-                        />
-                      </div>
+                      </select>
+                      {/* {customIcon} */}
                     </div>
                   </div>
-                  <div
-                    className={`${
-                      focus ? "flex" : "hidden"
-                    } absolute inset-0 w-96 h-full items-center backdrop-blur-sm`}>
-                    <div className="flex flex-row justify-start items-center gap-x-2">
-                      <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
-                      <input
-                        type="text"
-                        value={editChoice}
-                        onChange={(e) => {
-                          setEditChoice(e.target.value);
-                        }}
-                        className={`w-48 text-sm mt-1 px-3 py-2 border-2 rounded-md font-medium text-iconGray disabled:bg-gray-500 border-emerald-500`}
-                      />
-
-                      <div className="flex flex-row space-x-2 items-center">
-                        <IoIosCheckmarkCircleOutline
-                          className="text-xl text-iconGray"
-                          onClick={() => choiceEditHandler(selectedChoice)}
-                        />
+                  <div>
+                    <label
+                      htmlFor=""
+                      className="text-sm font-medium flex flex-row items-center space-x-2"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span>Question type?</span>
+                        {QuestionTypeError && (
+                          <p className="text-red-400">required *</p>
+                        )}
                       </div>
+                      <BsQuestionCircleFill className="text-iconGray" />
+                    </label>
+                    <div
+                      className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200"
+                    } rounded-md text-iconGray relative`}
+                    >
+                      <select
+                        className="w-full bg-none"
+                        value={currentForm.questinType}
+                        onChange={(e) =>
+                          setCurrentForm({
+                            ...currentForm,
+                            questinType: e.target.value,
+                          })
+                        }
+                      >
+                        <option value="none">Choose one</option>
+                        {questionType.map((item, key) => {
+                          return (
+                            <option key={key} value={item}>
+                              {capitalCase(item)}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      {/* {customIcon} */}
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="mb-6">
-                <label className="text-sm font-medium flex flex-row items-center space-x-2">
-                  <div className="flex items-center gap-2">
-                    <span>Additional options</span>
-                    {additionalError && (
+                {/* //format preiview */}
+                <div className="formatPreview mb-3">
+                  <label className="text-sm font-medium flex flex-row items-center space-x-2">
+                    <span>Format preview</span>
+                    <BsQuestionCircleFill className="text-iconGray" />
+                    {formatPreviewError && (
                       <p className="text-red-400">required *</p>
                     )}
+                  </label>
+                  <div
+                    className={`bg-[#F2F6FD] w-full h-32 mt-1 rounded-lg grid place-items-center border-2  "border-gray-200"
+                }`}
+                  >
+                    <div className="flex flex-row items-stretch gap-x-2">
+                      {choices.length > 0 &&
+                        choices.map((el, key) => (
+                          <button
+                            key={key}
+                            className={`bg-white text-sm font-medium text-iconGray px-4 py-2 rounded-md border-2`}
+                          >
+                            {el.value}
+                          </button>
+                        ))}
+                    </div>
                   </div>
-                </label>
-                <div className="mt-1 pl-1">
-                  <Radio
-                    value={"allow-comments"}
-                    checked={
-                      currentForm.option === "allow-comments" ? true : false
-                    }
-                    onChange={(val) => {
-                      setCurrentForm({ ...currentForm, option: val });
-                    }}
-                  />
-                  <Radio
-                    value={"required-question"}
-                    checked={
-                      currentForm.option === "required-question" ? true : false
-                    }
-                    onChange={(val) => {
-                      setCurrentForm({ ...currentForm, option: val });
-                    }}
-                  />
+                </div>
+                <div className="choices mb-4 w-2/4">
+                  <label className="text-sm font-medium flex flex-row items-center space-x-2">
+                    <span>Choices</span>
+                    <BsQuestionCircleFill className="text-iconGray" />
+                    {choiceError && <p className="text-red-400">required *</p>}
+                  </label>
+                  <div className="relative">
+                    {choices?.length > 0 ? (
+                      <ReactSortable
+                        animation={200}
+                        VdelayOnTouchStart={true}
+                        ghostClass="ghost"
+                        delay={2}
+                        list={choices}
+                        setList={(newValue) => {
+                          setChoice(newValue);
+                        }}
+                        className="flex flex-col space-y-2"
+                      >
+                        {choices?.length > 0 &&
+                          choices?.map((el, key) => {
+                            return (
+                              <div
+                                key={key}
+                                className="flex flex-row justify-start items-center gap-x-2"
+                              >
+                                <div>
+                                  <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
+                                </div>
+                                <input
+                                  type="text"
+                                  value={el.value}
+                                  onChange={(e) => {
+                                    setEditChoice(e.target.value);
+                                  }}
+                                  disabled
+                                  className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray ${
+                                    focus && selectedChoice === key
+                                      ? "border-emerald-500"
+                                      : ""
+                                  }`}
+                                />
+
+                                <div className="w-20 flex flex-row space-x-2 items-center">
+                                  <BiMinusCircle
+                                    className="text-xl text-iconGray"
+                                    onClick={() => {
+                                      const filter = choices.filter(
+                                        (val) => val !== el
+                                      );
+                                      if (filter) {
+                                        setChoice(filter);
+                                      }
+                                    }}
+                                  />
+
+                                  {focus && selectedChoice === key ? (
+                                    <IoIosCheckmarkCircleOutline
+                                      className="text-xl text-iconGray"
+                                      onClick={() => choiceEditHandler(key)}
+                                    />
+                                  ) : (
+                                    <RiEditBoxLine
+                                      className="text-xl text-iconGray"
+                                      onClick={() => {
+                                        setSelectedChoice(key);
+                                        setEditChoice(() => el.value);
+                                        setFocus(true);
+                                      }}
+                                    />
+                                  )}
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </ReactSortable>
+                    ) : (
+                      ""
+                    )}
+                    <div className="flex flex-col mt-2">
+                      <div className="flex flex-row justify-start items-center gap-x-2">
+                        <div>
+                          <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
+                        </div>
+                        <input
+                          type="text"
+                          value={currentChoice}
+                          className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray ${
+                            emptyChoice && "border-red-500"
+                          }`}
+                          onChange={(e) => {
+                            setCurrentChoice(e.target.value);
+                            setEmptyChoices(false);
+                          }}
+                        />
+
+                        <div className="w-20">
+                          <IoMdAddCircleOutline
+                            className="text-xl text-iconGray"
+                            onClick={() => {
+                              if (currentChoice !== "") {
+                                setCurrentChoice("");
+                                setChoice([
+                                  ...choices,
+                                  { value: currentChoice },
+                                ]);
+                              } else {
+                                setEmptyChoices(true);
+                              }
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className={`${
+                        focus ? "flex" : "hidden"
+                      } absolute inset-0 w-96 h-full items-center backdrop-blur-sm`}
+                    >
+                      <div className="flex flex-row justify-start items-center gap-x-2">
+                        <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
+                        <input
+                          type="text"
+                          value={editChoice}
+                          onChange={(e) => {
+                            setEditChoice(e.target.value);
+                          }}
+                          className={`w-48 text-sm mt-1 px-3 py-2 border-2 rounded-md font-medium text-iconGray disabled:bg-gray-500 border-emerald-500`}
+                        />
+
+                        <div className="flex flex-row space-x-2 items-center">
+                          <IoIosCheckmarkCircleOutline
+                            className="text-xl text-iconGray"
+                            onClick={() => choiceEditHandler(selectedChoice)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="mb-6">
+                  <label className="text-sm font-medium flex flex-row items-center space-x-2">
+                    <div className="flex items-center gap-2">
+                      <span>Additional options</span>
+                      {additionalError && (
+                        <p className="text-red-400">required *</p>
+                      )}
+                    </div>
+                  </label>
+                  <div className="mt-1 pl-1">
+                    <Radio
+                      value={"allow-comments"}
+                      checked={
+                        currentForm.option === "allow-comments" ? true : false
+                      }
+                      onChange={(val) => {
+                        setCurrentForm({ ...currentForm, option: val });
+                      }}
+                    />
+                    <Radio
+                      value={"required-question"}
+                      checked={
+                        currentForm.option === "required-question"
+                          ? true
+                          : false
+                      }
+                      onChange={(val) => {
+                        setCurrentForm({ ...currentForm, option: val });
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-row items-stretch space-x-2">
+                  <button
+                    className="bg-[#166ADE] text-white text-sm font-medium rounded-md px-10 py-2"
+                    onClick={handleSubmit}
+                  >
+                    Add question
+                  </button>
+                  <button className="bg-cancelBtn text-black text-sm font-medium rounded-md px-8 py-2">
+                    Cancel
+                  </button>
                 </div>
               </div>
-              <div className="flex flex-row items-stretch space-x-2">
-                <button
-                  className="bg-[#166ADE] text-white text-sm font-medium rounded-md px-10 py-2"
-                  onClick={handleSubmit}>
-                  Add question
-                </button>
-                <button className="bg-cancelBtn text-black text-sm font-medium rounded-md px-8 py-2">
-                  Cancel
-                </button>
-              </div>
-            </div>
+            )}
           </motion.div>
         </AnimatePresence>
       </div>

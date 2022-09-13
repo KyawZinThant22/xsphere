@@ -48,10 +48,12 @@ const QuestionCard = ({ index, data, handleDelete, handleEdit }) => {
       <div
         className={`${
           visible ? "border-green" : "border-gray-200"
-        } grow border-2 border-solid p-9 bg-white rounded-lg transition-all`}>
+        } grow border-2 border-solid p-9 bg-white rounded-border transition-all`}
+      >
         <div
           className="w-full cursor-pointer"
-          onClick={() => setVisible(!visible)}>
+          onClick={() => setVisible(!visible)}
+        >
           <div className="text-[#77808F] flex felx-row justify-between items-center mb-3">
             <div className="flex flex-row text-sm space-x-1">
               <span>Asked to:</span>
@@ -92,7 +94,8 @@ const QuestionCard = ({ index, data, handleDelete, handleEdit }) => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 1 }}
-            className="overflow-hidden">
+            className="overflow-hidden"
+          >
             {visible && (
               <div className="fullcardView mt-6 ">
                 <div className="questionInput mb-3">
@@ -117,12 +120,14 @@ const QuestionCard = ({ index, data, handleDelete, handleEdit }) => {
                   <div>
                     <label
                       htmlFor=""
-                      className="text-sm font-medium flex flex-row items-center space-x-2">
+                      className="text-sm font-medium flex flex-row items-center space-x-2"
+                    >
                       <span>Who answers?</span>
                       <BsQuestionCircleFill className="text-iconGray" />
                     </label>
                     <div
-                      className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md text-iconGray relative`}>
+                      className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md text-iconGray relative`}
+                    >
                       <select
                         className="w-full bg-none"
                         value={data.answerer}
@@ -132,7 +137,8 @@ const QuestionCard = ({ index, data, handleDelete, handleEdit }) => {
                             ...currentForm,
                             answerer: e.target.value,
                           })
-                        }>
+                        }
+                      >
                         {answerer.map((item, key) => {
                           return (
                             <option key={key} value={item}>
@@ -147,12 +153,14 @@ const QuestionCard = ({ index, data, handleDelete, handleEdit }) => {
                   <div>
                     <label
                       htmlFor=""
-                      className="text-sm font-medium flex flex-row items-center space-x-2">
+                      className="text-sm font-medium flex flex-row items-center space-x-2"
+                    >
                       <span>Question type?</span>
                       <BsQuestionCircleFill className="text-iconGray" />
                     </label>
                     <div
-                      className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md text-iconGray relative`}>
+                      className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md text-iconGray relative`}
+                    >
                       <select
                         className="w-full bg-none"
                         value={data.questinType}
@@ -162,7 +170,8 @@ const QuestionCard = ({ index, data, handleDelete, handleEdit }) => {
                             ...currentForm,
                             questinType: e.target.value,
                           })
-                        }>
+                        }
+                      >
                         {questionType.map((item, key) => {
                           return (
                             <option key={key} value={item}>
@@ -187,7 +196,8 @@ const QuestionCard = ({ index, data, handleDelete, handleEdit }) => {
                         data.choices.map((el, key) => (
                           <button
                             key={key}
-                            className={`bg-white text-sm font-medium text-iconGray px-4 py-2 rounded-md border-2`}>
+                            className={`bg-white text-sm font-medium text-iconGray px-4 py-2 rounded-md border-2`}
+                          >
                             {el.value}
                           </button>
                         ))}
@@ -204,7 +214,8 @@ const QuestionCard = ({ index, data, handleDelete, handleEdit }) => {
                       data.choices?.map((el, key) => (
                         <div
                           key={key}
-                          className="flex flex-row justify-start items-center gap-x-2">
+                          className="flex flex-row justify-start items-center gap-x-2"
+                        >
                           <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
                           <input
                             type="text"
@@ -240,12 +251,14 @@ const QuestionCard = ({ index, data, handleDelete, handleEdit }) => {
                 <div className="flex flex-row items-stretch space-x-2">
                   <button
                     className="bg-blue-500 text-white text-sm font-medium rounded-md px-10 py-2"
-                    onClick={editHandler}>
+                    onClick={editHandler}
+                  >
                     Edit
                   </button>
                   <button
                     className="bg-red-500 text-white text-sm font-medium rounded-md px-8 py-2"
-                    onClick={deleteHandler}>
+                    onClick={deleteHandler}
+                  >
                     Delete
                   </button>
                 </div>
