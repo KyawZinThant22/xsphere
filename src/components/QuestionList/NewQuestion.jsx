@@ -39,20 +39,38 @@ const NewQuestion = ({ index, submit }) => {
 	const handleSubmit = async () => {
 		if (currentForm.question === "") {
 			setQuestionError(true);
+		} else {
+			setQuestionError(false);
 		}
 		if (currentForm.option === "") {
 			setAdditionalError(true);
+		} else {
+			setAdditionalError(false);
 		}
 		if (currentForm.answerer === "") {
 			setwhoAnswerError(true);
+		} else {
+			setwhoAnswerError(false);
 		}
 		if (currentForm.questinType === "") {
 			setQuestionTypeError(true);
+		} else {
+			setQuestionTypeError(false);
 		}
 		if (choices.length === 0) {
 			setChoiceError(true);
 			setFormatPreviewError(true);
 		} else {
+			setChoiceError(false);
+			setFormatPreviewError(false);
+		}
+		if (
+			currentForm.question !== "" &&
+			currentForm.option !== "" &&
+			currentForm.answerer !== "" &&
+			currentForm.questinType !== "" &&
+			choices.length > 0
+		) {
 			submit({ ...currentForm, choices });
 			setCurrentForm({
 				question: "",
@@ -66,7 +84,7 @@ const NewQuestion = ({ index, submit }) => {
 
 	const choiceEditHandler = async (key) => {
 		let temp = choices;
-		temp[key] = { value: editChoice};
+		temp[key] = { value: editChoice };
 		// alert(JSON.stringify(temp));
 		setChoice(temp);
 		setFocus(false);
@@ -269,100 +287,130 @@ const NewQuestion = ({ index, submit }) => {
 									<BsQuestionCircleFill className="text-iconGray" />
 									{choiceError && <p className="text-red-400">required *</p>}
 								</label>
-								{choices?.length > 0 ? (
-									<ReactSortable
-										animation={200}
-										VdelayOnTouchStart={true}
-										ghostClass="ghost"
-										delay={2}
-										list={choices}
-										setList={(newValue) => {
-											console.log(newValue);
-											setChoice(newValue);
-										}}
-										className="flex flex-col space-y-2"
-									>
-										{choices?.length > 0 &&
-											choices?.map((el, key) => {
-												return (
-													<div
-														key={key}
-														className="flex flex-row justify-start items-center gap-x-2"
-													>
-														<MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
-														<input
-															type="text"
-															value={
-																focus && selectedChoice === key
-																	? editChoice
-																	: el.value
-															}
-															onChange={(e) => {
-																setEditChoice(e.target.value);
-															}}
-															disabled={
-																focus && selectedChoice === key ? false : true
-															}
-															className={`w-48 text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray ${
-																focus && selectedChoice === key
-																	? "border-emerald-500"
-																	: ""
-															}`}
-														/>
-
-														<div className="w-20 flex flex-row space-x-2 items-center">
-															<BiMinusCircle
-																className="text-xl text-iconGray"
-																onClick={() => {
-																	const filter = choices.filter(
-																		(val) => val !== el
-																	);
-																	if (filter) {
-																		setChoice(filter);
-																	}
+								<div className="relative">
+									{choices?.length > 0 ? (
+										<ReactSortable
+											animation={200}
+											VdelayOnTouchStart={true}
+											ghostClass="ghost"
+											delay={2}
+											list={choices}
+											setList={(newValue) => {
+												setChoice(newValue);
+											}}
+											className="flex flex-col space-y-2"
+										>
+											{choices?.length > 0 &&
+												choices?.map((el, key) => {
+													return (
+														<div
+															key={key}
+															className="flex flex-row justify-start items-center gap-x-2"
+														>
+															<MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
+															<input
+																type="text"
+																value={el.value}
+																onChange={(e) => {
+																	setEditChoice(e.target.value);
 																}}
+																disabled
+																className={`w-48 text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray ${
+																	focus && selectedChoice === key
+																		? "border-emerald-500"
+																		: ""
+																}`}
 															/>
-															{focus && selectedChoice === key ? (
-																<IoIosCheckmarkCircleOutline
-																	className="text-xl text-iconGray"
-																	onClick={() => choiceEditHandler(key)}
-																/>
-															) : (
-																<RiEditBoxLine
+
+															<div className="w-20 flex flex-row space-x-2 items-center">
+																<BiMinusCircle
 																	className="text-xl text-iconGray"
 																	onClick={() => {
-																		setSelectedChoice(key);
-																		setEditChoice(() => el.value);
-																		setFocus(!focus);
+																		const filter = choices.filter(
+																			(val) => val !== el
+																		);
+																		if (filter) {
+																			setChoice(filter);
+																		}
 																	}}
 																/>
-															)}
+																{focus && selectedChoice === key ? (
+																	<IoIosCheckmarkCircleOutline
+																		className="text-xl text-iconGray"
+																		onClick={() => choiceEditHandler(key)}
+																	/>
+																) : (
+																	<RiEditBoxLine
+																		className="text-xl text-iconGray"
+																		onClick={() => {
+																			setSelectedChoice(key);
+																			setEditChoice(() => el.value);
+																			setFocus(true);
+																		}}
+																	/>
+																)}
+															</div>
 														</div>
-													</div>
-												);
-											})}
-									</ReactSortable>
-								) : (
-									""
-								)}
-								<div className="flex flex-col mt-2">
-									<div className="flex flex-row justify-start items-center gap-x-2">
-										<MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
-										<input
-											type="text"
-											value={currentChoice}
-											className={`w-48 text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray`}
-											onChange={(e) => setCurrentChoice(e.target.value)}
-										/>
-
-										<div className="w-20">
-											<IoMdAddCircleOutline
-												className="text-xl text-iconGray"
-												onClick={() => {
-													setCurrentChoice("");
-													setChoice([...choices, { value: currentChoice }]);
-												}}
+													);
+												})}
+										</ReactSortable>
+									) : (
+										""
+									)}
+									<div className="flex flex-col mt-2">
+										<div className="flex flex-row justify-start items-center gap-x-2">
+											<MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
+											<input
+												type="text"
+												value={currentChoice}
+												className={`w-48 text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray`}
+												onChange={(e) => setCurrentChoice(e.target.value)}
 											/>
+
+											<div className="w-20">
+												<IoMdAddCircleOutline
+													className="text-xl text-iconGray"
+													onClick={() => {
+														setCurrentChoice("");
+														setChoice([...choices, { value: currentChoice }]);
+													}}
+												/>
+											</div>
+										</div>
+									</div>
+									<div
+										className={`${
+											focus ? "flex" : "hidden"
+										} absolute top-0 left-0 w-full h-full items-center backdrop-blur-sm`}
+									>
+										<div className="flex flex-row justify-start items-center gap-x-2">
+											<MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
+											<input
+												type="text"
+												value={editChoice}
+												onChange={(e) => {
+													setEditChoice(e.target.value);
+												}}
+												className={`w-48 text-sm mt-1 px-3 py-2 border-2 rounded-md font-medium text-iconGray disabled:bg-gray-500 border-emerald-500`}
+											/>
+
+											<div className="w-20 flex flex-row space-x-2 items-center">
+												<BiMinusCircle
+													className="text-xl text-iconGray"
+													onClick={() => {
+														const filter = choices.filter(
+															(val) => val !== selectedChoice
+														);
+														if (filter) {
+															setChoice(filter);
+														}
+													}}
+												/>
+												<IoIosCheckmarkCircleOutline
+													className="text-xl text-iconGray"
+													onClick={() => choiceEditHandler(selectedChoice)}
+												/>
+											</div>
 										</div>
 									</div>
 								</div>
