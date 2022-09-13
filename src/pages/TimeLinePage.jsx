@@ -7,6 +7,7 @@ import MainTitle from "../components/CampaingInfo/MainTitle";
 import CampaignTitle from "../components/CampaingInfo/CampaignTitle";
 import LocationDnd from "../components/CampaingInfo/LocationDnd";
 import Radio from "../components/CampaingInfo/Radio";
+import { AnimatePresence, motion } from "framer-motion";
 
 const TimeLinePage = () => {
   const [locationList, setlocationList] = useState([
@@ -85,7 +86,13 @@ const TimeLinePage = () => {
   };
 
   return (
-    <div className="w-full h-screen scrollbar-hide">
+    <AnimatePresence>
+			<motion.div
+				initial={{ translateY: -500 }}
+				animate={{ translateY: 0 }}
+				transition={{
+					duration: 0.8,
+				}} className="w-full h-screen scrollbar-hide">
       <div className="w-full mt-8">
         <Hero
           instruction={
@@ -161,7 +168,8 @@ const TimeLinePage = () => {
           </button>
         </div>
       </div>
-    </div>
+      </motion.div>
+		</AnimatePresence>
   );
 };
 
