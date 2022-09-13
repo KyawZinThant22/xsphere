@@ -1,17 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.e19e3719.css",
-    "main.js": "/static/js/main.2401c806.js",
+    "main.css": "/static/css/main.9602609f.css",
+    "main.js": "/static/js/main.51fe5ce8.js",
     "static/media/admin.jpg": "/static/media/admin.88538a4e04d32b5a9f58.jpg",
     "static/media/hand.gif": "/static/media/hand.f1e551a5278064b28809.gif",
+    "static/media/HelveticaNeueMedium.ttf": "/static/media/HelveticaNeueMedium.b4dad7d2f6cffb5d1f0e.ttf",
+    "static/media/HelveticaNeueBold.ttf": "/static/media/HelveticaNeueBold.caac1e27ec3f5b3f7a04.ttf",
     "static/media/GetbakLogo.svg": "/static/media/GetbakLogo.e2561db8e6ec441990ed51bc1433a657.svg",
     "static/media/selector.svg": "/static/media/selector.70c625a1560080c20a5a.svg",
     "index.html": "/index.html",
-    "main.e19e3719.css.map": "/static/css/main.e19e3719.css.map",
-    "main.2401c806.js.map": "/static/js/main.2401c806.js.map"
+    "main.9602609f.css.map": "/static/css/main.9602609f.css.map",
+    "main.51fe5ce8.js.map": "/static/js/main.51fe5ce8.js.map"
   },
   "entrypoints": [
-    "static/css/main.e19e3719.css",
-    "static/js/main.2401c806.js"
+    "static/css/main.9602609f.css",
+    "static/js/main.51fe5ce8.js"
   ]
 }
