@@ -13,12 +13,12 @@ const App = () => {
 
   return (
     <div className="font-theme">
-      <div className="grid grid-cols-12 gap-x-8 relative">
+      <div className="px-[20px] grid grid-cols-12 gap-x-8 relative">
         <div className="navbar col-span-12 sticky top-0 z-20">
           <Navbar callback={changeRoute} route={route} />
         </div>
         <div className="leftSideBar col-span-3 h-full">
-          <div className="flex justify-center items-center w-full h-full -mt-12">
+          <div className="flex justify-center items-center w-full h-full -mt-[150px]">
             <LeftSidebar route={route} callback={changeRoute} />
           </div>
         </div>

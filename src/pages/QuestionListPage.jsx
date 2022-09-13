@@ -54,9 +54,9 @@ const QuestionListPage = () => {
 					}
 					title="Question list"
 				>
-					<div className="flex items-center gap-2 text-blue-500 mt-4">
-						<FaEye size={19} />
-						<p className="font-semibold text-[0.85rem]">Preview questions</p>
+					<div className="flex items-center gap-2 text-[#166ADE] mt-4">
+						<FaEye size={26} />
+						<p className="text-[18px] font-medium">Preview questions</p>
 					</div>
 				</Hero>
 			</div>
