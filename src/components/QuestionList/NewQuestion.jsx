@@ -99,7 +99,8 @@ const NewQuestion = ({ index, submit }) => {
 
       <div
         className={`border-green
-        } grow border-2 border-solid p-9 bg-white rounded-lg transition-all`}>
+        } grow border-2 border-solid p-9 bg-white rounded-border transition-all`}
+      >
         <div className="w-full">
           <div className="text-[#77808F] flex felx-row justify-between items-center mb-3">
             <div className="flex flex-row text-sm space-x-1">
@@ -149,7 +150,8 @@ const NewQuestion = ({ index, submit }) => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 1 }}
-            className="overflow-hidden">
+            className="overflow-hidden"
+          >
             <div className="fullcardView mt-6 ">
               <div className="questionInput mb-3">
                 <label className="text-sm font-medium flex flex-row items-center space-x-2">
@@ -177,7 +179,8 @@ const NewQuestion = ({ index, submit }) => {
                 <div>
                   <label
                     htmlFor=""
-                    className="text-sm font-medium flex flex-row items-center space-x-2">
+                    className="text-sm font-medium flex flex-row items-center space-x-2"
+                  >
                     <div className="flex itmes-center gap-3 ">
                       <span>Who answers?</span>
                       {whoAnswerError && (
@@ -188,7 +191,8 @@ const NewQuestion = ({ index, submit }) => {
                   </label>
                   <div
                     className={`w-full text-sm mt-1 px-3 py-2 border-2 "border-red-400" : "border-gray-200"
-                     rounded-md text-iconGray relative`}>
+                     rounded-md text-iconGray relative`}
+                  >
                     <select
                       className="w-full bg-none"
                       value={currentForm.answerer}
@@ -197,7 +201,8 @@ const NewQuestion = ({ index, submit }) => {
                           ...currentForm,
                           answerer: e.target.value,
                         })
-                      }>
+                      }
+                    >
                       <option value="none">Choose one</option>
                       {answerer.map((item, key) => {
                         return (
@@ -213,7 +218,8 @@ const NewQuestion = ({ index, submit }) => {
                 <div>
                   <label
                     htmlFor=""
-                    className="text-sm font-medium flex flex-row items-center space-x-2">
+                    className="text-sm font-medium flex flex-row items-center space-x-2"
+                  >
                     <div className="flex items-center gap-3">
                       <span>Question type?</span>
                       {QuestionTypeError && (
@@ -224,7 +230,8 @@ const NewQuestion = ({ index, submit }) => {
                   </label>
                   <div
                     className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200"
-                    } rounded-md text-iconGray relative`}>
+                    } rounded-md text-iconGray relative`}
+                  >
                     <select
                       className="w-full bg-none"
                       value={currentForm.questinType}
@@ -233,7 +240,8 @@ const NewQuestion = ({ index, submit }) => {
                           ...currentForm,
                           questinType: e.target.value,
                         })
-                      }>
+                      }
+                    >
                       <option value="none">Choose one</option>
                       {questionType.map((item, key) => {
                         return (
@@ -258,13 +266,15 @@ const NewQuestion = ({ index, submit }) => {
                 </label>
                 <div
                   className={`bg-[#F2F6FD] w-full h-32 mt-1 rounded-lg grid place-items-center border-2  "border-gray-200"
-                  }`}>
+                  }`}
+                >
                   <div className="flex flex-row items-stretch gap-x-2">
                     {choices.length > 0 &&
                       choices.map((el, key) => (
                         <button
                           key={key}
-                          className={`bg-white text-sm font-medium text-iconGray px-4 py-2 rounded-md border-2`}>
+                          className={`bg-white text-sm font-medium text-iconGray px-4 py-2 rounded-md border-2`}
+                        >
                           {el.value}
                         </button>
                       ))}
@@ -288,13 +298,15 @@ const NewQuestion = ({ index, submit }) => {
                       setList={(newValue) => {
                         setChoice(newValue);
                       }}
-                      className="flex flex-col space-y-2">
+                      className="flex flex-col space-y-2"
+                    >
                       {choices?.length > 0 &&
                         choices?.map((el, key) => {
                           return (
                             <div
                               key={key}
-                              className="flex flex-row justify-start items-center gap-x-2">
+                              className="flex flex-row justify-start items-center gap-x-2"
+                            >
                               <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
                               <input
                                 type="text"
@@ -369,7 +381,8 @@ const NewQuestion = ({ index, submit }) => {
                   <div
                     className={`${
                       focus ? "flex" : "hidden"
-                    } absolute top-0 left-0 w-full h-full items-center backdrop-blur-sm`}>
+                    } absolute top-0 left-0 w-full h-full items-center backdrop-blur-sm`}
+                  >
                     <div className="flex flex-row justify-start items-center gap-x-2">
                       <MdDragIndicator className="text-lg text-iconGray cursor-pointer" />
                       <input
@@ -435,7 +448,8 @@ const NewQuestion = ({ index, submit }) => {
               <div className="flex flex-row items-stretch space-x-2">
                 <button
                   className="bg-[#166ADE] text-white text-sm font-medium rounded-md px-10 py-2"
-                  onClick={handleSubmit}>
+                  onClick={handleSubmit}
+                >
                   Add question
                 </button>
                 <button className="bg-cancelBtn text-black text-sm font-medium rounded-md px-8 py-2">

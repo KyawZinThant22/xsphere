@@ -129,7 +129,7 @@ const CampaignSetupPage = () => {
 						title="Campaign Information"
 					/>
 				</div>
-				<div className="border-2 w-11/12 mx-auto rounded-lg p-8 mb-10">
+				<div className="border-2 w-11/12 mx-auto rounded-border p-8 mb-10">
 					<MainTitle />
 					<CampaignTitle
 						required={titleError}
