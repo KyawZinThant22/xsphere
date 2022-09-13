@@ -136,15 +136,15 @@ const TimeLinePage = () => {
             {showProfileError && <p className="text-red-400">required *</p>}
           </div>
           <Radio
-            value={"Xsphere"}
-            checked={form.profile === "Xsphere" ? true : false}
+            value={"XSPHERE"}
+            checked={form.profile === "XSPHERE" ? true : false}
             onChange={(val) => {
               setForm({ ...form, profile: val });
             }}
           />
           <Radio
-            value={"Getbak"}
-            checked={form.profile === "Getbak" ? true : false}
+            value={"GETBAK"}
+            checked={form.profile === "GETBAK" ? true : false}
             onChange={(val) => {
               setForm({ ...form, profile: val });
             }}
