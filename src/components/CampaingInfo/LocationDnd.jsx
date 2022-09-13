@@ -12,8 +12,7 @@ const SelectedItem = ({ key, el, setOpenList, removeLocation }) => {
     <div
       className="text-sm font-medium bg-[#F3F7FE] rounded flex flex-row items-center gap-x-1 select-none z-20"
       style={{ padding: "0.4rem 0.4rem 0.4rem 0.2rem" }}
-      key={key}
-    >
+      key={key}>
       <MdOutlineDragIndicator className="text-[#ADB2B8] text-base" />
       <span>{el.location}</span>
       <CancleIcon
@@ -63,8 +62,7 @@ const List = ({ searchRef, data, addData, selectedData }) => {
                   onClick={() => {
                     addData(el);
                     setSearchValue("");
-                  }}
-                >
+                  }}>
                   {el.location}
                 </p>
               );
@@ -77,7 +75,7 @@ const List = ({ searchRef, data, addData, selectedData }) => {
   );
 };
 
-const LocationDnd = ({ onChange, data, value }) => {
+const LocationDnd = ({ onChange, data, value, required }) => {
   const inputFocusColor = " focus:border-[#61C09D]";
   const [openList, setOpenList] = useState(false);
   const [selectedValue, setSelectedValue] = useState([]);
@@ -145,15 +143,18 @@ const LocationDnd = ({ onChange, data, value }) => {
 
   return (
     <div className="mt-2 mb-3">
-      <Label title={"Location"} Icon={BsQuestionCircleFill} />
+      <Label
+        title={"Location"}
+        Icon={BsQuestionCircleFill}
+        required={required}
+      />
       <div className="mt-1 relative">
         <div
           className={`cursor-pointer rounded-md border-2 relative ${inputFocusColor}`}
           style={{
             padding:
               selectedValue.length > 0 ? "0.25rem 0.75rem" : "0.60rem 0.75rem",
-          }}
-        >
+          }}>
           <ReactSortable
             animation={200}
             VdelayOnTouchStart={true}
@@ -161,8 +162,7 @@ const LocationDnd = ({ onChange, data, value }) => {
             delay={2}
             list={selectedValue}
             setList={(newValue) => onChange(newValue)}
-            className="flex flex-row flex-wrap items-center gap-x-3 gap-y-2"
-          >
+            className="flex flex-row flex-wrap items-center gap-x-3 gap-y-2">
             {selectedValue.length > 0 &&
               selectedValue.map((el) => (
                 <SelectedItem
@@ -178,8 +178,7 @@ const LocationDnd = ({ onChange, data, value }) => {
           )}
           <div
             className="absolute inset-0"
-            onClick={() => setOpenList(true)}
-          ></div>
+            onClick={() => setOpenList(true)}></div>
         </div>
         {openList && (
           <div ref={locationListRef}>
