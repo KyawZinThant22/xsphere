@@ -22,6 +22,7 @@ const NewQuestion = ({ index, submit }) => {
   });
 
   const [choices, setChoice] = useState([]);
+  const [emptyChoice, setEmptyChoices] = useState(false);
   const [currentChoice, setCurrentChoice] = useState("");
   const [focus, setFocus] = useState(false);
   const [selectedChoice, setSelectedChoice] = useState("");
@@ -356,8 +357,13 @@ const NewQuestion = ({ index, submit }) => {
                       <input
                         type="text"
                         value={currentChoice}
-                        className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray`}
-                        onChange={(e) => setCurrentChoice(e.target.value)}
+                        className={`w-full text-sm mt-1 px-3 py-2 border-2 border-gray-200 rounded-md font-medium text-iconGray ${
+                          emptyChoice && "border-red-500"
+                        }`}
+                        onChange={(e) => {
+                          setCurrentChoice(e.target.value);
+                          setEmptyChoices(false);
+                        }}
                       />
 
                       <div className="w-20">
@@ -367,6 +373,8 @@ const NewQuestion = ({ index, submit }) => {
                             if (currentChoice !== "") {
                               setCurrentChoice("");
                               setChoice([...choices, { value: currentChoice }]);
+                            } else {
+                              setEmptyChoices(true);
                             }
                           }}
                         />
