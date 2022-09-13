@@ -139,7 +139,9 @@ const NewQuestion = ({ index, submit }) => {
             <span className=" w-6 h-[1.45rem] grid place-items-center rounded-full text-white text-xs bg-green">
               {index + 1}
             </span>
-            <h4 className="font-medium leading-relaxed cursor-pointer">
+            <h4
+              className="font-medium leading-relaxed cursor-pointer"
+              onClick={() => alert("Hello")}>
               {currentForm.question}
             </h4>
           </div>
