@@ -8,7 +8,7 @@ const Radio = ({ checked, value, onChange, disabled }) => {
 				type="radio"
 				value={value}
 				checked={checked}
-				className="w-[0.7rem] h-[0.7rem] focus:ring-[#2CC97D] dark:focus:ring-[#2CC97D] border-2 focus:ring-2"
+				className="w-[15px] h-[15px] outline-none border-2 cursor-pointer"
 				onChange={() => onChange(value)}
 				disabled={disabled}
 			/>
