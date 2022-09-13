@@ -49,8 +49,8 @@ const Sidebar = ({ route, callback }) => {
               <item.icon />
             </div>
             <h4
-              className={`text-sm font-semibold ${
-                item.route === route ? "font-bold" : "text-[#77808F]"
+              className={`text-sm font-theme font-bold ${
+                item.route === route ? "" : "text-[#77808F]"
               }`}>
               {key + 1}. {item.text}
             </h4>

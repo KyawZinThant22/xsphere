@@ -12,7 +12,7 @@ const App = () => {
   };
 
   return (
-    <div className="font-roboto">
+    <div className="font-theme">
       <div className="grid grid-cols-12 gap-x-8 relative">
         <div className="navbar col-span-12 sticky top-0 z-20">
           <Navbar callback={changeRoute} route={route} />
