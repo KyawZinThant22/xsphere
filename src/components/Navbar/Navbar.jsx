@@ -9,7 +9,7 @@ const Navbar = ({ callback, route }) => {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (document.documentElement.scrollTop > 100) {
+      if (document.documentElement.scrollTop > 50) {
         setVisible(true);
       } else {
         setVisible(false);
@@ -26,8 +26,8 @@ const Navbar = ({ callback, route }) => {
           Back to Dashboard
         </a>
       </div>
-      <div className="col-span-3  2xl:px-10">
-        {visible && <Nav callback={callback} route={route} />}
+      <div className="col-span-3 px-4">
+        <Nav callback={callback} visible={visible} route={route} />
       </div>
       <div>
         <img

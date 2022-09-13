@@ -7,6 +7,7 @@ import MainTitle from "../components/CampaingInfo/MainTitle";
 import CampaignTitle from "../components/CampaingInfo/CampaignTitle";
 import LocationDnd from "../components/CampaingInfo/LocationDnd";
 import Radio from "../components/CampaingInfo/Radio";
+import { AnimatePresence, motion } from "framer-motion";
 
 const TimeLinePage = () => {
   const [locationList, setlocationList] = useState([
@@ -85,7 +86,13 @@ const TimeLinePage = () => {
   };
 
   return (
-    <div className="w-full h-screen scrollbar-hide">
+    <AnimatePresence>
+			<motion.div
+				initial={{ translateY: -500 }}
+				animate={{ translateY: 0 }}
+				transition={{
+					duration: 0.8,
+				}} className="w-full h-screen scrollbar-hide">
       <div className="w-full mt-8">
         <Hero
           instruction={
@@ -94,7 +101,7 @@ const TimeLinePage = () => {
           title="Campaign Information"
         />
       </div>
-      <div className="border-2 w-11/12 mx-auto rounded-lg p-8">
+      <div className="border-2 w-11/12 mx-auto rounded-border p-8">
         <MainTitle />
         <CampaignTitle
           required={campaignTitleError}
@@ -136,15 +143,15 @@ const TimeLinePage = () => {
             {showProfileError && <p className="text-red-400">required *</p>}
           </div>
           <Radio
-            value={"Xsphere"}
-            checked={form.profile === "Xsphere" ? true : false}
+            value={"XSPHERE"}
+            checked={form.profile === "XSPHERE" ? true : false}
             onChange={(val) => {
               setForm({ ...form, profile: val });
             }}
           />
           <Radio
-            value={"Getbak"}
-            checked={form.profile === "Getbak" ? true : false}
+            value={"GETBAK"}
+            checked={form.profile === "GETBAK" ? true : false}
             onChange={(val) => {
               setForm({ ...form, profile: val });
             }}
@@ -153,7 +160,8 @@ const TimeLinePage = () => {
         <div className="flex flex-row space-x-2 items-stretch">
           <button
             className="bg-[#166ADE] text-white text-sm font-medium px-12 py-2 rounded-md"
-            onClick={handlePublish}>
+            onClick={handlePublish}
+          >
             Published
           </button>
           <button className=" bg-cancelBtn text-black text-sm font-medium px-8 py-2 rounded-md">
@@ -161,7 +169,8 @@ const TimeLinePage = () => {
           </button>
         </div>
       </div>
-    </div>
+      </motion.div>
+		</AnimatePresence>
   );
 };
 

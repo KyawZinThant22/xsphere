@@ -100,7 +100,7 @@ const NewQuestion = ({ index, submit }) => {
 
       <div
         className={`border-green
-        } grow border-2 border-solid p-9 bg-white rounded-lg transition-all`}>
+        } grow border-2 border-solid p-9 bg-white rounded-border transition-all`}>
         <div className="w-full">
           <div className="text-[#77808F] flex felx-row justify-between items-center mb-3">
             <div className="flex flex-row text-sm space-x-1">

@@ -63,3 +63,7 @@ select {
 select {
   background: white;
 }
+
+.rounded-border{
+	border-radius: 15px;
+}
