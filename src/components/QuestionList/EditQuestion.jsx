@@ -377,8 +377,10 @@ const EditQuestion = ({ index, data, handleCancel, handleUpdate }) => {
                         <IoMdAddCircleOutline
                           className="text-xl text-iconGray"
                           onClick={() => {
-                            setCurrentChoice("");
-                            setChoice([...choices, { value: currentChoice }]);
+                            if (currentChoice !== "") {
+                              setCurrentChoice("");
+                              setChoice([...choices, { value: currentChoice }]);
+                            }
                           }}
                         />
                       </div>
