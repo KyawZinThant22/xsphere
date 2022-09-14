@@ -19,8 +19,9 @@ const Navbar = ({ callback, route }) => {
 
   return (
     <nav
-      className={`px-[70px] 2xl:px-[120px] grid grid-cols-5 items-center w-full h-24 mx-auto bg-white/40 backdrop-blur-sm z-30`}>
-      <div className="flex items-center gap-3 ">
+      className={`px-[70px] 2xl:px-[120px] grid grid-cols-5 items-center w-full h-24 mx-auto bg-white/40 backdrop-blur-sm z-30`}
+    >
+      <div className="lg:flex items-center gap-3 md:hidden ">
         <MdOutlineArrowBackIosNew size={14} />
         <a href="/" className="font-medium text-sm">
           Back to Dashboard
@@ -33,7 +34,7 @@ const Navbar = ({ callback, route }) => {
         <img
           src={GetBak}
           alt="GetBak logo"
-          className="w-[137.6px] float-right"
+          className="w-[137.6px] float-right md:hidden lg:block "
         />
       </div>
     </nav>

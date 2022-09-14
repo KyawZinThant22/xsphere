@@ -29,7 +29,8 @@ const RightSideBar = ({ route }) => {
   );
   return (
     <div
-      className={`w-2/3 ${route === "question-list" ? "mt-[21rem]" : "mt-80"}`}>
+      className={`w-2/3 ${route === "question-list" ? "mt-[21rem]" : "mt-80"} `}
+    >
       {route === "question-list" && (
         <div>
           {title}

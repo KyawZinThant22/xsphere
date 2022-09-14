@@ -12,17 +12,18 @@ const App = () => {
   };
 
   return (
-    <div className="font-theme">
-      <div className="px-[20px] grid grid-cols-12 gap-x-8 relative">
+    <div className="font-theme ">
+      <div className="px-[20px] grid grid-cols-12 gap-x-8 relative ">
         <div className="navbar col-span-12 sticky top-0 z-20">
           <Navbar callback={changeRoute} route={route} />
         </div>
-        <div className="leftSideBar col-span-3 h-full">
+
+        <div className="leftSideBar col-span-3 h-full md:hidden lg:block ">
           <div className="flex justify-center items-center w-full h-full -mt-[150px]">
             <LeftSidebar route={route} callback={changeRoute} />
           </div>
         </div>
-        <div className="main col-span-6 h-full mb-10">
+        <div className="main col-span-6 h-full mb-10 place-items-center">
           {route === "campaign-setup" ? (
             <CampaignSetupPage />
           ) : route === "question-list" ? (
@@ -31,7 +32,7 @@ const App = () => {
             <TimeLinePage />
           )}
         </div>
-        <div className="rightSideBar col-span-3 h-full">
+        <div className="rightSideBar col-span-3 h-full md:hidden lg:block">
           <div className="flex w-full">
             <RightSideBar route={route} />
           </div>

@@ -30,7 +30,7 @@ const Sidebar = ({ route, callback }) => {
 
   window.addEventListener("scroll", toggleVisible);
   return (
-    <div className="w-auto text-iconGray space-y-2">
+    <div className="w-auto text-iconGray space-y-2 ">
       <AnimatePresence initial={false}>
         {questions.map((item, key) => (
           <motion.div
@@ -44,14 +44,16 @@ const Sidebar = ({ route, callback }) => {
             className={`flex flex-row items-center space-x-3 ml-2 cursor-pointer rounded-md w-52 
             ${item.route === route && "bg-paleGreen text-green"} `}
             style={{ padding: "0.6rem 1rem" }}
-            onClick={() => callback(item.route)}>
+            onClick={() => callback(item.route)}
+          >
             <div>
               <item.icon />
             </div>
             <h4
               className={`text-sm font-theme font-bold ${
                 item.route === route ? "" : "text-[#77808F]"
-              }`}>
+              }`}
+            >
               {key + 1}. {item.text}
             </h4>
           </motion.div>

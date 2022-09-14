@@ -87,90 +87,92 @@ const TimeLinePage = () => {
 
   return (
     <AnimatePresence>
-			<motion.div
-				initial={{ translateY: -500 }}
-				animate={{ translateY: 0 }}
-				transition={{
-					duration: 0.8,
-				}} className="w-full h-screen scrollbar-hide">
-      <div className="w-full mt-8">
-        <Hero
-          instruction={
-            "These are the questions corresponding to the template you have selected, you can modify, add or delete them."
-          }
-          title="Campaign Information"
-        />
-      </div>
-      <div className="border-2 w-11/12 mx-auto rounded-border p-8">
-        <MainTitle />
-        <CampaignTitle
-          required={campaignTitleError}
-          value={form.title}
-          onChange={(e) => {
-            setForm({
-              ...form,
-              title: e.target.value,
-            });
-          }}
-        />
-        <LocationDnd
-          required={locationError}
-          data={locationList}
-          value={location}
-          onChange={(value) => setLocation(value)}
-        />
-        <div className="mb-3 grid grid-cols-2 gap-x-2">
-          {/* startDate */}
-          <Date
-            title="Start Date"
-            value={form.startDate}
-            onChange={(val) => {
-              setForm({ ...form, startDate: val });
-            }}
-          />
-          {/* endDate */}
-          <Date
-            title="End Date"
-            value={form.endDate}
-            onChange={(val) => {
-              setForm({ ...form, endDate: val });
-            }}
+      <motion.div
+        initial={{ translateY: -500 }}
+        animate={{ translateY: 0 }}
+        transition={{
+          duration: 0.8,
+        }}
+        className="w-full h-screen scrollbar-hide"
+      >
+        <div className="w-full mt-8">
+          <Hero
+            instruction={
+              "These are the questions corresponding to the template you have selected, you can modify, add or delete them."
+            }
+            title="Campaign Information"
           />
         </div>
-        <div className="mb-4">
-          <div className="flex items-center gap-2">
-            <h6 className="text-sm font-medium mb-2">Show Profile</h6>
-            {showProfileError && <p className="text-red-400">required *</p>}
+        <div className="border-2 lg:w-11/12 md:w-[34rem] mx-auto rounded-border p-8">
+          <MainTitle />
+          <CampaignTitle
+            required={campaignTitleError}
+            value={form.title}
+            onChange={(e) => {
+              setForm({
+                ...form,
+                title: e.target.value,
+              });
+            }}
+          />
+          <LocationDnd
+            required={locationError}
+            data={locationList}
+            value={location}
+            onChange={(value) => setLocation(value)}
+          />
+          <div className="mb-3 grid grid-cols-2 gap-x-2">
+            {/* startDate */}
+            <Date
+              title="Start Date"
+              value={form.startDate}
+              onChange={(val) => {
+                setForm({ ...form, startDate: val });
+              }}
+            />
+            {/* endDate */}
+            <Date
+              title="End Date"
+              value={form.endDate}
+              onChange={(val) => {
+                setForm({ ...form, endDate: val });
+              }}
+            />
           </div>
-          <Radio
-            value={"XSPHERE"}
-            checked={form.profile === "XSPHERE" ? true : false}
-            onChange={(val) => {
-              setForm({ ...form, profile: val });
-            }}
-          />
-          <Radio
-            value={"GETBAK"}
-            checked={form.profile === "GETBAK" ? true : false}
-            onChange={(val) => {
-              setForm({ ...form, profile: val });
-            }}
-          />
+          <div className="mb-4">
+            <div className="flex items-center gap-2">
+              <h6 className="text-sm font-medium mb-2">Show Profile</h6>
+              {showProfileError && <p className="text-red-400">required *</p>}
+            </div>
+            <Radio
+              value={"XSPHERE"}
+              checked={form.profile === "XSPHERE" ? true : false}
+              onChange={(val) => {
+                setForm({ ...form, profile: val });
+              }}
+            />
+            <Radio
+              value={"GETBAK"}
+              checked={form.profile === "GETBAK" ? true : false}
+              onChange={(val) => {
+                setForm({ ...form, profile: val });
+              }}
+            />
+          </div>
+          <div className="flex flex-row space-x-2 items-stretch">
+            <button
+              className="bg-[#166ADE] text-white text-sm font-medium px-12 py-2 rounded-md"
+              onClick={handlePublish}
+            >
+              Published
+            </button>
+            <button className=" bg-cancelBtn text-black text-sm font-medium px-8 py-2 rounded-md">
+              Back to
+            </button>
+          </div>
         </div>
-        <div className="flex flex-row space-x-2 items-stretch">
-          <button
-            className="bg-[#166ADE] text-white text-sm font-medium px-12 py-2 rounded-md"
-            onClick={handlePublish}
-          >
-            Published
-          </button>
-          <button className=" bg-cancelBtn text-black text-sm font-medium px-8 py-2 rounded-md">
-            Back to
-          </button>
-        </div>
-      </div>
       </motion.div>
-		</AnimatePresence>
+    </AnimatePresence>
   );
 };
 

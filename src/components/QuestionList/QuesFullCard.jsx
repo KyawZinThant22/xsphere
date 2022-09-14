@@ -92,7 +92,7 @@ const QuesFullCard = ({ data }) => {
     },
   ];
   return (
-    <div className="fullcardView mt-6 ">
+    <div className="fullcardView mt-6  ">
       <div className="questionInput mb-3">
         <Label title={"Questions"} />
         <textarea
