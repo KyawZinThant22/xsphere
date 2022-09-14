@@ -21,6 +21,7 @@ body {
   font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* overflow: hidden; */
 }
 
 input[type="radio"] {
@@ -64,6 +65,10 @@ select {
   background: white;
 }
 
-.rounded-border{
-	border-radius: 15px;
+.rounded-border {
+  border-radius: 15px;
+}
+.no-scroll {
+  height: 100vh;
+  overflow: hidden;
 }

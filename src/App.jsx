@@ -6,14 +6,13 @@ import RightSideBar from "./components/RightSideBar/RightSideBar";
 
 const App = () => {
   const [route, setRoute] = useState("campaign-setup");
-
   const changeRoute = (route) => {
     setRoute(route);
   };
 
   return (
-    <div className="font-theme">
-      <div className="px-[20px] grid grid-cols-12 gap-x-8 relative">
+    <div className="font-theme relative">
+      <div className="px-[20px] grid grid-cols-12 gap-x-8 ">
         <div className="navbar col-span-12 sticky top-0 z-20">
           <Navbar callback={changeRoute} route={route} />
         </div>
