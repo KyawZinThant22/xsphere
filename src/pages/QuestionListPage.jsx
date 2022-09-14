@@ -7,13 +7,14 @@ import QuestionCard from "../components/QuestionList/QuestionCard";
 import NewQuestion from "../components/QuestionList/NewQuestion";
 import EditQuestion from "../components/QuestionList/EditQuestion";
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 const QuestionListPage = () => {
   const [questionList, setQuestionList] = useState([]);
   const [editQeustion, setEditQuestion] = useState({});
   const [isEdit, setIsEdit] = useState(false);
   const [selectedQuestion, setSelectedQuestion] = useState(0);
-
   const questionDeleteHandler = (id) => {
     let temp = questionList.filter((item, key) => {
       return key !== id;
@@ -43,7 +44,14 @@ const QuestionListPage = () => {
   const handleSubmit = () => {
     console.log(questionList);
   };
-
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (isEdit) {
+      body.style.overflow = "hidden";
+    } else {
+      body.style.overflow = "auto";
+    }
+  }, [isEdit]);
   return (
     <AnimatePresence>
       <motion.div
@@ -110,27 +118,26 @@ const QuestionListPage = () => {
           </div>
         </div>
 
-        <div
-          className={`${
-            isEdit ? "fixed" : "hidden"
-          } top-0 left-0 w-screen h-screen z-50 bg-white bg-opacity-30 backdrop-blur-sm flex items-center`}>
-          <div className="w-full grid grid-cols-12 gap-x-8 relative">
-            <div className="col-span-3" />
-            <div className="col-span-6">
-              <EditQuestion
-                index={selectedQuestion}
-                data={editQeustion}
-                handleUpdate={questionEditOnSaveHandler}
-                handleCancel={() => {
-                  setEditQuestion({});
-                  setSelectedQuestion("");
-                  setIsEdit(false);
-                }}
-              />
+        {isEdit && (
+          <div className="fixed inset-0 h-screen w-screen  bg-white bg-opacity-30 backdrop-blur-sm grid grid-cols-12 items-center z-50">
+            <div className="col-span-3"></div>
+            <div className="col-span-6 h-full py-4 overflow-scroll scrollbar-hide scroll-smooth">
+              <div className="w-full h-full">
+                <EditQuestion
+                  index={selectedQuestion}
+                  data={editQeustion}
+                  handleUpdate={questionEditOnSaveHandler}
+                  handleCancel={() => {
+                    setEditQuestion({});
+                    setSelectedQuestion("");
+                    setIsEdit(false);
+                  }}
+                />
+              </div>
             </div>
-            <div className="col-span-3" />
+            <div className="col-span-3"></div>
           </div>
-        </div>
+        )}
       </motion.div>
     </AnimatePresence>
   );
